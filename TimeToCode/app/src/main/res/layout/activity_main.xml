@@ -17,13 +17,21 @@
         app:contentInsetStart="0dp" >
 
         <TextView
+            android:id="@+id/TTC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time To Code"
-            android:textSize="22sp"
+            android:text="@string/mainTitle"
+            android:textSize="25sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_gravity="center" />
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="timetocode"
+            android:textSize="15sp"
+            android:layout_gravity="center_horizontal" />
+
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
@@ -33,11 +41,13 @@
         android:orientation="vertical" >
 
         <Button
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_margin="15dp"
-            android:background="@drawable/shape_of_circle_button" />
+            android:background="@drawable/shape_of_circle_button"
+            android:text="my profile"
+            android:textColor="#00000000"/>
 
         <TextView
             android:id="@+id/userName"
@@ -62,12 +72,13 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/myChallengge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/myChallenge"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/shape_of_rounded_button"
-        android:text="   내 챌린지 인증하기   "
+        android:text="내 챌린지 인증하기"
         android:textColor="@color/black" />
 
     <CalendarView
@@ -77,10 +88,18 @@
         android:background="@color/black"
         android:foregroundTint="#FFFFFF" />
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#623dff">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="main"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
 
-
-
-
-
-
+    </androidx.appcompat.widget.Toolbar>
 </LinearLayout>

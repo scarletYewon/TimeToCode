@@ -2,4 +2,5 @@
     <string name="app_name">TimeToCode</string>
     <string name="userName">홍길동</string>
     <string name="userLevel">코린이</string>
+    <string name="mainTitle">TTC</string>
 </resources>
