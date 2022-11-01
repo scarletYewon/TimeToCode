@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/backNotification"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="#623dff"/>
@@ -30,40 +31,68 @@
         android:rowCount="4"
         android:columnCount="3">
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/recordImage"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_rowSpan="3"
+            android:layout_marginRight="20dp"
             android:background="#dddddd"
             android:layout_row="0"
             android:layout_column="0"/>
         <Button
+            android:id="@+id/recordName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
             android:layout_row="0"
+            android:layout_columnSpan="2"
             android:text="Github Daily Commit"
-            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="#ffffff"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="1"
             android:layout_column="1"
-            android:text="(1일 1커밋을 해보자!)" />
+            android:layout_columnSpan="2"
+            android:text="(1일 1커밋을 해보자!)"
+            android:textColor="#555555"/>
         <TextView
             android:layout_row="2"
             android:layout_column="1"
+            android:layout_marginTop="20dp"
             android:text="내 챌린지 순위"
             android:textColor="@color/black"/>
         <TextView
             android:layout_row="2"
             android:layout_column="2"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="70dp"
             android:text="인증횟수"
             android:textColor="@color/black"/>
 
     </GridLayout>
+
     <TableLayout
+        android:stretchColumns="*"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                android:text="Image1"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="Image2"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                android:text="Image3"/>
+        </TableRow>
     </TableLayout>
 </LinearLayout>

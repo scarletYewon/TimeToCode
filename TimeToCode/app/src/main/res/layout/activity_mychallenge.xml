@@ -1,66 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_row="4"
-    android:layout_column="3"
+    android:orientation="vertical"
     android:background="@color/white"
     tools:context=".MychallengeActivity">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginRight="10dp"
-        android:background="#111111"
-        android:layout_row="0"
-        android:layout_rowSpan="4" />
+    <FrameLayout
+        android:id="@+id/certificateToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/backCertification"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#623dff"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="인증센터"
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:textColor="@color/black"/>
+    </FrameLayout>
 
-    <TextView
-        android:id="@+id/challengeTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_row="0"
-        android:layout_column="1"
-        android:text="TITIE"
-        android:textColor="@color/black"
-        android:textStyle="bold"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/challengeImage"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="#111111"
+            tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/challengeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="TITIE"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/challengeImage"
+            tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/oneCommit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="(1일 1커밋을 해보자!)"
+            android:textColor="#555555"
+            app:layout_constraintTop_toBottomOf="@id/challengeTitle"
+            app:layout_constraintLeft_toRightOf="@id/challengeImage"/>
+        <TextView
+            android:id="@+id/setter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="생성자"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/oneCommit"
+            app:layout_constraintLeft_toRightOf="@id/challengeImage"/>
+        <Button
+            android:id="@+id/certificateButton"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_of_rounded_button"
+            android:text="인증하기"
+            android:textColor="@color/black"
+            app:layout_constraintLeft_toRightOf="@id/challengeImage"
+            app:layout_constraintTop_toBottomOf="@id/setter"/>
+        <Button
+            android:id="@+id/galleryButton"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_of_rounded_button"
+            android:text="갤러리"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/setter"
+            app:layout_constraintLeft_toRightOf="@id/certificateButton"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_row="1"
-        android:layout_column="1"
-        android:text="(1일 1커밋을 해보자!)"
-        android:textColor="@color/black"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_row="2"
-        android:layout_column="1"
-        android:layout_marginBottom="10dp"
-        android:text="생성자" />
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_row="3"
-        android:layout_column="1"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/shape_of_rounded_button"
-        android:text="인증하기"
-        android:textColor="@color/black" />
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_row="3"
-        android:layout_column="2"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/shape_of_rounded_button"
-        android:text="갤러리"
-        android:textColor="@color/black" />
-</GridLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
 

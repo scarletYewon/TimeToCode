@@ -26,6 +26,7 @@
                 android:value="" />
         </activity>
         <activity android:name=".MychallengeActivity"/>
+        <activity android:name=".RecordActivity"/>
     </application>
 
 </manifest>

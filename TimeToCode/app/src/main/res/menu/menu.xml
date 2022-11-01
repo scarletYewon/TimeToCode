@@ -4,14 +4,14 @@
 
     <item
         android:id="@+id/favorite"
+        android:title="내가 찜한 챌린지"
         android:icon="@android:drawable/btn_star"
-        app:showAsAction="ifRoom"
-        android:title="favorite" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/notification"
         android:icon="@android:drawable/ic_popup_reminder"
         app:showAsAction="ifRoom"
-        android:title="notification" />
+        android:title="알림센터" />
 
 </menu>
