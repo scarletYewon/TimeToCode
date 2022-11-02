@@ -56,9 +56,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_margin="15dp"
-            android:background="@drawable/shape_of_circle_button"
-            android:text="my profile"
-            android:textColor="#00000000"/>
+            android:background="@drawable/shape_of_circle_button" />
 
         <TextView
             android:id="@+id/userName"
@@ -96,22 +94,16 @@
         android:id="@+id/calenderView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:selectedDateVerticalBar="@color/white"
+        android:unfocusedMonthDateColor="@color/black"
         android:background="#aaaaaa" />
 <!--        android:dateTextAppearance="@color/black"-->
 <!--        android:weekDayTextAppearance="@color/black"/>-->
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="#623dff">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="main"
-            android:textColor="@color/black"
-            android:textSize="15sp"/>
-
-    </androidx.appcompat.widget.Toolbar>
+        android:id="@+id/bottomNavigation"
+        app:itemBackground="@color/design_default_color_primary"
+        app:menu="@menu/navigation" />
 </LinearLayout>

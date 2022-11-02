@@ -2,22 +2,56 @@ package com.kmu.timetocode
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.CalendarView
 import com.kmu.timetocode.R
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    private var toolbar: Toolbar? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
+    var toolbar: Toolbar? = null
+    var calendarView: CalendarView? = null
+    var bottomNavigation: BottomNavigationView? = null
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(true)
+
+        calendarView = findViewById<View>(R.id.calenderView) as CalendarView
+        calendarView!!.setOnDateChangeListener { calendarView, i, i1, i2 ->
+            Log.i(
+                "캘린더",
+                "선택한 날짜는 " + i + "년 " + (i1 + 1) + "월 " + i2 + "일"
+            )
+        }
+
+        bottomNavigation = findViewById<View>(R.id.bottomNavigation) as BottomNavigationView
+        bottomNavigation!!.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.certification -> {
+                    Toast.makeText(applicationContext, "인증센터", Toast.LENGTH_SHORT).show()
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.search -> {
+                    Toast.makeText(applicationContext, "검색", Toast.LENGTH_SHORT).show()
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.challenge -> {
+                    Toast.makeText(applicationContext, "챌린지", Toast.LENGTH_SHORT).show()
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
+            false
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
