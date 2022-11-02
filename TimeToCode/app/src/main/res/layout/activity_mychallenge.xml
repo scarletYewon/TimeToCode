@@ -72,147 +72,89 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#33333333" />
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp">
-        <ImageView
-            android:id="@+id/challengeImage"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:background="#cccccc"
-            tools:ignore="MissingConstraints" />
-        <TextView
-            android:id="@+id/challengeTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Github Daily Commit"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            app:layout_constraintLeft_toRightOf="@id/challengeImage"
-            tools:ignore="MissingConstraints" />
-        <TextView
-            android:id="@+id/oneCommit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="(1일 1커밋을 해보자!)"
-            android:textColor="#555555"
-            app:layout_constraintTop_toBottomOf="@id/challengeTitle"
-            app:layout_constraintLeft_toRightOf="@id/challengeImage"/>
-        <TextView
-            android:id="@+id/setter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="15dp"
-            android:text="생성자"
-            android:textSize="10sp"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/oneCommit"
-            app:layout_constraintLeft_toRightOf="@id/challengeImage"/>
-        <Button
-            android:id="@+id/certificateButton"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_of_rounded_button"
-            android:text="인증하기"
-            android:textColor="@color/black"
-            app:layout_constraintLeft_toRightOf="@id/challengeImage"
-            app:layout_constraintTop_toBottomOf="@id/setter"/>
-        <Button
-            android:id="@+id/galleryButton"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_of_rounded_button"
-            android:text="갤러리"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/setter"
-            app:layout_constraintLeft_toRightOf="@id/certificateButton"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <View
+    <ListView
+        android:id="@+id/challengeList"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#33333333" />
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp">
-        <ImageView
-            android:id="@+id/challengeImage2"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:background="#cccccc"
-            tools:ignore="MissingConstraints" />
-        <TextView
-            android:id="@+id/challengeTitle2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Github Daily Commit"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            app:layout_constraintLeft_toRightOf="@id/challengeImage2"
-            tools:ignore="MissingConstraints" />
-        <TextView
-            android:id="@+id/oneCommit2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="(1일 1커밋을 해보자!)"
-            android:textColor="#555555"
-            app:layout_constraintTop_toBottomOf="@id/challengeTitle2"
-            app:layout_constraintLeft_toRightOf="@id/challengeImage2"/>
-        <TextView
-            android:id="@+id/setter2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="15dp"
-            android:text="생성자"
-            android:textSize="10sp"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/oneCommit2"
-            app:layout_constraintLeft_toRightOf="@id/challengeImage2"/>
-        <Button
-            android:id="@+id/certificateButton2"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_of_rounded_button"
-            android:text="인증하기"
-            android:textColor="@color/black"
-            app:layout_constraintLeft_toRightOf="@id/challengeImage2"
-            app:layout_constraintTop_toBottomOf="@id/setter2"/>
-        <Button
-            android:id="@+id/galleryButton2"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_of_rounded_button"
-            android:text="갤러리"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/setter2"
-            app:layout_constraintLeft_toRightOf="@id/certificateButton2"/>
+        android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#33333333" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/challenge1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp">
+                <ImageView
+                    android:id="@+id/challengeImage"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:background="#cccccc"
+                    tools:ignore="MissingConstraints" />
+                <TextView
+                    android:id="@+id/challengeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Github Daily Commit"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    app:layout_constraintLeft_toRightOf="@id/challengeImage"
+                    tools:ignore="MissingConstraints" />
+                <TextView
+                    android:id="@+id/oneCommit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="(1일 1커밋을 해보자!)"
+                    android:textColor="#555555"
+                    app:layout_constraintTop_toBottomOf="@id/challengeTitle"
+                    app:layout_constraintLeft_toRightOf="@id/challengeImage"/>
+                <TextView
+                    android:id="@+id/setter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="생성자"
+                    android:textSize="10sp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@id/oneCommit"
+                    app:layout_constraintLeft_toRightOf="@id/challengeImage"/>
+                <Button
+                    android:id="@+id/certificateButton"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_of_rounded_button"
+                    android:text="인증하기"
+                    android:textColor="@color/black"
+                    app:layout_constraintLeft_toRightOf="@id/challengeImage"
+                    app:layout_constraintTop_toBottomOf="@id/setter"/>
+                <Button
+                    android:id="@+id/galleryButton"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_of_rounded_button"
+                    android:text="갤러리"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@id/setter"
+                    app:layout_constraintLeft_toRightOf="@id/certificateButton"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#33333333" />
+        </LinearLayout>
+    </ListView>
+
 </LinearLayout>
-

@@ -13,14 +13,14 @@ import androidx.appcompat.widget.Toolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    var toolbar: Toolbar? = null
-    var calendarView: CalendarView? = null
-    var bottomNavigation: BottomNavigationView? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        var toolbar: Toolbar? = null
+        var calendarView: CalendarView? = null
+        var bottomNavigation: BottomNavigationView? = null
 
         toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
@@ -28,10 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         calendarView = findViewById<View>(R.id.calenderView) as CalendarView
         calendarView!!.setOnDateChangeListener { calendarView, i, i1, i2 ->
-            Log.i(
-                "캘린더",
-                "선택한 날짜는 " + i + "년 " + (i1 + 1) + "월 " + i2 + "일"
-            )
+            Log.i("캘린더", "선택한 날짜는 " + i + "년 " + (i1 + 1) + "월 " + i2 + "일")
         }
 
         bottomNavigation = findViewById<View>(R.id.bottomNavigation) as BottomNavigationView
