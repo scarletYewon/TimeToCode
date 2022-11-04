@@ -15,34 +15,22 @@
         android:layout_height="?attr/actionBarSize"
         android:elevation="4dp"
         android:background="#623dff"
-        android:minHeight="?attr/actionBarTheme"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:titleTextColor="@color/white"
-        app:menu="@menu/menu">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        app:menu="@menu/toolbar_menu">
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/TTC"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/mainTitle"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_gravity="center_horizontal" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="timetocode"
-                android:textSize="15sp"
-                android:textColor="@color/white"
-                android:layout_gravity="center_horizontal" />
-        </LinearLayout>
+            android:text="@string/mainTitle"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="timetocode"-->
+<!--            android:textSize="15sp"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:layout_gravity="center_horizontal" />-->
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -52,12 +40,14 @@
         android:layout_gravity="center"
         android:orientation="vertical" >
 
-        <Button
+        <ImageView
+            android:id="@+id/profileImage"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_margin="15dp"
-            android:background="@drawable/shape_of_circle_button" />
+            android:background="@drawable/shape_of_circle_button"
+            tools:ignore="InvalidId" />
 
         <TextView
             android:id="@+id/userName"
@@ -75,7 +65,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:text="@string/userLevel"
-            android:textColor="#aaaaaa"
+            android:textColor="#999999"
             android:textSize="15sp" />
 
 
@@ -84,7 +74,7 @@
     <Button
         android:id="@+id/myChallenge"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp"
         android:background="@drawable/shape_of_rounded_button"
@@ -96,15 +86,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:selectedDateVerticalBar="@color/white"
-        android:unfocusedMonthDateColor="@color/black"
-        android:background="#aaaaaa" />
-<!--        android:dateTextAppearance="@color/black"-->
-<!--        android:weekDayTextAppearance="@color/black"/>-->
+        android:unfocusedMonthDateColor="@color/black"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bottomNavigation"
-        app:itemBackground="@color/design_default_color_primary"
-        app:menu="@menu/navigation" />
+        android:layout_weight="1"
+        app:itemBackground="@color/main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/navi_menu"
+        tools:ignore="MissingConstraints" />
+
 </LinearLayout>

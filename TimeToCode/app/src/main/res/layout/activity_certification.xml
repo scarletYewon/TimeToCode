@@ -5,7 +5,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        android:background="#623dff"
+        app:menu="@menu/toolbar_menu">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mainTitle"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal" />
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="timetocode"-->
+        <!--            android:textSize="15sp"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:layout_gravity="center_horizontal" />-->
+
+    </androidx.appcompat.widget.Toolbar>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +40,9 @@
         <ImageButton
             android:id="@+id/challengeImage"
             android:layout_width="120dp"
-            android:layout_height="120dp" />
+            android:layout_height="120dp"
+            android:layout_gravity="center_vertical"
+            android:background="#999999"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,20 +53,22 @@
                 android:id="@+id/challengeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:text="Github Daily Commit"
+                android:text="@string/challengeTitle"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:background="@color/white" />
+                android:background="#ffffffff" />
             <TextView
                 android:id="@+id/challengeExplain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="(1일 1커밋을 해보자!)"
+                android:text="@string/challengeExplain"
                 android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/challengeMaker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="생성자" />
+                android:text="@string/challengeMaker"
+                android:textColor="#999999"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,6 +80,7 @@
                     android:layout_height="30dp"
                     android:layout_marginLeft="30dp"
                     android:text="인증하기"
+                    android:textColor="@color/black"
                     android:background="@drawable/shape_of_rounded_button"/>
                 <Button
                     android:id="@+id/btnGallery"
@@ -57,13 +88,15 @@
                     android:layout_height="30dp"
                     android:layout_marginLeft="30dp"
                     android:text="갤러리"
+                    android:textColor="@color/black"
                     android:background="@drawable/shape_of_rounded_button"/>
             </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
     <View
-android:layout_width="match_parent"
-android:layout_height="2dp"
-android:background="#33333333" />
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#33333333" />
+
 </LinearLayout>
