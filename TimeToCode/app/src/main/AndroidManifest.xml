@@ -25,7 +25,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-<!--        <activity android:name=".MychallengeActivity"/>-->
+        <activity android:name=".CertificationActivity"/>
 <!--        <activity android:name=".RecordActivity"/>-->
     </application>
 

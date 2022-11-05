@@ -33,70 +33,49 @@
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
+        android:id="@+id/certificateToolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:background="@color/white"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:elevation="4dp">
+
         <ImageButton
-            android:id="@+id/challengeImage"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:id="@+id/backCertification"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:src="@drawable/ic_baseline_keyboard_arrow_left_24" />
+        <ImageView
+            android:layout_marginLeft="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:background="#999999"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:src="@drawable/ic_outline_assignment_black"
+            android:background="@color/white" />
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
-            <Button
-                android:id="@+id/challengeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:text="@string/challengeTitle"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:background="#ffffffff" />
-            <TextView
-                android:id="@+id/challengeExplain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/challengeExplain"
-                android:textColor="@color/black"/>
-            <TextView
-                android:id="@+id/challengeMaker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/challengeMaker"
-                android:textColor="#999999"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
-                <Button
-                    android:id="@+id/btnCertification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:text="인증하기"
-                    android:textColor="@color/black"
-                    android:background="@drawable/shape_of_rounded_button"/>
-                <Button
-                    android:id="@+id/btnGallery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:text="갤러리"
-                    android:textColor="@color/black"
-                    android:background="@drawable/shape_of_rounded_button"/>
-            </LinearLayout>
-
-        </LinearLayout>
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="인증센터"
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:background="#00ffffff"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#33333333" />
+
+    <ListView
+        android:id="@+id/challengeList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+
 
 </LinearLayout>

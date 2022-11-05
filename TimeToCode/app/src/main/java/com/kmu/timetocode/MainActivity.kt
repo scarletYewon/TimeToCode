@@ -1,5 +1,6 @@
 package com.kmu.timetocode
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -28,12 +29,18 @@ class MainActivity : AppCompatActivity() {
         val userLevel = findViewById<TextView>(R.id.userLevel)
         val myChallenge = findViewById<Button>(R.id.myChallenge)
         val calendarView = findViewById<CalendarView>(R.id.calenderView)
-        var bottomNavigation = findViewById<BottomNavigationView>(R.id.navigationView)
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.navigationView)
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true) // 왼쪽 버튼 사용 설정
-        supportActionBar!!.setHomeAsUpIndicator(com.google.android.material.R.drawable.ic_keyboard_black_24dp)
+        supportActionBar!!.setHomeAsUpIndicator(com.kmu.timetocode.R.drawable.ic_baseline_favorite_24)
+
+        myChallenge.setOnClickListener {
+            val intent = Intent(this, CertificationActivity::class.java)
+            startActivity(intent)
+        }
+
 
         bottomNavigation!!.setOnItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -66,11 +73,11 @@ class MainActivity : AppCompatActivity() {
 //                val intent = Intent(applicationContext, ) // 내가 찜한 챌린지로 이동
                 return true
             }
-            R.id.favorite -> {
-                Toast.makeText(applicationContext, "찜한 챌린지 보기", Toast.LENGTH_SHORT).show()
+//            R.id.favorite -> {
+//                Toast.makeText(applicationContext, "찜한 챌린지 보기", Toast.LENGTH_SHORT).show()
 //                val intent = Intent(applicationContext, ) // 내가 찜한 챌린지로 이동
-                return true
-            }
+//                return true
+//            }
             R.id.notification -> {
                 Toast.makeText(applicationContext, "알림센터로 이동", Toast.LENGTH_SHORT).show()
 //                val intent = Intent(applicationContext, ) // 알림센터로 이동
@@ -84,6 +91,7 @@ class MainActivity : AppCompatActivity() {
         val manager: FragmentManager = supportFragmentManager
         val fragTransaction = manager.beginTransaction()
 
+        if(manager.findFragmentByTag(tag) == null) fragTransaction.add(R.id.mainLayout, fragment, tag)
         val certification = manager.findFragmentByTag(TAG_CERTIFICATION)
         val search = manager.findFragmentByTag(TAG_SEARCH)
         val challenge = manager.findFragmentByTag(TAG_CHALLENGE)
@@ -92,7 +100,11 @@ class MainActivity : AppCompatActivity() {
         if(search != null) fragTransaction.hide(search)
         if(challenge != null) fragTransaction.hide(challenge)
 
-        if(tag == TAG_CERTIFICATION && certification != null) fragTransaction.show(certification)
+        if(tag == TAG_CERTIFICATION && certification != null) {
+            fragTransaction.show(certification)
+            val intent = Intent(this, CertificationActivity::class.java)
+            startActivity(intent)
+        }
         else if(tag == TAG_SEARCH && search != null) fragTransaction.show(search)
         else if(tag == TAG_CHALLENGE && challenge != null) fragTransaction.show(challenge)
 
