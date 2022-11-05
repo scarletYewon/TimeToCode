@@ -8,7 +8,7 @@
     android:background="@color/white"
     android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:elevation="4dp"
@@ -37,8 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white"
-        android:orientation="horizontal"
-        android:elevation="4dp">
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/backCertification"
@@ -66,16 +65,25 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#33333333" />
+        android:layout_height="1dp"
+        android:background="#dddddd" />
 
     <ListView
         android:id="@+id/challengeList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="570dp">
 
     </ListView>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigationView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:itemBackground="@color/main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/navi_menu"
+        tools:ignore="MissingConstraints" />
 
 
 </LinearLayout>

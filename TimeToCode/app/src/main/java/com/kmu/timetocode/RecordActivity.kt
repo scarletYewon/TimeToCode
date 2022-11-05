@@ -1,44 +1,43 @@
 package com.kmu.timetocode
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.Button
-import android.widget.CalendarView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.*
+import android.widget.*
+
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-private const val TAG_CERTIFICATION = "certification_fragment"
-private const val TAG_SEARCH = "search_fragment"
-private const val TAG_CHALLENGE = "challenge_fragment"
-
-class MainActivity : AppCompatActivity() {
-
+class RecordActivity: AppCompatActivity() {
+    var gridview: GridView? = null
+    var adapter: GridViewAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_record)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        val userName = findViewById<TextView>(R.id.userName)
-        val userLevel = findViewById<TextView>(R.id.userLevel)
-        val myChallenge = findViewById<Button>(R.id.myChallenge)
-        val calendarView = findViewById<CalendarView>(R.id.calenderView)
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.navigationView)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar3)
+        val backRecord = findViewById<ImageButton>(R.id.backRecord)
+        val recordList = findViewById<GridView>(R.id.recordList)
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.navigationView3)
+
+        adapter = GridViewAdapter(this, recordList)
+        adapter!!.addItem(RecordList(1, "제목", R.drawable.ic_launcher_background))
+        adapter!!.addItem(RecordList(2, "제목", R.drawable.ic_launcher_background))
+        adapter!!.addItem(RecordList(3, "제목", R.drawable.ic_launcher_background))
+        adapter!!.addItem(RecordList(4, "제목", R.drawable.ic_launcher_background))
+
+        recordList.setAdapter(adapter);
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true) // 왼쪽 버튼 사용 설정
-        supportActionBar!!.setHomeAsUpIndicator(com.kmu.timetocode.R.drawable.ic_baseline_favorite_24)
-
-        myChallenge.setOnClickListener {
-            val intent = Intent(this, CertificationActivity::class.java)
-            startActivity(intent)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_baseline_favorite_24)
+        backRecord.setOnClickListener {
+            Toast.makeText(applicationContext, "뒤로가기", Toast.LENGTH_SHORT).show()
+            finish()
+            //            startActivity(intent)
         }
 
         bottomNavigation!!.setOnItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -64,7 +63,6 @@ class MainActivity : AppCompatActivity() {
             true
         })
     }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
         return true
@@ -91,32 +89,35 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setFragment(tag: String, fragment: Fragment) {
-        val manager: FragmentManager = supportFragmentManager
-        val fragTransaction = manager.beginTransaction()
+    /* 그리드뷰 어댑터 */
+    inner class GridViewAdapter(val context: Context, recordList: GridView) : BaseAdapter() {
+        var recordList: ArrayList<RecordList> = ArrayList<RecordList>()
+        override fun getCount(): Int { return recordList.size }
 
-        if(manager.findFragmentByTag(tag) == null) fragTransaction.add(R.id.mainLayout, fragment, tag)
-        val certification = manager.findFragmentByTag(TAG_CERTIFICATION)
-        val search = manager.findFragmentByTag(TAG_SEARCH)
-        val challenge = manager.findFragmentByTag(TAG_CHALLENGE)
+        fun addItem(item: RecordList) { recordList.add(item) }
+        override fun getItem(position: Int): Any { return recordList[position] }
+        override fun getItemId(position: Int): Long { return position.toLong() }
+        override fun getView(position: Int, convertView: View?, viewGroup: ViewGroup?): View {
+            val view: View = LayoutInflater.from(context).inflate(R.layout.gridview_record, null)
 
-        if(certification != null) fragTransaction.hide(certification)
-        if(search != null) fragTransaction.hide(search)
-        if(challenge != null) fragTransaction.hide(challenge)
+            var rc_num = view.findViewById<TextView>(R.id.recordNumber)
+            var rc_title = view.findViewById<TextView>(R.id.recordTitle)
+            val rc_image = view.findViewById<ImageButton>(R.id.recordImage)
+            val recordList = recordList[position]
+            val resourceId = context.resources.getIdentifier(recordList.resId.toString(), "drawable", context.packageName)
+            rc_image.setImageResource(resourceId)
 
-        if(tag == TAG_CERTIFICATION && certification != null) {
-//            fragTransaction.show(certification)
-            val intent = Intent(this, CertificationActivity::class.java)
-            startActivity(intent)
+            rc_num.text = recordList.num.toString()
+            rc_title.text = recordList.title
+            recordList.resId?.let { rc_image.setImageResource(it) };
+
+            //각 아이템 선택 event
+            view.setOnClickListener {
+                Toast.makeText(context,
+                    recordList.num.toString() + " 번 - " + recordList.title + " 입니다! ",
+                    Toast.LENGTH_SHORT).show()
+            }
+            return view //뷰 객체 반환
         }
-        else if(tag == TAG_SEARCH && search != null) fragTransaction.show(search)
-        else if(tag == TAG_CHALLENGE && challenge != null) {
-//            fragTransaction.show(challenge)
-            val intent = Intent(this, RecordActivity::class.java)
-            startActivity(intent)
-        }
-
-        fragTransaction.commitAllowingStateLoss()
-
     }
 }

@@ -89,9 +89,10 @@
         <CalendarView
             android:id="@+id/calenderView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-<!--            android:focusedMonthDateColor="@color/black"-->
-<!--            android:unfocusedMonthDateColor="#999999"/>-->
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:focusedMonthDateColor="@color/black"
+            android:unfocusedMonthDateColor="#999999"/>
 
     </LinearLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
