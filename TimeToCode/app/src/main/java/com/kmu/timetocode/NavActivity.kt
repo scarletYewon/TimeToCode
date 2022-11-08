@@ -1,11 +1,8 @@
 package com.kmu.timetocode
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.LinearLayout
 import androidx.fragment.app.FragmentActivity
-import androidx.navigation.findNavController
 
 class NavActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
