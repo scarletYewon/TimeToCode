@@ -22,7 +22,7 @@ class CertificationFragment : Fragment() {
 
         val listView = view?.findViewById<ListView>(R.id.list) // 레이아웃 내에 챌린지 목록을 담고 있는 리스트뷰
 
-        adapter = ListViewAdapter(this, listView)
+        adapter = ListViewAdapter(requireContext(), listView)
 
         // challenge 추가하는 부분
         adapter!!.addItem(Challenge(1, "Github Commit", "설명1", "만든이", R.drawable.ic_launcher_background))
