@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/favoritePage2">
+
+    <fragment
+        android:id="@+id/favoritePage2"
+        android:name="com.kmu.timetocode.FavoritePage"
+        android:label="fragment_favorite_page"
+        tools:layout="@layout/fragment_favorite_page" >
+        <action
+            android:id="@+id/action_favoritePage2_to_searchPage"
+            app:destination="@id/searchPage" />
+        <action
+            android:id="@+id/action_favoritePage2_to_noticePage"
+            app:destination="@id/noticePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchPage"
+        android:name="com.kmu.timetocode.SearchPage"
+        android:label="fragment_search_page"
+        tools:layout="@layout/fragment_search_page" >
+        <action
+            android:id="@+id/action_searchPage_to_favoritePage2"
+            app:destination="@id/favoritePage2" />
+        <action
+            android:id="@+id/action_searchPage_to_noticePage"
+            app:destination="@id/noticePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/noticePage"
+        android:name="com.kmu.timetocode.NoticePage"
+        android:label="fragment_notice_page"
+        tools:layout="@layout/fragment_notice_page" >
+        <action
+            android:id="@+id/action_noticePage_to_favoritePage2"
+            app:destination="@id/favoritePage2" />
+        <action
+            android:id="@+id/action_noticePage_to_searchPage"
+            app:destination="@id/searchPage" />
+    </fragment>
+
+</navigation>
