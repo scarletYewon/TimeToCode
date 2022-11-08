@@ -4,30 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".RecordActivity">
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar3"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"
-        android:background="#623dff"
-        app:menu="@menu/toolbar_menu">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/mainTitle"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_gravity="center_horizontal" />
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/recordToolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -39,24 +19,28 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:src="@drawable/ic_baseline_keyboard_arrow_left_24" />
-        <ImageView
-            android:layout_marginStart="100dp"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_baseline_track_changes_black"
-            android:background="@color/white" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:text="기록센터"
-            android:textAlignment="center"
-            android:textSize="17sp"
-            android:textColor="@color/black"
-            android:background="#00ffffff"/>
-    </LinearLayout>
+            android:gravity="center">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:clipToOutline="true"
+                android:src="@drawable/heroicons_pencil_square"
+                android:background="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:text="기록센터"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                android:background="#00ffffff"/>
+        </LinearLayout>
+    </FrameLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -127,33 +111,20 @@
                         android:textSize="18sp"/>
                 </TableRow>
             </TableLayout>
-
-
         </LinearLayout>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#dddddd" />
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10dp"/>
     <GridView
         android:id="@+id/recordList"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="match_parent"
         android:numColumns="3"
         android:background="@color/white">
 
     </GridView>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigationView3"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:itemBackground="@color/main"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/navi_menu"
-        tools:ignore="MissingConstraints" />
-
-
 
 </LinearLayout>

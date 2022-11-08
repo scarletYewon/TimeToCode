@@ -6,33 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"
-        android:background="#623dff"
-        app:menu="@menu/toolbar_menu">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mainTitle"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_gravity="center_horizontal" />
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="timetocode"-->
-<!--            android:textSize="15sp"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:layout_gravity="center_horizontal" />-->
-
-    </androidx.appcompat.widget.Toolbar>
+    android:orientation="vertical" >
 
     <LinearLayout
         android:id="@+id/mainLayout"
@@ -73,7 +47,6 @@
                 android:textColor="#999999"
                 android:textSize="15sp" />
 
-
         </LinearLayout>
 
         <Button
@@ -90,19 +63,8 @@
             android:id="@+id/calenderView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:focusedMonthDateColor="@color/black"
-            android:unfocusedMonthDateColor="#999999"/>
+            android:background="@color/black"/>
 
     </LinearLayout>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigationView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:itemBackground="@color/main"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/navi_menu"
-        tools:ignore="MissingConstraints" />
 
 </LinearLayout>
