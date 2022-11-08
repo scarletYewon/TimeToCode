@@ -1,6 +1,6 @@
 package com.kmu.timetocode
 
-class RecordList(num: Int, title: String, resId: Int) {
+class Record(num: Int, title: String, resId: Int) {
     var num: Int? = num
     var title: String? = title
     var resId: Int? = resId
