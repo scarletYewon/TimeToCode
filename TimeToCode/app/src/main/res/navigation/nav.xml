@@ -41,4 +41,5 @@
             android:id="@+id/action_noticePage_to_searchPage"
             app:destination="@id/searchPage" />
     </fragment>
+
 </navigation>

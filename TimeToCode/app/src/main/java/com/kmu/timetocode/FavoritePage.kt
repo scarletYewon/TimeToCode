@@ -10,21 +10,17 @@ import androidx.navigation.findNavController
 
 class FavoritePage : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_favorite_page,container,false)
-
-        view.findViewById<Button>(R.id.btn2).setOnClickListener{
-            it.findNavController().navigate(R.id.action_favoritePage2_to_searchPage)
-        }
-        view.findViewById<Button>(R.id.btn3).setOnClickListener{
-            it.findNavController().navigate(R.id.action_favoritePage2_to_noticePage)
-        }
-
-        return view
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) : View? {
+        val rootView = inflater.inflate(R.layout.fragment_favorite_page, container, false)
+//        val mActivity = activity as MainActivity
+//        val btn_change = rootView.findViewById(R.id.button_change);
+//        btn_change.setOnClickListener{
+//            activity.changeFragment(2)
+//        }
+        return rootView
     }
 }

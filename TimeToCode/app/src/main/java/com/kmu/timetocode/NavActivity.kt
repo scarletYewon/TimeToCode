@@ -2,10 +2,64 @@ package com.kmu.timetocode
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import androidx.fragment.app.FragmentActivity
+import androidx.navigation.findNavController
 
-class NavActivity : AppCompatActivity() {
+class NavActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nav)
+
+        val favoriteFrag = FavoritePage()
+        val searchFrag = SearchPage()
+        val noticeFrag = NoticePage()
+
+        val btn1 = findViewById<Button>(R.id.btn1);
+        val btn2 = findViewById<Button>(R.id.btn2);
+        val btn3 = findViewById<Button>(R.id.btn3);
+
+        btn1.setOnClickListener {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragmentContainerView, favoriteFrag)
+                .commit()
+        }
+        btn2.setOnClickListener {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragmentContainerView, searchFrag)
+                .commit()
+        }
+        btn3.setOnClickListener {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragmentContainerView, noticeFrag)
+                .commit()
+        }
+        fun changeFragment(index: Int){
+            when(index){
+                1 -> {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainerView, favoriteFrag)
+                        .commit()
+                }
+
+                2 -> {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainerView, searchFrag)
+                        .commit()
+                }
+                3 -> {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainerView, noticeFrag)
+                        .commit()
+                }
+            }
+        }
     }
+
 }
