@@ -3,6 +3,7 @@ package com.kmu.timetocode
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 
@@ -15,9 +16,9 @@ class NavActivity : FragmentActivity() {
         val searchFrag = SearchPage()
         val noticeFrag = NoticePage()
 
-        val btn1 = findViewById<Button>(R.id.btn1);
-        val btn2 = findViewById<Button>(R.id.btn2);
-        val btn3 = findViewById<Button>(R.id.btn3);
+        val btn1 = findViewById<LinearLayout>(R.id.btn1);
+        val btn2 = findViewById<LinearLayout>(R.id.btn2);
+        val btn3 = findViewById<LinearLayout>(R.id.btn3);
 
         btn1.setOnClickListener {
             supportFragmentManager

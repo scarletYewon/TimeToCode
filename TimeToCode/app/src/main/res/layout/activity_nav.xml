@@ -31,36 +31,67 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="65dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/fragmentContainerView">
 
-        <Button
+        <LinearLayout
             android:id="@+id/btn1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#625EFF"
-            android:text="favorite"
-            android:textColor="@color/white" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#645EFF"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <Button
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/certificationicon" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Certification"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/btn2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#625EFF"
-            android:text="search"
-            android:textColor="@color/white" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#645EFF"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <Button
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/searchicon" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/btn3"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#625EFF"
-            android:text="notice"
-            android:textColor="@color/white" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#645EFF"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/challengeicon" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Challlenge"
+                android:textColor="@color/white"/>
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
