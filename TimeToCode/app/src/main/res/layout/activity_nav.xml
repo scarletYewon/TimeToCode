@@ -20,6 +20,7 @@
             android:layout_height="28dp"
             android:src="@drawable/heart"/>
         <ImageView
+            android:id="@+id/ttc"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:src="@drawable/ttcwhite" />

@@ -13,18 +13,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 
 class MainFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) : View? {
-        val rootView = inflater.inflate(R.layout.fragment_main, container, false)
+        val rootView : View = inflater.inflate(R.layout.fragment_main, container, false)
 
         val userName = rootView?.findViewById<TextView>(R.id.userName)
         val userLevel = rootView?.findViewById<TextView>(R.id.userLevel)
-        val myChallenge = rootView?.findViewById<TextView>(R.id.myChallenge)
-        val calendarView = rootView?.findViewById<TextView>(R.id.calenderView)
+        val myChallenge = rootView?.findViewById<Button>(R.id.myChallenge)
+        val calendarView = rootView?.findViewById<CalendarView>(R.id.calenderView)
 
         return rootView
     }
