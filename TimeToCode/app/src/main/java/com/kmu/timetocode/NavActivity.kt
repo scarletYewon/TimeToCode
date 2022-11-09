@@ -10,20 +10,29 @@ class NavActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nav)
 
+        val mainFrag = MainFragment()
+        val certiFrag = CertificationFragment()
         val favoriteFrag = FavoritePage()
         val searchFrag = SearchPage()
         val noticeFrag = NoticePage()
 
         val heart = findViewById<ImageView>(R.id.heart)
         val bell = findViewById<ImageView>(R.id.bell)
+        val ttc = findViewById<ImageView>(R.id.ttc)
         val btn1 = findViewById<LinearLayout>(R.id.btn1)
         val btn2 = findViewById<LinearLayout>(R.id.btn2)
         val btn3 = findViewById<LinearLayout>(R.id.btn3)
 
+        ttc.setOnClickListener{
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragmentContainerView, mainFrag)
+                .commit()
+        }
         btn1.setOnClickListener {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragmentContainerView, favoriteFrag)
+                .replace(R.id.fragmentContainerView, certiFrag)
                 .commit()
         }
         btn2.setOnClickListener {

@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/userName"
+                android:text="ddd"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
 
@@ -63,7 +63,7 @@
             android:id="@+id/calenderView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black"/>
+            android:background="@color/white"/>
 
     </LinearLayout>
 
