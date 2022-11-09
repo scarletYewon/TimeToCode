@@ -13,7 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     boolean notError = true;
 
+    RequestQueue queue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,9 +104,8 @@ public class RegisterActivity extends AppCompatActivity {
         loginUrl.append(LoginActivity.url);
         loginUrl.append("/user/register");
 
-        new StringRequest(Request.Method.POST, loginUrl.toString(), response -> {
+        StringRequest sr = new StringRequest(Request.Method.POST, loginUrl.toString(), response -> {
             // 회원가입 응답 확인하기
-            Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
         }, error -> {
             Toast.makeText(this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
             notError = false;
@@ -117,6 +119,9 @@ public class RegisterActivity extends AppCompatActivity {
                 return params;
             }
         };
+        sr.setShouldCache(false);
+        queue = Volley.newRequestQueue(this);
+        queue.add(sr);
 
         return notError;
     }

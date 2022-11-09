@@ -57,7 +57,8 @@
         android:backgroundTint="@color/black"
         android:drawableLeft="@drawable/pwleft"
         android:drawablePadding="10dp"
-        android:hint="비밀번호" />
+        android:hint="비밀번호"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/btnLogin"
