@@ -1,6 +1,7 @@
 package com.kmu.timetocode
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.FragmentActivity
 
@@ -13,9 +14,11 @@ class NavActivity : FragmentActivity() {
         val searchFrag = SearchPage()
         val noticeFrag = NoticePage()
 
-        val btn1 = findViewById<LinearLayout>(R.id.btn1);
-        val btn2 = findViewById<LinearLayout>(R.id.btn2);
-        val btn3 = findViewById<LinearLayout>(R.id.btn3);
+        val heart = findViewById<ImageView>(R.id.heart)
+        val bell = findViewById<ImageView>(R.id.bell)
+        val btn1 = findViewById<LinearLayout>(R.id.btn1)
+        val btn2 = findViewById<LinearLayout>(R.id.btn2)
+        val btn3 = findViewById<LinearLayout>(R.id.btn3)
 
         btn1.setOnClickListener {
             supportFragmentManager
@@ -30,6 +33,18 @@ class NavActivity : FragmentActivity() {
                 .commit()
         }
         btn3.setOnClickListener {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragmentContainerView, noticeFrag)
+                .commit()
+        }
+        heart.setOnClickListener {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragmentContainerView, favoriteFrag)
+                .commit()
+        }
+        bell.setOnClickListener {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragmentContainerView, noticeFrag)
