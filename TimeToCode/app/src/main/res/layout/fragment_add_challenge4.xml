@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FragmentAddChallenge4">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:text="인증 방법을 설명해주세요."
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="27dp"
+            android:text="인증 예시 사진을 함께 올려줘도 좋아요!"
+            android:textSize="11dp" />
+
+        <EditText
+            android:id="@+id/editChallengeInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/edit_challenge_border"
+            android:gravity="top"
+            android:hint="내용을 입력해주세요."
+            android:inputType="text|textMultiLine"
+            android:minLines="6"
+            android:padding="13dp"
+            android:textSize="17dp" />
+
+        <!--TODO: id명 바꾸기-->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnSelectBG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_challenge_border"
+                android:textColor="#645EFF"
+                android:textSize="17dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/iconBtnSelectBG"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    android:src="@drawable/camera" />
+
+                <TextView
+                    android:id="@+id/textBtnSelectBG"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="사진 첨부하기"
+                    android:textColor="#645EFF"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!--TODO: 사진 첨부 시 imageView-->
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAddFinish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="18dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="챌린지 생성 완료"
+        android:textSize="23dp"/>
+
+</LinearLayout>

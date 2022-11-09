@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FragmentAddChallenge3">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+
+            android:text="인증 빈도를 선택해주세요."
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:scrollbars="@null">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:id="@+id/rGroupFreq"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:checkedButton="@id/rBtnFreq1">
+
+                    <RadioButton
+                        android:id="@+id/rBtnFreq1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/add_challenge_radio_btn"
+                        android:button="@null"
+                        android:text="매일"
+                        android:textColor="@drawable/add_challenge_radio_text" />
+
+                    <RadioButton
+                        android:id="@+id/rBtnFreq2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/add_challenge_radio_btn"
+                        android:button="@null"
+                        android:text="평일"
+                        android:textColor="@drawable/add_challenge_radio_text" />
+
+                    <RadioButton
+                        android:id="@+id/rBtnFreq3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/add_challenge_radio_btn"
+                        android:button="@null"
+                        android:text="주말"
+                        android:textColor="@drawable/add_challenge_radio_text" />
+
+                    <RadioButton
+                        android:id="@+id/rBtnFreq4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/add_challenge_radio_btn"
+                        android:button="@null"
+                        android:text="주 1일"
+                        android:textColor="@drawable/add_challenge_radio_text" />
+
+                    <RadioButton
+                        android:id="@+id/rBtnFreq5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/add_challenge_radio_btn"
+                        android:button="@null"
+                        android:text="주 2일"
+                        android:textColor="@drawable/add_challenge_radio_text" />
+
+                    <RadioButton
+                        android:id="@+id/rBtnFreq6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/add_challenge_radio_btn"
+                        android:button="@null"
+                        android:text="주 3일"
+                        android:textColor="@drawable/add_challenge_radio_text" />
+
+                    <RadioButton
+                        android:id="@+id/rBtnFreq7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/add_challenge_radio_btn"
+                        android:button="@null"
+                        android:text="주 4일"
+                        android:textColor="@drawable/add_challenge_radio_text" />
+
+                    <RadioButton
+                        android:id="@+id/rBtnFreq8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/add_challenge_radio_btn"
+                        android:button="@null"
+                        android:text="주 5일"
+                        android:textColor="@drawable/add_challenge_radio_text" />
+
+                    <RadioButton
+                        android:id="@+id/rBtnFreq9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/add_challenge_radio_btn"
+                        android:button="@null"
+                        android:text="주 6일"
+                        android:textColor="@drawable/add_challenge_radio_text" />
+                </RadioGroup>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="하루 인증 횟수를 선택해주세요."
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/rGroupCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/rBtnCountOption1">
+
+            <RadioButton
+                android:id="@+id/rBtnCountOption1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/add_challenge_cnt_radio_btn"
+                android:button="@null"
+                android:gravity="center"
+                android:text="하루 한 번"
+                android:textSize="17dp" />
+
+            <RadioButton
+                android:id="@+id/rBtnCountOption2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/add_challenge_cnt_radio_btn"
+                android:button="@null"
+                android:gravity="center"
+                android:text="하루 여러 번"
+                android:textSize="17dp" />
+
+            <RadioButton
+                android:id="@+id/rBtnCountOption3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/add_challenge_cnt_radio_btn"
+                android:button="@null"
+                android:gravity="center"
+                android:text="시작과 마무리 (하루 2번)"
+                android:textSize="17dp" />
+        </RadioGroup>
+
+        <!-- TODO: 클릭 버튼에 따라 visible,gone    -->
+
+        <LinearLayout
+            android:id="@+id/selectCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:gravity="center" >
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="회" />
+
+        </LinearLayout>
+
+        <!--TODO: timepicker사용(인증 간격 설정)    -->
+
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="Button" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="인증 가능 시간을 설정해주세요."
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <!-- TODO: 인증 가능 시간- (시작,종료)       -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp">
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="종료시간\n" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="챌린지 기간은 어떻게 되나요?"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:scrollbars="@null" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <RadioButton
+                        android:id="@+id/rBtnPeriod1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:button="@null"
+                        android:text="1주 동안"
+                        android:textColor="@drawable/add_challenge_radio_text"
+                        android:background="@drawable/add_challenge_radio_btn"/>
+
+                    <RadioButton
+                        android:id="@+id/rBtnPeriod2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:button="@null"
+                        android:text="2주 동안"
+                        android:textColor="@drawable/add_challenge_radio_text"
+                        android:background="@drawable/add_challenge_radio_btn"/>
+
+                    <RadioButton
+                        android:id="@+id/rBtnPeriod3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:button="@null"
+                        android:text="3주 동안"
+                        android:textColor="@drawable/add_challenge_radio_text"
+                        android:background="@drawable/add_challenge_radio_btn" />
+
+                    <RadioButton
+                        android:id="@+id/rBtnPeriod4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:button="@null"
+                        android:text="4주 동안"
+                        android:textColor="@drawable/add_challenge_radio_text"
+                        android:background="@drawable/add_challenge_radio_btn" />
+
+                    <RadioButton
+                        android:id="@+id/rBtnPeriod5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:button="@null"
+                        android:text="50일 동안"
+                        android:textColor="@drawable/add_challenge_radio_text"
+                        android:background="@drawable/add_challenge_radio_btn" />
+
+                    <RadioButton
+                        android:id="@+id/rBtnPeriod6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:button="@null"
+                        android:text="100일 동안"
+                        android:textColor="@drawable/add_challenge_radio_text"
+                        android:background="@drawable/add_challenge_radio_btn" />
+                </RadioGroup>
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnGoAdd4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="18dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="다음"
+        android:textSize="23dp"/>
+
+
+
+
+
+
+</LinearLayout>
