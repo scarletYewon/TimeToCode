@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".FragmentAddChallenge1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/editChallengeNameTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="챌린지명을 지어주세요."
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editChallengeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_challenge_border"
+            android:hint="챌린지명을 입력해주세요."
+            android:padding="10dp" />
+
+<!--TODO: 입력 글자 수 표시 추가 여부 고민-->
+<!--        <TextView-->
+<!--            android:id="@+id/textNameCount"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:gravity="right"-->
+<!--            android:text="TextView" />-->
+
+        <TextView
+            android:id="@+id/textChallengeTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="챌린지를 설명하는 태그를 선택해주세요."
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textChallengeTagTip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="챌린지 목록에서는 첫번째 태그만 보여요!" />
+
+        <!-- TODO: chip height wrap_content 로 변경 필요       -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#F3EEEE" />
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/challengeAllTags"
+            style="@style/Widget.MaterialComponents.ChipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/textChallengeInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="챌린지를 소개해주세요."
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editChallengeInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_challenge_border"
+            android:gravity="top"
+            android:hint="내용을 입력해주세요."
+            android:inputType="text|textMultiLine"
+            android:minLines="6"
+            android:padding="13dp"
+            android:textSize="17dp" />
+
+    </LinearLayout>
+
+    <!--   TODO: 태그 부분 추가   -->
+    <Button
+        android:id="@+id/btnGoAdd2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="18dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="다음"
+        android:textSize="23dp"/>
+
+</LinearLayout>

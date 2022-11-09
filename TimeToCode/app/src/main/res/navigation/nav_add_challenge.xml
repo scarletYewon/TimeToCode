@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_add_challenge"
+    app:startDestination="@id/fragmentAddChallenge1">
+
+    <fragment
+        android:id="@+id/fragmentAddChallenge1"
+        android:name="com.kmu.timetocode.FragmentAddChallenge1"
+        android:label="fragment_add_challenge1"
+        tools:layout="@layout/fragment_add_challenge1" >
+        <action
+            android:id="@+id/action_fragmentAddChallenge1_to_fragmentAddChallenge2"
+            app:destination="@id/fragmentAddChallenge2" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAddChallenge2"
+        android:name="com.kmu.timetocode.FragmentAddChallenge2"
+        android:label="fragment_add_challenge2"
+        tools:layout="@layout/fragment_add_challenge2" >
+        <action
+            android:id="@+id/action_fragmentAddChallenge2_to_fragmentAddChallenge3"
+            app:destination="@id/fragmentAddChallenge3" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAddChallenge3"
+        android:name="com.kmu.timetocode.FragmentAddChallenge3"
+        android:label="fragment_add_challenge3"
+        tools:layout="@layout/fragment_add_challenge3" >
+        <action
+            android:id="@+id/action_fragmentAddChallenge3_to_fragmentAddChallenge4"
+            app:destination="@id/fragmentAddChallenge4" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAddChallenge4"
+        android:name="com.kmu.timetocode.FragmentAddChallenge4"
+        android:label="fragment_add_challenge4"
+        tools:layout="@layout/fragment_add_challenge4" />
+</navigation>
