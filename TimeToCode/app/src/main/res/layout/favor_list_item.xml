@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageArea"
+            android:layout_width="106dp"
+            android:layout_height="110dp"
+            android:src="@drawable/gray"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/title"
+                android:textColor="@color/black"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Github Daily Commit
+                                        (1일 1커밋을 해보자!)"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/owner"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="생성자"
+                android:textSize="11sp"/>
+
+            <LinearLayout
+                android:layout_marginTop="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tag1"
+                    android:layout_width="47dp"
+                    android:layout_height="20dp"
+                    android:text="+ 60명"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="10sp"
+                    android:background="@drawable/radius"/>
+                <TextView
+                    android:id="@+id/tag2"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:text="#Github"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="10sp"
+                    android:background="@drawable/radius2"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

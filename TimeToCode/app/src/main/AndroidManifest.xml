@@ -11,19 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TimeToCode"
-        tools:targetApi="31">
-        <activity
-            android:name=".ChallengeListActivity"
-            android:exported="false" />
+        tools:targetApi="31"
         <activity
             android:name=".AddChallenge"
             android:exported="false" />
         <activity
-            android:name=".FragmentAddChallenge1"
-            android:exported="false"
-            android:theme="@style/Theme.MaterialComponents"/>
+            android:name=".Splash"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".NavActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
