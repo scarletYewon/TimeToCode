@@ -26,12 +26,15 @@
                 android:background="#979797"
                 android:scaleType="centerCrop" />
 
+
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/btnHeart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                app:srcCompat="@android:drawable/ic_notification_overlay" />
+                android:background="#00000000"
+                android:contentDescription="찜"
+                app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
         </FrameLayout>
 
@@ -45,7 +48,7 @@
             android:paddingBottom="5dp">
 
             <TextView
-                android:id="@+id/textChallegeTitleList"
+                android:id="@+id/textChallegeNameInList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="5dp"
@@ -54,7 +57,7 @@
                 android:textSize="15dp" />
 
             <TextView
-                android:id="@+id/textMadeUser"
+                android:id="@+id/textMadeUserInList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -75,12 +78,12 @@
                     android:textColor="@color/white"
                     android:textSize="10dp" />
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/challengeTags"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+<!--                <com.google.android.material.chip.ChipGroup-->
+<!--                    android:id="@+id/challengeTags"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
 
-                </com.google.android.material.chip.ChipGroup>
+<!--                </com.google.android.material.chip.ChipGroup>-->
             </LinearLayout>
 
 
