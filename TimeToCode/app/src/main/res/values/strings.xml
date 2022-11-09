@@ -1,11 +1,5 @@
 <resources>
     <string name="app_name">TimeToCode</string>
-    <string name="userName">홍길동</string>
-    <string name="userLevel">코린이</string>
-    <string name="mainTitle">TTC</string>
-    <string name="challengeMaker">생성자</string>
-    <string name="challengeExplain">(1일 1커밋을 해보자!)</string>
-    <string name="challengeTitle">Github Daily Commit</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="challengeNum">1</string>
