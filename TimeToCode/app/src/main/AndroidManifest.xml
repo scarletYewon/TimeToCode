@@ -16,6 +16,9 @@
             android:name=".AddChallenge"
             android:exported="false" />
         <activity
+            android:name=".AddChallenge"
+            android:exported="false" />
+        <activity
             android:name=".Splash"
             android:exported="false">
             <meta-data

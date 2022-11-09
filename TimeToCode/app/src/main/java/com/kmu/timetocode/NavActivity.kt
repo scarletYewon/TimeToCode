@@ -15,6 +15,7 @@ class NavActivity : FragmentActivity() {
         val favoriteFrag = FavoritePage()
         val searchFrag = SearchPage()
         val noticeFrag = NoticePage()
+        val challFrag = FragmentChallengeList()
 
         val heart = findViewById<ImageView>(R.id.heart)
         val bell = findViewById<ImageView>(R.id.bell)
@@ -44,7 +45,7 @@ class NavActivity : FragmentActivity() {
         btn3.setOnClickListener {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragmentContainerView, noticeFrag)
+                .replace(R.id.fragmentContainerView, challFrag)
                 .commit()
         }
         heart.setOnClickListener {
