@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         vf = findViewById(R.id.vf);
         vf.setInAnimation(this, android.R.anim.slide_in_left);
         vf.setOutAnimation(this, android.R.anim.slide_out_right);
+        vf.startFlipping();
 
         btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(view -> {
@@ -43,11 +44,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        btnRegister = findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
             startActivity(intent);
         });
 
+        btnRef = findViewById(R.id.btnRef);
         btnRef.setOnClickListener(view -> {
             // 이용약관
         });
