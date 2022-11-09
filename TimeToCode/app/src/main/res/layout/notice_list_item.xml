@@ -56,8 +56,6 @@
                         android:background="@drawable/radius"/>
                 </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>
