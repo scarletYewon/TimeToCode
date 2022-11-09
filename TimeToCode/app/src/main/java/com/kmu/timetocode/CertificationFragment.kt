@@ -25,8 +25,8 @@ class CertificationFragment : Fragment() {
         adapter = ListViewAdapter(requireContext(), listView)
 
         // challenge 추가하는 부분
-        adapter!!.addItem(Challenge(1, "Github Commit", "설명1", "만든이", R.drawable.ic_launcher_background))
-        adapter!!.addItem(Challenge(2, "BOJ algorithm", "설명2", "만든사람", R.drawable.ic_launcher_background))
+        adapter!!.addItem(Challenge(1, "Github Commit", "설명1", "만든이", R.drawable.ttcwhite))
+        adapter!!.addItem(Challenge(2, "BOJ algorithm", "설명2", "만든사람", R.drawable.ttcwhite))
 
         listView?.setAdapter(adapter);
 

@@ -20,10 +20,10 @@ class RecordFragment : Fragment() {
         val gridView = view?.findViewById<GridView>(R.id.recordList)
 
         adapter = GridViewAdapter(requireContext(), gridView)
-        adapter!!.addItem(Record(1, "제목", R.drawable.ic_launcher_background))
-        adapter!!.addItem(Record(2, "제목", R.drawable.ic_launcher_background))
-        adapter!!.addItem(Record(3, "제목", R.drawable.ic_launcher_background))
-        adapter!!.addItem(Record(4, "제목", R.drawable.ic_launcher_background))
+        adapter!!.addItem(Record(1, "제목", R.drawable.ttcwhite))
+        adapter!!.addItem(Record(2, "제목", R.drawable.ttcwhite))
+        adapter!!.addItem(Record(3, "제목", R.drawable.ttcwhite))
+        adapter!!.addItem(Record(4, "제목", R.drawable.ttcwhite))
 
         gridView?.setAdapter(adapter)
 
