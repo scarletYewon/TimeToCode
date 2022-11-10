@@ -9,9 +9,13 @@ import com.kmu.timetocode.databinding.ChallengeListItemBinding
 class ChallengeListAdapter(val context: Context, val challengeListArray: ArrayList<ChallengeListModel>): RecyclerView.Adapter<ChallengeListAdapter.ListViewHolder>()  {
 
     class ListViewHolder(val binding: ChallengeListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+//        TODO: img 추가
         fun setList(item: ChallengeListModel){
             binding.textChallegeNameInList.text = item.title
             binding.textMadeUserInList.text = item.owner
+            binding.challengePrtcp.text = "+"+item.prtcp+"명"
+            binding.challengeTag1.text = item.tag1
+            binding.challengeTag2.text = item.tag2
 
         }
     }

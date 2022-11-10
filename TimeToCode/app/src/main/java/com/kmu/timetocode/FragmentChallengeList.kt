@@ -1,5 +1,6 @@
 package com.kmu.timetocode
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -33,27 +34,33 @@ class FragmentChallengeList : Fragment() {
             ChallengeItemModel("a","챌린지 이름","github")
         )
         val challengeListArray = arrayListOf<ChallengeListModel>(
-            ChallengeListModel("a","챌린지 이름","생성자","+60명","github"),
-            ChallengeListModel("a","챌린지 이름","생성자","+60명","github"),
-            ChallengeListModel("a","챌린지 이름","생성자","+60명","github"),
-            ChallengeListModel("a","챌린지 이름","생성자","+60명","github"),
-            ChallengeListModel("a","챌린지 이름","생성자","+60명","github"),
-            ChallengeListModel("a","챌린지 이름","생성자","+60명","github")
+            ChallengeListModel("a","챌린지 이름","생성자","60","github", "알고리즘"),
+            ChallengeListModel("a","챌린지 이름","생성자","60","github", "알고리즘"),
+            ChallengeListModel("a","챌린지 이름","생성자","60","github", "알고리즘"),
+            ChallengeListModel("a","챌린지 이름","생성자","60","github", "알고리즘"),
+            ChallengeListModel("a","챌린지 이름","생성자","60","github", "알고리즘"),
+            ChallengeListModel("a","챌린지 이름","생성자","60","github", "알고리즘")
 
         )
 
         binding.listChallenge.layoutManager = LinearLayoutManager(requireContext())
         binding.listChallenge.adapter = ChallengeListAdapter(requireContext(),challengeListArray)
 
-        binding.listNew.layoutManager = LinearLayoutManager(requireContext())
+        binding.listNew.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
         binding.listNew.adapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
 
+        binding.btnGoAddChallenge.setOnClickListener{
+            val intent = Intent(getActivity(), AddChallenge::class.java)
+            startActivity(intent)
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
+//    TODO: 찜 버튼 클릭 시 버튼 이미지 변경
 
     override fun onDestroyView() {
         super.onDestroyView()
