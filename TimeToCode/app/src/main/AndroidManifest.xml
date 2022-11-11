@@ -36,6 +36,12 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".AddChallenge"
+            android:exported="false" />
+        <activity
+            android:name=".AddChallenge"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false">
             <meta-data
