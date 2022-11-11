@@ -23,12 +23,14 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
     ImageView x;
     EditText editId, editPw, editPw2, editName;
+    ImageView idCheck, pwCheck, pw2Check, nameCheck;
     Button btnRegister;
     LinearLayout btnLogin;
 
     boolean notError = true;
 
     RequestQueue queue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,28 +41,100 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         editId = findViewById(R.id.editId);
+        idCheck = findViewById(R.id.idCheck);
         editId.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                idCheck.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String id = editId.getText().toString();
-                if (id.isEmpty() & !id.contains("@")) {
-                    // 오른쪽 체크 표시 확인하기
-                }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                String id = editId.getText().toString();
+                if (!id.contains("@")) {
+                    idCheck.setVisibility(View.INVISIBLE);
+                } else {
+                    idCheck.setVisibility(View.VISIBLE);
+                }
             }
         });
+
         editPw = findViewById(R.id.editPw);
+        pwCheck = findViewById(R.id.pwCheck);
+        editPw.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                pwCheck.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String pw = editPw.getText().toString();
+                if (pw.length() < 8) {
+                    pwCheck.setVisibility(View.INVISIBLE);
+                } else {
+                    pwCheck.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         editPw2 = findViewById(R.id.editPw2);
+        pw2Check = findViewById(R.id.pw2Check);
+        editPw2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                pw2Check.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String pw = editPw.getText().toString();
+                String pw2 = editPw2.getText().toString();
+                if (!pw.equals(pw2)) {
+                    pw2Check.setVisibility(View.INVISIBLE);
+                } else {
+                    pw2Check.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         editName = findViewById(R.id.editName);
+        nameCheck = findViewById(R.id.nameCheck);
+        editName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                nameCheck.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String name = editName.getText().toString();
+                if (name.isEmpty()) {
+                    nameCheck.setVisibility(View.INVISIBLE);
+                } else {
+                    nameCheck.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         btnRegister = findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(view -> {
@@ -104,11 +178,12 @@ public class RegisterActivity extends AppCompatActivity {
         loginUrl.append(LoginActivity.url);
         loginUrl.append("/user/register");
 
+        notError = false;
         StringRequest sr = new StringRequest(Request.Method.POST, loginUrl.toString(), response -> {
             // 회원가입 응답 확인하기
+            notError = true;
         }, error -> {
             Toast.makeText(this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
-            notError = false;
         }) {
             @Override
             protected Map<String, String> getParams() throws Error {
