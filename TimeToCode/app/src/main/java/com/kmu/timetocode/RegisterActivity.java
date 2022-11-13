@@ -2,14 +2,18 @@ package com.kmu.timetocode;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -26,6 +30,8 @@ public class RegisterActivity extends AppCompatActivity {
     ImageView idCheck, pwCheck, pw2Check, nameCheck;
     Button btnRegister;
     LinearLayout btnLogin;
+    ProgressDialog dialog;
+    Animation anim;
 
     boolean notError = true;
 
@@ -39,6 +45,11 @@ public class RegisterActivity extends AppCompatActivity {
         x.setOnClickListener(view -> {
             finish();
         });
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Loading...");
+
+        anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.chillanim);
 
         editId = findViewById(R.id.editId);
         idCheck = findViewById(R.id.idCheck);
@@ -156,17 +167,21 @@ public class RegisterActivity extends AppCompatActivity {
         String pw2 = editPw2.getText().toString();
         String name = editName.getText().toString();
 
-        if (id.isEmpty() & !id.contains("@")) {
+        if (id.isEmpty() | !id.contains("@")) {
             Toast.makeText(this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            editId.startAnimation(anim);
             return false;
         } else if (pw.length() < 8) {
             Toast.makeText(this, "비밀번호를 8자리 이상 입력해주세요.", Toast.LENGTH_SHORT).show();
+            editPw.startAnimation(anim);
             return false;
         } else if (!pw.equals(pw2)) {
             Toast.makeText(this, "비밀번호 확인이 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+            editPw2.startAnimation(anim);
             return false;
         } else if (name.isEmpty()) {
             Toast.makeText(this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            editName.startAnimation(anim);
             return false;
         }
 
@@ -174,6 +189,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean makeUser(String id, String pw, String name) {
+        dialog.show();
         StringBuilder loginUrl = new StringBuilder();
         loginUrl.append(LoginActivity.url);
         loginUrl.append("/user/register");
@@ -198,6 +214,7 @@ public class RegisterActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         queue.add(sr);
 
+        dialog.dismiss();
         return notError;
     }
 }
