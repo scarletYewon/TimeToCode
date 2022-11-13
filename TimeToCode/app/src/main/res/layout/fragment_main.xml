@@ -121,9 +121,10 @@
         </TableLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="31dp"
             android:layout_marginStart="20dp"
+            android:background="@color/main"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/myChallenge"
@@ -135,16 +136,16 @@
                 android:textSize="14sp"/>
             <ImageButton
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/right_arrow"
-                android:background="@color/white"
-                android:layout_gravity="center"/>
+                android:layout_height="30dp"
+                android:src="@drawable/rightblue"
+                android:background="@color/white"/>
         </LinearLayout>
 
         <CalendarView
             android:id="@+id/calenderView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="3dp"
             android:background="@color/white"/>
 
         <TableLayout
@@ -154,7 +155,7 @@
             android:stretchColumns="0">
             <TableRow
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
+                android:layout_margin="10dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -163,14 +164,14 @@
                     android:textSize="18sp"/>
                 <ImageButton
                     android:id="@+id/madeByMe"
-                    android:layout_width="12dp"
-                    android:layout_height="25dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/right_arrow"
                     android:background="@color/white"/>
             </TableRow>
             <TableRow
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
+                android:layout_margin="10dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -179,14 +180,14 @@
                     android:textSize="18sp"/>
                 <ImageButton
                     android:id="@+id/toNotice"
-                    android:layout_width="12dp"
-                    android:layout_height="25dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/right_arrow"
                     android:background="@color/white"/>
             </TableRow>
             <TableRow
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
+                android:layout_margin="10dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -195,14 +196,14 @@
                     android:textSize="18sp"/>
                 <ImageButton
                     android:id="@+id/toSupport"
-                    android:layout_width="12dp"
-                    android:layout_height="25dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/right_arrow"
                     android:background="@color/white"/>
             </TableRow>
             <TableRow
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
+                android:layout_margin="10dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -212,9 +213,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
                     android:text="1.0.0-beta"
                     android:textColor="#afafaf"
-                    android:textSize="13sp"/>
+                    android:textSize="15sp"/>
             </TableRow>
         </TableLayout>
 
