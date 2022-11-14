@@ -204,9 +204,10 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws Error {
                 Map<String, String> params = new HashMap<>();
+                params.put("id", "0");
+                params.put("name", name);
                 params.put("email", id);
                 params.put("pw", pw);
-                params.put("name", name);
                 return params;
             }
         };
