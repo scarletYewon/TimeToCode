@@ -1,117 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    android:padding="33dp"
     tools:context=".LoginActivity">
-
-    <ImageView
-        android:layout_width="53dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/ttcblack" />
-
-    <ViewFlipper
-        android:id="@+id/vf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:scaleType="fitStart"
-            android:src="@drawable/logintext1" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:scaleType="fitStart"
-            android:src="@drawable/logintext2" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:scaleType="fitStart"
-            android:src="@drawable/logintext3" />
-    </ViewFlipper>
-
-    <EditText
-        android:id="@+id/editId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/black"
-        android:drawableLeft="@drawable/userleft"
-        android:drawablePadding="10dp"
-        android:hint="아이디" />
-
-    <EditText
-        android:id="@+id/editPw"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:drawableLeft="@drawable/pwleft"
-        android:drawablePadding="10dp"
-        android:hint="비밀번호"
-        android:inputType="textPassword" />
-
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/radius2"
-        android:text="로그인"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/radius3"
-        android:text="회원가입"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="33dp">
+        <ImageView
+            android:layout_width="53dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/ttcblack" />
 
-        <TextView
+        <ViewFlipper
+            android:id="@+id/vf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="회원가입 시 TTC의 "
-            android:textColor="@color/grey"
-            android:textSize="10dp" />
+            android:layout_marginBottom="80dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:scaleType="fitStart"
+                android:src="@drawable/logintext1" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:scaleType="fitStart"
+                android:src="@drawable/logintext2" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:scaleType="fitStart"
+                android:src="@drawable/logintext3" />
+        </ViewFlipper>
 
         <EditText
-            android:id="@+id/btnRef"
-            android:layout_width="wrap_content"
+            android:id="@+id/editId"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="이용약관"
-            android:textColor="@color/black"
-            android:textSize="10dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/black"
+            android:drawableLeft="@drawable/userleft"
+            android:drawablePadding="10dp"
+            android:hint="아이디" />
+
+        <EditText
+            android:id="@+id/editPw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:drawableLeft="@drawable/pwleft"
+            android:drawablePadding="10dp"
+            android:hint="비밀번호"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/radius2"
+            android:text="로그인"
+            android:textColor="@color/white"
+            android:textSize="16dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="에 동의하게 됩니다."
-            android:textColor="@color/grey"
-            android:textSize="10dp" />
+            android:layout_marginTop="20dp"
+            android:background="@drawable/radius3"
+            android:text="회원가입"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회원가입 시 TTC의 "
+                android:textColor="@color/grey"
+                android:textSize="10dp" />
+
+            <EditText
+                android:id="@+id/btnRef"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="이용약관"
+                android:textColor="@color/black"
+                android:textSize="10dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="에 동의하게 됩니다."
+                android:textColor="@color/grey"
+                android:textSize="10dp" />
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#625EFF"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="109dp"
+            android:src="@drawable/ttcwhite"/>
+    </LinearLayout>
+
+</FrameLayout>

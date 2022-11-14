@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -35,13 +36,14 @@ public class LoginActivity extends AppCompatActivity {
 
     RequestQueue queue;
 
+    LinearLayout splash;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-//        Intent splash = new Intent(getApplicationContext(), Splash.class);
-//        startActivity(splash);
+        splash = findViewById(R.id.splash);
 
         dialog = new ProgressDialog(this);
         dialog.setMessage("Loading...");
@@ -75,6 +77,9 @@ public class LoginActivity extends AppCompatActivity {
         btnRef.setOnClickListener(view -> {
             // 이용약관
         });
+
+        Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloudanim);
+        splash.startAnimation(anim);
     }
 
     private void login(String id, String pw) {
