@@ -149,10 +149,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         btnRegister = findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(view -> {
-            if (check()) {
-                Toast.makeText(this, "계정이 생성되었습니다.", Toast.LENGTH_SHORT).show();
-                finish();
-            }
+            check();
         });
 
         btnLogin = findViewById(R.id.btnLogin);
@@ -161,7 +158,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private boolean check() {
+    private void check() {
         String id = editId.getText().toString();
         String pw = editPw.getText().toString();
         String pw2 = editPw2.getText().toString();
@@ -170,34 +167,30 @@ public class RegisterActivity extends AppCompatActivity {
         if (id.isEmpty() | !id.contains("@")) {
             Toast.makeText(this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show();
             editId.startAnimation(anim);
-            return false;
         } else if (pw.length() < 8) {
             Toast.makeText(this, "비밀번호를 8자리 이상 입력해주세요.", Toast.LENGTH_SHORT).show();
             editPw.startAnimation(anim);
-            return false;
         } else if (!pw.equals(pw2)) {
             Toast.makeText(this, "비밀번호 확인이 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
             editPw2.startAnimation(anim);
-            return false;
         } else if (name.isEmpty()) {
             Toast.makeText(this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
             editName.startAnimation(anim);
-            return false;
+        } else {
+            makeUser(id, pw, name);
         }
-
-        return makeUser(id, pw, name);
     }
 
-    private boolean makeUser(String id, String pw, String name) {
+    private void makeUser(String id, String pw, String name) {
         dialog.show();
         StringBuilder loginUrl = new StringBuilder();
         loginUrl.append(LoginActivity.url);
-        loginUrl.append("/user/register");
+        loginUrl.append("/user/add");
 
-        notError = false;
         StringRequest sr = new StringRequest(Request.Method.POST, loginUrl.toString(), response -> {
             // 회원가입 응답 확인하기
-            notError = true;
+            Toast.makeText(this, "환영합니다.", Toast.LENGTH_SHORT).show();
+            finish();
         }, error -> {
             Toast.makeText(this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
         }) {
@@ -216,6 +209,5 @@ public class RegisterActivity extends AppCompatActivity {
         queue.add(sr);
 
         dialog.dismiss();
-        return notError;
     }
 }
