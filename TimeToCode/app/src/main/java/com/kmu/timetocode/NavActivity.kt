@@ -3,7 +3,10 @@ package com.kmu.timetocode
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.replace
 
 class NavActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,6 +86,12 @@ class NavActivity : FragmentActivity() {
                 }
             }
         }
+    }
+
+    fun replaceFragment(fragment : Fragment){
+        var fragmentManager = supportFragmentManager
+        var fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainerView, fragment).commit()
     }
 
 }

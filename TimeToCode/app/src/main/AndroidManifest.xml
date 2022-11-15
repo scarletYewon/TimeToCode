@@ -11,10 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TimeToCode"
-        tools:targetApi="31"
-        <activity
-            android:name=".AddChallenge"
-            android:exported="false" />
+        tools:targetApi="31">
         <activity
             android:name=".AddChallenge"
             android:exported="false" />
