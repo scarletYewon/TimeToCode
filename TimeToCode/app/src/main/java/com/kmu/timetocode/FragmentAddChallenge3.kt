@@ -45,6 +45,7 @@ class FragmentAddChallenge3 : Fragment() {
                 binding.editInterval.text = "${i}시간 ${i2}분"
             }
             var picker = TimePickerDialog(requireContext(),listener, 0, 0, true)
+            picker.setMessage("인증 간격")
             picker.show()
         }
 
@@ -53,6 +54,7 @@ class FragmentAddChallenge3 : Fragment() {
                 binding.editStartTime.text = "${i}시 ${i2}분"
             }
             var picker = TimePickerDialog(requireContext(),listener, 0, 0, true)
+            picker.setMessage("시작시간")
             picker.show()
         }
 
@@ -61,6 +63,7 @@ class FragmentAddChallenge3 : Fragment() {
                 binding.editEndTime.text = "${i}시 ${i2}분"
             }
             var picker = TimePickerDialog(requireContext(), listener, 23, 59, true)
+            picker.setMessage("종료시간")
             picker.show()
         }
 
