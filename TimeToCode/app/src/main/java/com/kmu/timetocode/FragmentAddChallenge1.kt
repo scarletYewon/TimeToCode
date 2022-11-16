@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.android.material.chip.Chip
 import com.kmu.timetocode.databinding.ChoiceTagBinding
 import androidx.navigation.fragment.findNavController
@@ -29,17 +30,11 @@ class FragmentAddChallenge1 : Fragment() {
         _binding = FragmentAddChallenge1Binding.inflate(inflater, container, false)
 
         binding.editChallengeName.addTextChangedListener(nameListener)
-
-
+        
         binding.btnGoAdd2.setOnClickListener{
-//            if(binding.editChallengeName.text.isNotEmpty()||binding.editChallengeInfo.text.isNotEmpty()){
-//                val testMsg = binding.editChallengeName.text.toString()
-//                Log.v("test", testMsg)
-//            }else{
-//
-//            }
             findNavController().navigate(R.id.action_fragmentAddChallenge1_to_fragmentAddChallenge2)
         }
+
 
         return binding.root
 
