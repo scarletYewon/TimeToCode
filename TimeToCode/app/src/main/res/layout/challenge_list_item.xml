@@ -54,7 +54,7 @@
                 android:paddingBottom="5dp"
                 android:text="TextView"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/textMadeUserInList"
@@ -70,20 +70,38 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/challegePrtcp"
+                <TextView
+                    android:id="@+id/challengePrtcp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/black"
-                    android:textColor="@color/white"
-                    android:textSize="10dp" />
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/challenge_prtcp_background"
+                    android:text="TextView"
+                    android:textSize="12dp"
+                    android:textColor="@color/white"/>
 
-<!--                <com.google.android.material.chip.ChipGroup-->
-<!--                    android:id="@+id/challengeTags"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content">-->
+                <TextView
+                    android:id="@+id/challengeTag1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/challenge_tag_in_list_background"
+                    android:text="TextView"
+                    android:textSize="12dp"
+                    android:textColor="@color/white"/>
+                <TextView
+                    android:id="@+id/challengeTag2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/challenge_tag_in_list_background"
+                    android:text="TextView"
+                    android:textSize="12dp"
+                    android:textColor="@color/white"/>
 
-<!--                </com.google.android.material.chip.ChipGroup>-->
             </LinearLayout>
 
 

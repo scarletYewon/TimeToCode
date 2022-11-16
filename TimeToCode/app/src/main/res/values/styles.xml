@@ -2,5 +2,12 @@
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="tint">@color/white</item>
+        <item name="android:timePickerStyle">@style/MyTimePickerStyle</item>
+    </style>
+    <style name="MyTimePickerStyle" parent="Theme.MaterialComponents.Light.Dialog.Alert.Bridge">
+        <item name="android:timePickerStyle">@style/MyPickerSpinner</item>
+    </style>
+    <style name="MyPickerSpinner" parent="android:Widget.Material.DatePicker">
+        <item name="android:datePickerMode">spinner</item>
     </style>
 </resources>
