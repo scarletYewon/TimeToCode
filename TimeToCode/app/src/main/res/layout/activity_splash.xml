@@ -10,6 +10,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         <ImageView
             android:layout_width="257dp"
             android:layout_height="156dp"
-            android:src="@drawable/ttcblack"/>
+            android:src="@drawable/ttcwhite"/>
     </LinearLayout>
 </layout>

@@ -13,3 +13,13 @@
 .externalNativeBuild
 .cxx
 local.properties
+codeStyleConfig.xml
+Project.xml
+deploymentTargetDropDown.xml
+gradle.xml
+misc.xml
+.gitignore
+modules.xml
+vcs.xml
+/.idea/gradle.xml
+/.misc.xml
