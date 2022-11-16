@@ -1,69 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical" >
-
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <LinearLayout
-        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@color/white"
+        android:orientation="vertical" >
+
         <LinearLayout
+            android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical" >
+            android:layout_marginStart="20dp"
+            android:orientation="horizontal" >
 
             <ImageView
                 android:id="@+id/profileImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
                 android:background="@drawable/shape_of_circle_button"
                 tools:ignore="InvalidId" />
 
-            <TextView
-                android:id="@+id/userName"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_gravity="center"
-                android:text="이름"
-                android:textColor="@color/black"
-                android:textSize="23sp" />
+                android:layout_marginStart="15dp">
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이름"
+                    android:textColor="@color/black"
+                    android:textSize="23sp" />
 
-            <TextView
-                android:id="@+id/userLevel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:text="코린이"
-                android:textColor="#999999"
-                android:textSize="15sp" />
-
+                <TextView
+                    android:id="@+id/userLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lv. 코린이"
+                    android:textColor="#999999"
+                    android:textSize="15sp" />
+            </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/myChallenge"
-            android:layout_width="160dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/shape_of_rounded_button"
-            android:text="내 챌린지 인증하기"
-            android:textColor="@color/black" />
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:elevation="5dp"
+            android:stretchColumns="*"
+            android:background="@drawable/rounded_table" >
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginEnd="1dp"
+                    android:padding="10dp"
+                    android:textSize="15sp"
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                    android:text="진행 중" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginEnd="1dp"
+                    android:padding="10dp"
+                    android:textSize="15sp"
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                    android:text="완료" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textSize="15sp"
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                    android:text="개설" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginEnd="1dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="15sp"
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                    android:text="0" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginEnd="1dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="15sp"
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                    android:text="0" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:textSize="15sp"
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                    android:text="0" />
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="31dp"
+            android:layout_marginStart="20dp"
+            android:background="@color/main"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/myChallenge"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@color/white"
+                android:text="챌린지 인증하러 가기"
+                android:textColor="@color/main"
+                android:textSize="14sp"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:src="@drawable/rightblue"
+                android:background="@color/white"/>
+        </LinearLayout>
 
         <CalendarView
             android:id="@+id/calenderView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="3dp"
             android:background="@color/white"/>
 
-    </LinearLayout>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:stretchColumns="0">
+            <TableRow
+                android:layout_margin="10dp">
+                <TextView
+                    android:text="공지사항"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
+                <ImageButton
+                    android:id="@+id/toNotice"
+                    android:src="@drawable/right_arrow"
+                    android:background="@color/white"/>
+            </TableRow>
+            <TableRow
+                android:layout_margin="10dp">
+                <TextView
+                    android:text="고객센터"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
+                <ImageButton
+                    android:id="@+id/toSupport"
+                    android:src="@drawable/right_arrow"
+                    android:background="@color/white"/>
+            </TableRow>
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="10"
+                    android:text="버전정보"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1.0.0-beta"
+                    android:textColor="#afafaf"
+                    android:textSize="15sp"/>
+            </TableRow>
+        </TableLayout>
 
-</LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/white"/>
+    </LinearLayout>
+</ScrollView>
