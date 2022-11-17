@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.FragmentActivity
+import com.kmu.timetocode.search.Search
 
 class NavActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +14,7 @@ class NavActivity : FragmentActivity() {
         val mainFrag = MainFragment()
         val certiFrag = CertificationFragment()
         val favoriteFrag = FavoritePage()
-        val searchFrag = SearchPage()
+        val searchFrag = Search()
         val noticeFrag = NoticePage()
         val challFrag = FragmentChallengeList()
 

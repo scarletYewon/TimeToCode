@@ -27,7 +27,7 @@
         android:id="@+id/searchPage"
         android:name="com.kmu.timetocode.SearchPage"
         android:label="fragment_search_page"
-        tools:layout="@layout/fragment_search_page" >
+        tools:layout="@layout/fragment_search" >
 <!--        <action-->
 <!--            android:id="@+id/action_searchPage_to_certification"-->
 <!--            app:destination="@id/certificate" />-->
