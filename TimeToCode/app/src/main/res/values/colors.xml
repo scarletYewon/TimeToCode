@@ -10,4 +10,5 @@
     <color name="grey">#979797</color>
     <color name="mainColor">#645EFF</color>
     <color name="main">#623dff</color>
+    <color name="glassGrey">#33D3D3D3</color>
 </resources>
