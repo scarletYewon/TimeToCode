@@ -23,6 +23,8 @@ import com.android.volley.toolbox.Volley;
 import com.kmu.timetocode.NavActivity;
 import com.kmu.timetocode.R;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -142,7 +144,15 @@ public class LoginActivity extends AppCompatActivity {
         loginUrl.append("/user/email");
 
         StringRequest sr = new StringRequest(Request.Method.POST, loginUrl.toString(), response -> {
-            Log.e("login", response);
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                int id = jsonObject.getInt("id");
+                String name = jsonObject.getString("name");
+                int level = jsonObject.getInt("level");
+                UserProfile.setRef(id, name, email, level);
+            } catch (Exception e) {
+                Log.e("LoginJSON", "예외 발생");
+            }
         }, error -> {
 
         }) {

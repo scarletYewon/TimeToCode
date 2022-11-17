@@ -6,11 +6,11 @@ public class UserProfile {
     private static String email;
     private static int level;
 
-    public UserProfile(int id, String name, String email, String pw, int level) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.level = level;
+    public static void setRef(int id, String name, String email, int level) {
+        UserProfile.id = id;
+        UserProfile.name = name;
+        UserProfile.email = email;
+        UserProfile.level = level;
     }
 
     public static int getId() {
