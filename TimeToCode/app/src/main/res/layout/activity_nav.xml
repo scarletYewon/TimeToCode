@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".NavActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#625EFF"
@@ -15,22 +16,28 @@
 
         <ImageView
             android:id="@+id/heart"
-            android:layout_marginRight="130dp"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:src="@drawable/heart"/>
+            android:src="@drawable/heart"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="17dp" />
         <ImageView
             android:id="@+id/ttc"
             android:layout_width="60dp"
             android:layout_height="40dp"
-            android:src="@drawable/ttcwhite" />
+            android:src="@drawable/ttcwhite"
+            tools:layout_editor_absoluteX="175dp"
+            tools:layout_editor_absoluteY="10dp" />
+
         <ImageView
             android:id="@+id/bell"
-            android:layout_marginLeft="130dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/bell"/>
-    </LinearLayout>
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/bell"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="15dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.fragment.app.FragmentContainerView
         android:layout_marginTop="60dp"
         android:id="@+id/fragmentContainerView"
