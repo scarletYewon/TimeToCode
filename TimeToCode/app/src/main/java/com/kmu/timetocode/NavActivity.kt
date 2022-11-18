@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.FragmentActivity
+import com.kmu.timetocode.favorite.FavoritePage
+import com.kmu.timetocode.notice.NoticePage
 import com.kmu.timetocode.search.Search
 
 class NavActivity : FragmentActivity() {
