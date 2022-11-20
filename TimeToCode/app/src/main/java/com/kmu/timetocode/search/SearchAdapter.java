@@ -65,11 +65,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
                     mData.add(jsonObject.getString("search"));
                 }
             } catch (Exception e) {
-                Log.e("SearchJSON", "예외 발생");
+                Log.e("SearchHistoryJSON", response);
             }
             notifyDataSetChanged();
         }, error -> {
-            Log.e("SearchList", error.toString());
+            Log.e("SearchHistory", error.toString());
         }) {
             @Override
             protected Map<String, String> getParams() throws Error {
