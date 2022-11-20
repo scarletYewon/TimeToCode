@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 class CertificationFragment : Fragment() {
     override fun onCreateView(
@@ -28,6 +27,7 @@ class CertificationFragment : Fragment() {
 
         listView?.setAdapter(adapter)
         rootView?.findViewById<ListView>(R.id.list)?.adapter = adapter
+
         return rootView
     }
 

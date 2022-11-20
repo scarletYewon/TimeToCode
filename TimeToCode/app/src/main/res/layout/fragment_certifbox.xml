@@ -59,47 +59,65 @@
             android:layout_height="80dp"
             android:text="Github Daily Commit \n (1일 1커밋을 해보자!)"
             android:textColor="@color/black"
-            android:textSize="17sp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="16dp" />
+            android:textSize="17sp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#D3D3D3"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="95dp" />
 
-        <Button
-            android:layout_width="390dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="인증 사진 업로드"
-            tools:layout_editor_absoluteX="10dp"
-            tools:layout_editor_absoluteY="118dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="70dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_gravity="center"
-            android:src="@drawable/gray"
-            tools:layout_editor_absoluteX="140dp"
-            tools:layout_editor_absoluteY="270dp" />
-
+            <View
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#D3D3D3" />
+            <LinearLayout
+                android:background="@drawable/radius3"
+                android:orientation="horizontal"
+                android:layout_width="390dp"
+                android:layout_height="45dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/camera"/>
+                <TextView
+                    android:textColor="#625EFF"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="인증 사진 업로드" />
+            </LinearLayout>
+            <ImageView
+                android:layout_marginTop="30dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/gray" />
+        </LinearLayout>
         <TextView
-            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="잠깐! 인증 방법을 확인하고 사진을 업로드 해주세요."
             android:textColor="@color/black"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="556dp" />
+            android:textStyle="bold" />
 
         <LinearLayout
-            android:layout_marginLeft="10dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="590dp"
+            android:layout_marginBottom="125dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -117,9 +135,15 @@
                 android:background="@color/white" />
         </LinearLayout>
         <Button
-            android:layout_width="390dp"
+            android:background="@drawable/radius2"
+            android:textColor="@color/white"
+            android:layout_marginBottom="70dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="395dp"
             android:layout_height="wrap_content"
             android:text="제출하기"
+            android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
