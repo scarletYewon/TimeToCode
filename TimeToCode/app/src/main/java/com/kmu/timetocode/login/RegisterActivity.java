@@ -1,4 +1,4 @@
-package com.kmu.timetocode;
+package com.kmu.timetocode.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,13 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.kmu.timetocode.R;
+import com.kmu.timetocode.login.LoginActivity;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="30dp"
-    tools:context=".RegisterActivity">
+    tools:context=".login.RegisterActivity">
 
     <ImageView
         android:id="@+id/x"
