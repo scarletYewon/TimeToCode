@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.kmu.timetocode.certicenter.CertificationFragment
 
 class NavActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

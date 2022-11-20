@@ -1,10 +1,11 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.recordcenter
 
 import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.kmu.timetocode.R
 
 class RecordFragment : Fragment() {
     var recordList = ArrayList<Record>() // 기록 전체 목록을 담고 있는 리스트

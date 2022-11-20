@@ -1,6 +1,5 @@
 package com.kmu.timetocode
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,7 @@ import android.widget.CalendarView
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.kmu.timetocode.certicenter.CertificationFragment
 
 
 class MainFragment : Fragment() {
@@ -39,7 +39,9 @@ class MainFragment : Fragment() {
         doneChallenge?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Done()) }
         madeByMe?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(UserCreated()) }
 
-        gotoCerti?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(CertificationFragment()) }
+        gotoCerti?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(
+            CertificationFragment()
+        ) }
 
         toSupportButton.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Support.newInstance()) }
         toNoticeButton.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Announce.newInstance()) }

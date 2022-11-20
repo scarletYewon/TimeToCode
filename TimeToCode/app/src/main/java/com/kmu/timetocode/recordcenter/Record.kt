@@ -1,4 +1,4 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.recordcenter
 
 class Record(num: Int, title: String, resId: Int) {
     var num: Int? = num
