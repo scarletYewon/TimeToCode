@@ -88,31 +88,28 @@
                     android:text="개설" />
             </TableRow>
             <TableRow>
-                <TextView
+                <Button
+                    android:id="@+id/ingChallenge"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_height="40dp"
                     android:layout_marginEnd="1dp"
-                    android:paddingBottom="10dp"
                     android:textSize="15sp"
                     android:background="@color/white"
                     android:textColor="@color/black"
                     android:text="0" />
-                <TextView
+                <Button
+                    android:id="@+id/doneChallenge"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_height="40dp"
                     android:layout_marginEnd="1dp"
-                    android:paddingBottom="10dp"
                     android:textSize="15sp"
                     android:background="@color/white"
                     android:textColor="@color/black"
                     android:text="0" />
-                <TextView
+                <Button
+                    android:id="@+id/madeByMe"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingBottom="10dp"
+                    android:layout_height="40dp"
                     android:textSize="15sp"
                     android:background="@color/white"
                     android:textColor="@color/black"
@@ -126,15 +123,16 @@
             android:layout_marginStart="20dp"
             android:background="@color/main"
             android:orientation="horizontal">
-            <Button
-                android:id="@+id/myChallenge"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:background="@color/white"
                 android:text="챌린지 인증하러 가기"
                 android:textColor="@color/main"
+                android:gravity="center_vertical"
                 android:textSize="14sp"/>
             <ImageButton
+                android:id="@+id/gotoCerti"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:src="@drawable/rightblue"
@@ -146,7 +144,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="3dp"
-            android:background="@color/white"/>
+            android:background="@color/white"
+            android:minDate="11/01/2022"/>
 
         <TableLayout
             android:layout_width="match_parent"

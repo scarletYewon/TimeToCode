@@ -34,4 +34,5 @@ class Proceeding : Fragment() {
 
         return rootView
     }
+
 }

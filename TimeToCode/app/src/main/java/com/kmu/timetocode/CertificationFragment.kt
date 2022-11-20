@@ -19,6 +19,9 @@ class CertificationFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_certification, container, false)
         val listView = view?.findViewById<ListView>(R.id.list)
 
+        val backCertification = rootView?.findViewById<ImageButton>(R.id.backCertification)
+        backCertification?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(MainFragment()) }
+
         var challengeList = ArrayList<Challenge>() // 챌린지 전체 목록을 담고 있는 리스트
 
         var adapter = ListViewAdapter(requireContext(), challengeList)
@@ -34,7 +37,15 @@ class CertificationFragment : Fragment() {
     inner class ListViewAdapter(val context: Context, val list: ArrayList<Challenge>): BaseAdapter() {
         override fun getCount(): Int { return list.size }
 
-        fun addItem(item: Challenge) { list.add(item) }
+        fun addItem(item: Challenge) {
+            list.add(item)
+            val holder = ViewHolder()
+            holder.ch_number?.text = item.num.toString()
+            holder.ch_title?.text = item.title
+            holder.ch_maker?.text = item.maker
+            holder.ch_explain?.text = item.explain
+            item.resId?.let { holder.ch_image?.setImageResource(it) }
+        }
         override fun getItem(position: Int): Any { return list[position] }
         override fun getItemId(position: Int): Long { return position.toLong() }
 
