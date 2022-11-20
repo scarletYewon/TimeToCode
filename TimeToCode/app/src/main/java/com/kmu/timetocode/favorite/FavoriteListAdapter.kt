@@ -1,4 +1,4 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.favorite
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,20 +7,23 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.kmu.timetocode.R
 
-class NoticeListAdapter(val context: Context, val list: ArrayList<NoticeListModel>): BaseAdapter() {
+class FavoriteListAdapter(val context: Context, val list: ArrayList<FavoriteListModel>): BaseAdapter() {
 
     override fun getView(position: Int, convertview: View?, parent: ViewGroup?): View {
         val view: View
-        val holder: ViewHolder
+        val holder : ViewHolder
 
         if (convertview == null) {
-            view = LayoutInflater.from(parent?.context)
-                .inflate(R.layout.notice_list_item, parent, false)
+            view = LayoutInflater.from(parent?.context).inflate(R.layout.favor_list_item,parent,false)
             holder = ViewHolder()
 
             holder.view_image = view.findViewById(R.id.imageArea)
-            holder.view_content = view.findViewById(R.id.content)
+            holder.view_text1 = view.findViewById(R.id.title)
+            holder.view_text2 = view.findViewById(R.id.owner)
+            holder.view_text3 = view.findViewById(R.id.tag1)
+            holder.view_text4 = view.findViewById(R.id.tag2)
 
             view.tag = holder
         } else {
@@ -28,7 +31,7 @@ class NoticeListAdapter(val context: Context, val list: ArrayList<NoticeListMode
             view = convertview
         }
         val item = list[position]
-        holder.view_content?.text = item.content
+        holder.view_text1?.text = item.title
 
         return view
 
@@ -43,7 +46,10 @@ class NoticeListAdapter(val context: Context, val list: ArrayList<NoticeListMode
     override fun getItemId(position: Int): Long = position.toLong()
 
     private class ViewHolder {
-        var view_image: ImageView? = null
-        var view_content: TextView? = null
+        var view_image : ImageView? = null
+        var view_text1: TextView? = null
+        var view_text2: TextView? = null
+        var view_text3: TextView? = null
+        var view_text4: TextView? = null
     }
 }

@@ -1,4 +1,4 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.favorite
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import com.kmu.timetocode.R
 
 class FavoritePage : Fragment() {
     override fun onCreateView(

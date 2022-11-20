@@ -1,4 +1,4 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.favorite
 
 data class FavoriteListModel(
 
