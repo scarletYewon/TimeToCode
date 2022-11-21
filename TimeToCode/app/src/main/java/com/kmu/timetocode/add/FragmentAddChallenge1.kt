@@ -1,17 +1,16 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.add
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.android.material.chip.Chip
 import com.kmu.timetocode.databinding.ChoiceTagBinding
 import androidx.navigation.fragment.findNavController
+import com.kmu.timetocode.R
 import com.kmu.timetocode.databinding.FragmentAddChallenge1Binding
 
 class FragmentAddChallenge1 : Fragment() {

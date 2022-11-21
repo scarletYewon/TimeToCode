@@ -1,4 +1,4 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.add
 
 import android.app.TimePickerDialog
 import android.os.Bundle
@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.kmu.timetocode.R
 import com.kmu.timetocode.databinding.FragmentAddChallenge3Binding
-import java.util.*
 
 class FragmentAddChallenge3 : Fragment() {
 

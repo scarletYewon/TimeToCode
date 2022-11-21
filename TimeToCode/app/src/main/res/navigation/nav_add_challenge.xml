@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragmentAddChallenge1"
-        android:name="com.kmu.timetocode.FragmentAddChallenge1"
+        android:name="com.kmu.timetocode.add.FragmentAddChallenge1"
         android:label="fragment_add_challenge1"
         tools:layout="@layout/fragment_add_challenge1" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentAddChallenge2"
-        android:name="com.kmu.timetocode.FragmentAddChallenge2"
+        android:name="com.kmu.timetocode.add.FragmentAddChallenge2"
         android:label="fragment_add_challenge2"
         tools:layout="@layout/fragment_add_challenge2" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentAddChallenge3"
-        android:name="com.kmu.timetocode.FragmentAddChallenge3"
+        android:name="com.kmu.timetocode.add.FragmentAddChallenge3"
         android:label="fragment_add_challenge3"
         tools:layout="@layout/fragment_add_challenge3" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentAddChallenge4"
-        android:name="com.kmu.timetocode.FragmentAddChallenge4"
+        android:name="com.kmu.timetocode.add.FragmentAddChallenge4"
         android:label="fragment_add_challenge4"
         tools:layout="@layout/fragment_add_challenge4" />
 </navigation>
