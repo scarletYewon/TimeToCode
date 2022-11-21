@@ -41,6 +41,7 @@ class MainFragment : Fragment() {
         calendarView?.state()?.edit()
             ?.setMinimumDate(CalendarDay.from(2022, 11, 1))
             ?.setMaximumDate(CalendarDay.from(Date(System.currentTimeMillis())))
+        calendarView?.addDecorator(EventDecorator(Color.RED, Collections.singleton(CalendarDay.today())));
 
         val toNoticeButton = rootView.findViewById<ImageButton>(R.id.toNotice)
         val toSupportButton = rootView.findViewById<ImageButton>(R.id.toSupport)
@@ -62,6 +63,17 @@ class MainFragment : Fragment() {
         return rootView
     }
 
+    class EventDecorator(private val color: Int, dates: Collection<CalendarDay>?) : DayViewDecorator {
+        private val dates: HashSet<CalendarDay>
+
+        override fun shouldDecorate(day: CalendarDay): Boolean {
+            return dates.contains(day)
+        }
+        override fun decorate(view: DayViewFacade) {
+            view.addSpan(DotSpan(5F, color))
+        }
+        init{
+            this.dates = HashSet(dates)
         }
     }
 }
