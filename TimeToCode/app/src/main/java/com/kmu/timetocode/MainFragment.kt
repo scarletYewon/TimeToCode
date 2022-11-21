@@ -1,11 +1,11 @@
 package com.kmu.timetocode
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CalendarView
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -14,6 +14,9 @@ import com.kmu.timetocode.cdp.Proceeding
 import com.kmu.timetocode.cdp.UserCreated
 import com.kmu.timetocode.certicenter.CertificationFragment
 import com.kmu.timetocode.login.UserProfile
+import com.prolificinteractive.materialcalendarview.*
+import com.prolificinteractive.materialcalendarview.spans.DotSpan
+import java.util.*
 
 
 class MainFragment : Fragment() {
@@ -34,13 +37,15 @@ class MainFragment : Fragment() {
         val madeByMe = rootView?.findViewById<Button>(R.id.madeByMe)
 
         val gotoCerti = rootView?.findViewById<ImageButton>(R.id.gotoCerti)
-        val calendarView = rootView?.findViewById<CalendarView>(R.id.calenderView)
-        calendarView?.maxDate = System.currentTimeMillis()
+        val calendarView = rootView?.findViewById<MaterialCalendarView>(R.id.calenderView)
+        calendarView?.state()?.edit()
+            ?.setMinimumDate(CalendarDay.from(2022, 11, 1))
+            ?.setMaximumDate(CalendarDay.from(Date(System.currentTimeMillis())))
 
         val toNoticeButton = rootView.findViewById<ImageButton>(R.id.toNotice)
         val toSupportButton = rootView.findViewById<ImageButton>(R.id.toSupport)
 
-        userName?.text = "이부분에 객체 불러와야함"
+        userName?.text = UserProfile.getName()
         userLevel?.text = "Lv." + level[UserProfile.getLevel()]
 
         ingChallenge?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Proceeding()) }
@@ -57,9 +62,6 @@ class MainFragment : Fragment() {
         return rootView
     }
 
-    companion object {
-        fun newInstance(): MainFragment {
-            return MainFragment()
         }
     }
 }
