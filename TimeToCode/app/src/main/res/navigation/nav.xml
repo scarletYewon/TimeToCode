@@ -13,7 +13,7 @@
     </fragment>
     <fragment
         android:id="@+id/certificate"
-        android:name="com.kmu.timetocode.CertificationFragment"
+        android:name="com.kmu.timetocode.certicenter.CertificationFragment"
         android:label="fragment_certification"
         tools:layout="@layout/fragment_certification" >
 <!--        <action-->
@@ -27,7 +27,7 @@
         android:id="@+id/searchPage"
         android:name="com.kmu.timetocode.SearchPage"
         android:label="fragment_search_page"
-        tools:layout="@layout/fragment_search_page" >
+        tools:layout="@layout/fragment_search" >
 <!--        <action-->
 <!--            android:id="@+id/action_searchPage_to_certification"-->
 <!--            app:destination="@id/certificate" />-->
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/noticePage"
-        android:name="com.kmu.timetocode.NoticePage"
+        android:name="com.kmu.timetocode.notice.NoticePage"
         android:label="fragment_notice_page"
         tools:layout="@layout/fragment_notice_page" >
 <!--        <action-->

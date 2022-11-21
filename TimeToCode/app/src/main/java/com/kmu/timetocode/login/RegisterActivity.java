@@ -1,8 +1,8 @@
-package com.kmu.timetocode;
+package com.kmu.timetocode.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,13 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.kmu.timetocode.R;
+import com.kmu.timetocode.login.LoginActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,12 +31,13 @@ public class RegisterActivity extends AppCompatActivity {
     ImageView idCheck, pwCheck, pw2Check, nameCheck;
     Button btnRegister;
     LinearLayout btnLogin;
-    ProgressDialog dialog;
+
+    CustomProgressDialog dialog;
     Animation anim;
 
-    boolean notError = true;
-
     RequestQueue queue;
+
+    View blur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +48,9 @@ public class RegisterActivity extends AppCompatActivity {
             finish();
         });
 
-        dialog = new ProgressDialog(this);
-        dialog.setMessage("Loading...");
+        blur = findViewById(R.id.blur);
+        dialog = new CustomProgressDialog(RegisterActivity.this);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.chillanim);
 
@@ -183,6 +186,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void makeUser(String id, String pw, String name) {
         dialog.show();
+        blur.setVisibility(View.VISIBLE);
         StringBuilder loginUrl = new StringBuilder();
         loginUrl.append(LoginActivity.url);
         loginUrl.append("/user/add");
@@ -208,6 +212,7 @@ public class RegisterActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         queue.add(sr);
 
+        blur.setVisibility(View.INVISIBLE);
         dialog.dismiss();
     }
 }

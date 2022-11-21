@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".login.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,6 +11,7 @@
         android:background="@color/white"
         android:orientation="vertical"
         android:padding="33dp">
+
         <ImageView
             android:layout_width="53dp"
             android:layout_height="29dp"
@@ -124,10 +125,18 @@
         android:layout_height="match_parent"
         android:background="#625EFF"
         android:gravity="center">
+
         <ImageView
             android:layout_width="180dp"
             android:layout_height="109dp"
-            android:src="@drawable/ttcwhite"/>
+            android:src="@drawable/ttcwhite" />
     </LinearLayout>
+
+    <View
+        android:id="@+id/blur"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/glassGrey"
+        android:visibility="invisible" />
 
 </FrameLayout>

@@ -1,21 +1,18 @@
 package com.kmu.timetocode
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.findNavController
+import androidx.fragment.app.Fragment
 
-class SearchPage : Fragment() {
+class Certifbox : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) : View? {
-        val rootView = inflater.inflate(R.layout.fragment_search_page, container, false)
-
+        val rootView : View = inflater.inflate(R.layout.fragment_certifbox, container, false)
         return rootView
     }
 }

@@ -1,4 +1,4 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.cdp
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import com.kmu.timetocode.R
+import com.kmu.timetocode.favorite.FavoriteListAdapter
+import com.kmu.timetocode.favorite.FavoriteListModel
 
 class UserCreated : Fragment() {
     override fun onCreateView(
