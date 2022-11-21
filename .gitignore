@@ -23,3 +23,5 @@ modules.xml
 vcs.xml
 /.idea/gradle.xml
 /.misc.xml
+TimeToCode/.idea/deploymentTargetDropDown.xml
+TimeToCode/build.gradle
