@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ListView
+import com.kmu.timetocode.MainFragment
+import com.kmu.timetocode.NavActivity
 import com.kmu.timetocode.R
+import com.kmu.timetocode.certicenter.CertificationFragment
 
 class FavoritePage : Fragment() {
     override fun onCreateView(
@@ -20,6 +24,11 @@ class FavoritePage : Fragment() {
 //        btn_change.setOnClickListener{
 //            activity.changeFragment(2)
 //        }
+
+        val backCertification = rootView?.findViewById<ImageButton>(R.id.backCertification)
+        backCertification?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(
+            MainFragment()
+        ) }
 
         val list_array = arrayListOf<FavoriteListModel>(
             FavoriteListModel("a","챌린지 이름","생성자","+60명","github"),
