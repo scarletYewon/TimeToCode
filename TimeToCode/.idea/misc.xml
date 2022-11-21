@@ -20,10 +20,12 @@
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/drawable/img_btn_click_favorite.xml" value="0.142" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/drawable/radius.xml" value="0.142" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/drawable/radius2.xml" value="0.142" />
+        <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/drawable/rounded_table.xml" value="0.136" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/drawable/selector_radio_text.xml" value="0.1405" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/drawable/shape_of_circle_button.xml" value="0.142" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/drawable/shape_of_rounded_button.xml" value="0.142" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/drawable/test_radio.xml" value="0.1615" />
+        <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/drawable/uncheckright.xml" value="0.136" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/activity_add_challenge.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/activity_challenge_list.xml" value="0.22" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/activity_main.xml" value="0.16354166666666667" />
@@ -35,7 +37,7 @@
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/choice_tag.xml" value="0.1" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/favor_list_item.xml" value="0.5" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/fragment_add_challenge1.xml" value="0.22" />
-        <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/fragment_add_challenge2.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/fragment_add_challenge2.xml" value="0.22" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/fragment_add_challenge3.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/fragment_add_challenge4.xml" value="0.25" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/fragment_add_challenge_1.xml" value="0.178125" />
@@ -44,6 +46,7 @@
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/fragment_main.xml" value="0.1" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/new_item_view.xml" value="0.6" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/notice_list_item.xml" value="0.14266304347826086" />
+        <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/take_img_dialog_layout.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/tory9/AndroidStudioProjects/MP/TimeToCode/app/src/main/res/layout/test.xml" value="0.22" />
       </map>
     </option>

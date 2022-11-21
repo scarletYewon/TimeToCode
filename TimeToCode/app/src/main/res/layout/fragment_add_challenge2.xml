@@ -94,45 +94,52 @@
             android:textSize="17dp"
             android:textStyle="bold" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:background="@color/light_gray_1"
+            android:src="@drawable/gray_img"
+            android:scaleType="centerInside"/>
+
+        <LinearLayout
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnSelectBG"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_challenge_border"
-                android:textColor="#645EFF"
-                android:textSize="17dp" />
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:padding="6dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/challenge_tag_in_new_background"
+                android:text="업로드"
+                android:textColor="@color/white"
+                android:textSize="14dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/iconBtnSelectBG"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingRight="15dp"
-                    android:src="@drawable/photo" />
-
-                <TextView
-                    android:id="@+id/textBtnSelectBG"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="앨범에서 사진 선택"
-                    android:textColor="#645EFF"
-                    android:textSize="17dp" />
-            </LinearLayout>
-
-        </FrameLayout>
-
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:padding="6dp"
+                android:background="@drawable/rounded_table"
+                android:text="취소"
+                android:textColor="@color/white"
+                android:textSize="14dp"/>
+        </LinearLayout>
     </LinearLayout>
+
+
 
     <Button
         android:id="@+id/btnGoAdd3"
