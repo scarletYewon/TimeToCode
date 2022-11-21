@@ -52,16 +52,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <TextView
             android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:text="Github Daily Commit \n (1일 1커밋을 해보자!)"
             android:textColor="@color/black"
-            android:textSize="17sp" />
-
-
+            android:textSize="17sp"
+            tools:ignore="MissingConstraints" />
         <LinearLayout
             android:orientation="vertical"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -131,7 +129,7 @@
                 android:layout_width="25dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/back_blue"
+                android:src="@drawable/rightblue"
                 android:background="@color/white" />
         </LinearLayout>
         <Button
