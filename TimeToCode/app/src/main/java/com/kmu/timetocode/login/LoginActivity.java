@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     LinearLayout splash;
     View blur;
 
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
