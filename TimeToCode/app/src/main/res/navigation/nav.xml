@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/noticePage"
-        android:name="com.kmu.timetocode.NoticePage"
+        android:name="com.kmu.timetocode.notice.NoticePage"
         android:label="fragment_notice_page"
         tools:layout="@layout/fragment_notice_page" >
 <!--        <action-->

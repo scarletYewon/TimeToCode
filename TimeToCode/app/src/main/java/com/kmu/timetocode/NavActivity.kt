@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.FragmentActivity
+import com.kmu.timetocode.favorite.FavoritePage
+import com.kmu.timetocode.notice.NoticePage
 import com.kmu.timetocode.search.Search
 
 class NavActivity : FragmentActivity() {
@@ -60,29 +62,6 @@ class NavActivity : FragmentActivity() {
                 .beginTransaction()
                 .replace(R.id.fragmentContainerView, noticeFrag)
                 .commit()
-        }
-        fun changeFragment(index: Int){
-            when(index){
-                1 -> {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainerView, favoriteFrag)
-                        .commit()
-                }
-
-                2 -> {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainerView, searchFrag)
-                        .commit()
-                }
-                3 -> {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainerView, noticeFrag)
-                        .commit()
-                }
-            }
         }
     }
 
