@@ -10,7 +10,6 @@ import android.widget.ListView
 import com.kmu.timetocode.MainFragment
 import com.kmu.timetocode.NavActivity
 import com.kmu.timetocode.R
-import com.kmu.timetocode.certicenter.CertificationFragment
 import com.kmu.timetocode.favorite.FavoriteListAdapter
 import com.kmu.timetocode.favorite.FavoriteListModel
 
