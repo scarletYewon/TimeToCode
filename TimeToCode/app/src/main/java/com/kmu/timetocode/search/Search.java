@@ -20,6 +20,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kmu.timetocode.ChallengeItemAdapter;
@@ -96,7 +97,6 @@ public class Search extends Fragment {
         String url = LoginActivity.url + "/usersearch/add";
 
         StringRequest sr = new StringRequest(Request.Method.POST, url, response -> {
-            Log.e("searchAdd", response);
         }, error -> {
             Log.e("searchAdd", error.toString());
         }) {
@@ -115,10 +115,8 @@ public class Search extends Fragment {
     }
 
     private void showSearchList(String searchText) {
-        String url = LoginActivity.url + "/challenge/nameChallenge";
-
-        StringRequest sr = new StringRequest(Request.Method.POST, url, response -> {
-            Log.e("SearchList", response);
+        String url = LoginActivity.url + "/challenge/nameChallenge?nameChallenge=" + searchText;
+        StringRequest sr = new StringRequest(Request.Method.GET, url, response -> {
             ArrayList<ChallengeListModel> challengeList = new ArrayList<>();
             try {
                 JSONArray jsonArray = new JSONArray(response);
@@ -127,20 +125,20 @@ public class Search extends Fragment {
                     String nameChallenge = jsonObject.getString("nameChallenge");
                     String imageLink = jsonObject.getString("imageLink");
                     int madeIdUser = jsonObject.getInt("madeIdUser");
-                    int countUser = jsonObject.getInt("countUser");
+                    int countUser = jsonObject.getInt("count");
                     challengeList.add(new ChallengeListModel(imageLink, nameChallenge, Integer.toString(madeIdUser), Integer.toString(countUser), "github", "알고리즘"));
                 }
             } catch (Exception e) {
-                Log.e("SearchJSON", "예외 발생");
+                Log.e("SearchListJSON", response);
             }
             challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
         }, error -> {
-            Log.e("searchResult", error.toString());
+            Log.e("searchList", searchText + "/" + error.toString());
         }) {
             @Override
             protected Map<String, String> getParams() throws Error {
                 Map<String, String> params = new HashMap<>();
-                params.put("nameChallenge", searchText);
+//                params.put("nameChallenge", searchText);
                 return params;
             }
         };
