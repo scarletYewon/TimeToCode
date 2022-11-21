@@ -9,6 +9,9 @@ import android.widget.CalendarView
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.kmu.timetocode.cdp.Done
+import com.kmu.timetocode.cdp.Proceeding
+import com.kmu.timetocode.cdp.UserCreated
 import com.kmu.timetocode.certicenter.CertificationFragment
 import com.kmu.timetocode.login.UserProfile
 
