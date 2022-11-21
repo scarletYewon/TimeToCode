@@ -28,7 +28,7 @@ class FragmentAddChallenge2 : Fragment() {
         _binding = FragmentAddChallenge2Binding.inflate(inflater, container, false)
 
         binding.btnSelectBG.setOnClickListener{
-            setPermission()
+            Toast.makeText(activity,"",Toast.LENGTH_LONG).show()
             TakeImgDialog("이미지 가져오기").show(parentFragmentManager,"takeImgDialog")
 
         }
