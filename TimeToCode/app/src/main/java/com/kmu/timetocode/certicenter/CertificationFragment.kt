@@ -1,4 +1,4 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.certicenter
 
 import android.content.Context
 import android.os.Bundle
@@ -8,6 +8,10 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.kmu.timetocode.MainFragment
+import com.kmu.timetocode.NavActivity
+import com.kmu.timetocode.R
+import com.kmu.timetocode.recordcenter.RecordFragment
 
 class CertificationFragment : Fragment() {
     override fun onCreateView(
@@ -17,6 +21,9 @@ class CertificationFragment : Fragment() {
     ) : View? {
         val rootView = inflater.inflate(R.layout.fragment_certification, container, false)
         val listView = view?.findViewById<ListView>(R.id.list)
+
+        val backCertification = rootView?.findViewById<ImageButton>(R.id.backCertification)
+        backCertification?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(MainFragment()) }
 
         var challengeList = ArrayList<Challenge>() // 챌린지 전체 목록을 담고 있는 리스트
 
@@ -51,7 +58,17 @@ class CertificationFragment : Fragment() {
                 holder.ch_explain = view.findViewById(R.id.challengeExplain)
                 holder.ch_maker = view.findViewById(R.id.challengeMaker)
                 holder.ch_image = view.findViewById(R.id.challengeImage)
+                holder.btn_certificaion = view.findViewById(R.id.btnCertification)
+                holder.btn_gallery = view.findViewById(R.id.btnGallery)
 
+                holder.ch_number?.text = list[position].num.toString()
+                holder.ch_title?.text = list[position].title
+                holder.ch_maker?.text = list[position].maker
+                holder.ch_explain?.text = list[position].explain
+                list[position].resId?.let {holder.ch_image?.setImageResource(it)}
+
+                holder.btn_certificaion?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(CertificationFragment()) }
+                holder.btn_gallery?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(RecordFragment()) }
                 view.tag = holder
             } else {
                 holder = convertview.tag as ViewHolder
@@ -71,6 +88,8 @@ class CertificationFragment : Fragment() {
             var ch_explain: TextView? = null
             var ch_maker: TextView? = null
             var ch_image: ImageButton? = null
+            var btn_certificaion: Button? = null
+            var btn_gallery: Button? = null
         }
     }
 

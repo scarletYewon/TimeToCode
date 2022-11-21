@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/Support"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/backCertification"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:src="@drawable/back_blue" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|top"
+                android:layout_marginLeft="10dp"
+                android:text="고객센터"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                android:background="#00ffffff"/>
+        </LinearLayout>
+    </FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_margin="11dp"
+                android:text="자주 묻는 질문(FAQ)"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                >
+            </TextView>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+            </View>
+
+            <ImageButton
+                android:id="@+id/questionButton"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:src="@drawable/back_blue"
+                android:rotation="180"
+                android:layout_gravity="right"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_margin="11dp"
+                android:text="1:1문의"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                >
+            </TextView>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+            </View>
+
+            <ImageButton
+                android:id="@+id/inquiryButton"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:src="@drawable/back_blue"
+                android:rotation="180"
+                android:layout_gravity="right"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_margin="11dp"
+                android:text="이용약관"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                >
+            </TextView>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+            </View>
+
+            <ImageButton
+                android:id="@+id/TermOfServiceButton"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:src="@drawable/back_blue"
+                android:rotation="180"
+                android:layout_gravity="right"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_margin="11dp"
+                android:text="개인정보처리방침"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                >
+            </TextView>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+            </View>
+
+            <ImageButton
+                android:id="@+id/privacyButton"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:src="@drawable/back_blue"
+                android:rotation="180"
+                android:layout_gravity="right"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

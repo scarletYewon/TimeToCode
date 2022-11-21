@@ -3,10 +3,12 @@ package com.kmu.timetocode
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.kmu.timetocode.favorite.FavoritePage
 import com.kmu.timetocode.notice.NoticePage
 import com.kmu.timetocode.search.Search
+import com.kmu.timetocode.certicenter.CertificationFragment
 
 class NavActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,4 +67,9 @@ class NavActivity : FragmentActivity() {
         }
     }
 
+    fun replaceFragment(fragment : Fragment){
+        var fragmentManager = supportFragmentManager
+        var fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainerView, fragment).commit()
+    }
 }

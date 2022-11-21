@@ -13,7 +13,7 @@
     </fragment>
     <fragment
         android:id="@+id/certificate"
-        android:name="com.kmu.timetocode.CertificationFragment"
+        android:name="com.kmu.timetocode.certicenter.CertificationFragment"
         android:label="fragment_certification"
         tools:layout="@layout/fragment_certification" >
 <!--        <action-->
