@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.kmu.timetocode.Certifbox
 import com.kmu.timetocode.MainFragment
 import com.kmu.timetocode.NavActivity
 import com.kmu.timetocode.R
@@ -67,7 +67,7 @@ class CertificationFragment : Fragment() {
                 holder.ch_explain?.text = list[position].explain
                 list[position].resId?.let {holder.ch_image?.setImageResource(it)}
 
-                holder.btn_certificaion?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(CertificationFragment()) }
+                holder.btn_certificaion?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Certifbox()) }
                 holder.btn_gallery?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(RecordFragment()) }
                 view.tag = holder
             } else {

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.kmu.timetocode.MainFragment
 import com.kmu.timetocode.NavActivity
 import com.kmu.timetocode.R
+import com.kmu.timetocode.certicenter.CertificationFragment
 
 class RecordFragment : Fragment() {
     override fun onCreateView(
@@ -19,9 +20,9 @@ class RecordFragment : Fragment() {
         val gridView = view?.findViewById<GridView>(R.id.recordList)
 
         val backRecord = rootView?.findViewById<ImageButton>(R.id.backRecord)
-        backRecord?.setOnClickListener { (activity as NavActivity?)!!. replaceFragment(MainFragment()) }
+        backRecord?.setOnClickListener { (activity as NavActivity?)!!. replaceFragment(CertificationFragment()) }
 
-        var recordList = ArrayList<Record>() // 기록 전체 목록을 담고 있는 리스트        adapter = GridViewAdapter(requireContext(), gridView)
+        var recordList = ArrayList<Record>() // 기록 전체 목록을 담고 있는 리스트
 
         var adapter = GridViewAdapter(requireContext(), recordList)
 
