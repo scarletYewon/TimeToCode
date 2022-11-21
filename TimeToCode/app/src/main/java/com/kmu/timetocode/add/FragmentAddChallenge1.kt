@@ -1,9 +1,8 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.add
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import android.view.ViewGroup
 import com.google.android.material.chip.Chip
 import com.kmu.timetocode.databinding.ChoiceTagBinding
 import androidx.navigation.fragment.findNavController
+import com.kmu.timetocode.R
 import com.kmu.timetocode.databinding.FragmentAddChallenge1Binding
 
 class FragmentAddChallenge1 : Fragment() {
@@ -29,17 +29,11 @@ class FragmentAddChallenge1 : Fragment() {
         _binding = FragmentAddChallenge1Binding.inflate(inflater, container, false)
 
         binding.editChallengeName.addTextChangedListener(nameListener)
-
-
+        
         binding.btnGoAdd2.setOnClickListener{
-//            if(binding.editChallengeName.text.isNotEmpty()||binding.editChallengeInfo.text.isNotEmpty()){
-//                val testMsg = binding.editChallengeName.text.toString()
-//                Log.v("test", testMsg)
-//            }else{
-//
-//            }
             findNavController().navigate(R.id.action_fragmentAddChallenge1_to_fragmentAddChallenge2)
         }
+
 
         return binding.root
 

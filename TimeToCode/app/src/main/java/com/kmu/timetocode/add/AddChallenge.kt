@@ -1,14 +1,8 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.add
 
-import android.R
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.kmu.timetocode.databinding.ActivityAddChallengeBinding
-import com.kmu.timetocode.databinding.FragmentAddChallenge1Binding
 
 
 class AddChallenge : AppCompatActivity() {

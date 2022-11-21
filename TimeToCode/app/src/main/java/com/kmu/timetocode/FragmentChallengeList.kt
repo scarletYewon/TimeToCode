@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kmu.timetocode.databinding.FragmentAddChallenge1Binding
+import com.kmu.timetocode.add.AddChallenge
 import com.kmu.timetocode.databinding.FragmentChallengeListBinding
 
 class FragmentChallengeList : Fragment() {
@@ -50,7 +50,7 @@ class FragmentChallengeList : Fragment() {
         binding.listNew.adapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
 
         binding.btnGoAddChallenge.setOnClickListener{
-            val intent = Intent(getActivity(), AddChallenge::class.java)
+            val intent = Intent(context, AddChallenge::class.java)
             startActivity(intent)
         }
         return binding.root
