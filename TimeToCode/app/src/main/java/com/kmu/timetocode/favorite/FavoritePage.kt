@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.ListAdapter
 import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -22,7 +23,7 @@ import org.json.JSONArray
 
 class FavoritePage : Fragment() {
     var favoriteListAdapter: FavoriteListAdapter?=null
-    var queue: RequestQueue? = null//5
+    var queue: RequestQueue? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,17 +39,14 @@ class FavoritePage : Fragment() {
         }
 //        val btn = rootView?.findViewById<LinearLayout>(R.id.hello)
 //        btn?.setOnClickListener {
-//            showFavorList(myId)
+//            showFavorList()
 //        }
         showFavorList()
-//        Log.e(Fav)
-//
-//        val list_array = arrayListOf(
-//            FavoriteListModel("a", "챌린지 이름", "생성자", 60, "github","algorithm"),
-//            FavoriteListModel("a", "챌린지 이름", "생성자", 70, "github","algorithm"),
-//            FavoriteListModel("a", "챌린지 이름", "생성자", 80, "github","algorithm"),
-//        )
-//        var Adapter = FavoriteListAdapter(requireContext(), list_array)
+        Log.e("chall2", favoriteListAdapter.toString())
+        val list_array = arrayListOf(
+            FavoriteListModel("a", "챌린지 이름", "생성자", 60, "github","algorithm"),
+        )
+        var Adapter = FavoriteListAdapter(requireContext(), list_array)
         rootView?.findViewById<ListView>(R.id.listview_favorite_fragment)?.adapter = favoriteListAdapter
 
         return rootView
@@ -57,8 +55,7 @@ class FavoritePage : Fragment() {
     private fun showFavorList() {
         val myId = UserProfile.getId()
         val url = "https://android-pkfbl.run.goorm.io/challenge/challengeFavorite?idUser=" + myId
-        val sr: StringRequest = object : StringRequest(
-            Method.GET, url,
+        val sr: StringRequest = object : StringRequest( Method.GET, url,
             Response.Listener { response: String? ->
                 val challengeList = ArrayList<FavoriteListModel>()
                 try {
@@ -72,19 +69,14 @@ class FavoritePage : Fragment() {
                         val tag1 = jsonObject.getString("tagName1")
                         val tag2 = jsonObject.getString("tagName2")
                         challengeList.add(FavoriteListModel(imageLink, nameChallenge, madeIdUser, countUser, tag1, tag2))
-                        Log.e(challengeList.toString(),"hellooooo")
                     }
-                    Log.e(challengeList.toString(),"hello")
                 } catch (e: Exception) {
-                    Log.e("hi",e.toString())
                     Log.e("FavoriteListJSON", response!!)
                 }
-                Log.e("gogo",response!!)
-                Log.e("challist",challengeList.get(0).title)
                 favoriteListAdapter = FavoriteListAdapter(requireContext(), challengeList)
+                Log.e("before", favoriteListAdapter.toString())
             },
             Response.ErrorListener { error: VolleyError ->
-                Log.e("Favor","error")
             }) {
             @Throws(java.lang.Error::class)
             override fun getParams(): MutableMap<String,String>? {
@@ -97,5 +89,6 @@ class FavoritePage : Fragment() {
         sr.setShouldCache(false)
         queue = Volley.newRequestQueue(requireContext())
         queue!!.add(sr)
+        Log.e("after", favoriteListAdapter.toString())
     }
 }
