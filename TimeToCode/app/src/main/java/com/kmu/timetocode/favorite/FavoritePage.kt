@@ -81,7 +81,7 @@ class FavoritePage : Fragment() {
                 }
                 Log.e("gogo",response!!)
                 Log.e("challist",challengeList.get(0).title)
-                favoriteListAdapter = FavoriteListAdapter(requireContext(), challengeList.get(0))
+                favoriteListAdapter = FavoriteListAdapter(requireContext(), challengeList)
             },
             Response.ErrorListener { error: VolleyError ->
                 Log.e("Favor","error")
