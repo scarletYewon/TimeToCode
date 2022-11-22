@@ -56,15 +56,6 @@ class FragmentAddChallenge2 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().supportFragmentManager.setFragmentResultListener("takeRequestKey",this) { requestKey, bundle ->
-            bundle.getString("takeBundleKey")?.let {
-                val imageBytes = Base64.getDecoder().decode(it)
-                val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-                binding.uploadBackGroundImgView.setImageBitmap(image)
-                Log.i("take","takeImg를 통해 fragment")
-            }
-        }
-
         requireActivity().supportFragmentManager.setFragmentResultListener("pickRequestKey",this) { requestKey, bundle ->
             bundle.getString("pickBundleKey")?.let {
                 val image = Uri.parse(it)
