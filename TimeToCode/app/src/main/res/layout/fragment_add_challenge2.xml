@@ -95,7 +95,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/uploadBackGroundImgView"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
@@ -105,13 +105,13 @@
 
         <LinearLayout
             android:layout_width="140dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnSelectBG"
+                android:id="@+id/btnUploadBackGround"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -125,7 +125,7 @@
                 android:textSize="14dp"/>
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btnUploadCancel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

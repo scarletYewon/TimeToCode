@@ -1,10 +1,9 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.list
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.kmu.timetocode.databinding.ChallengeListItemBinding
 import com.kmu.timetocode.databinding.ChallengeNewItemBinding
 
 class ChallengeItemAdapter(val context: Context, val challengeItemArray: ArrayList<ChallengeItemModel>): RecyclerView.Adapter<ChallengeItemAdapter.ItemViewHolder>()  {

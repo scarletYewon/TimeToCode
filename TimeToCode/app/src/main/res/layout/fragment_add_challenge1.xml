@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:text="챌린지 목록에서는 첫번째 태그만 보여요!" />
+            android:text="2개 필수 선택! " />
 
         <!-- TODO: chip height wrap_content 로 변경 필요       -->
         <com.google.android.material.chip.ChipGroup

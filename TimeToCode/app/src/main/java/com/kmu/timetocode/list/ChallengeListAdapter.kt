@@ -1,4 +1,4 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.list
 
 import android.content.Context
 import android.view.LayoutInflater

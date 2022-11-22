@@ -1,8 +1,6 @@
 package com.kmu.timetocode.search;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +18,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.kmu.timetocode.ChallengeItemAdapter;
-import com.kmu.timetocode.ChallengeItemModel;
-import com.kmu.timetocode.ChallengeListAdapter;
-import com.kmu.timetocode.ChallengeListModel;
+import com.kmu.timetocode.list.ChallengeListAdapter;
+import com.kmu.timetocode.list.ChallengeListModel;
 import com.kmu.timetocode.R;
 import com.kmu.timetocode.login.LoginActivity;
 import com.kmu.timetocode.login.UserProfile;
