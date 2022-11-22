@@ -31,12 +31,12 @@ class Proceeding : Fragment() {
         ) }
 
         val list_array = arrayListOf<FavoriteListModel>(
-            FavoriteListModel("a","진행중","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github")
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm")
 
         )
         var Adapter = FavoriteListAdapter(requireContext(),list_array)
