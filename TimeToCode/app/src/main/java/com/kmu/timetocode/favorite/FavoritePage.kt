@@ -24,6 +24,7 @@ import org.json.JSONArray
 class FavoritePage : Fragment() {
     var favoriteListAdapter: FavoriteListAdapter?=null
     var queue: RequestQueue? = null
+    var myList: ListView? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,6 +42,7 @@ class FavoritePage : Fragment() {
 //        btn?.setOnClickListener {
 //            showFavorList()
 //        }
+        myList = rootView?.findViewById<ListView>(R.id.listview_favorite_fragment)
         showFavorList()
         Log.e("chall2", favoriteListAdapter.toString())
         val list_array = arrayListOf(
@@ -74,6 +76,7 @@ class FavoritePage : Fragment() {
                     Log.e("FavoriteListJSON", response!!)
                 }
                 favoriteListAdapter = FavoriteListAdapter(requireContext(), challengeList)
+                myList?.setAdapter(favoriteListAdapter);
                 Log.e("before", favoriteListAdapter.toString())
             },
             Response.ErrorListener { error: VolleyError ->
