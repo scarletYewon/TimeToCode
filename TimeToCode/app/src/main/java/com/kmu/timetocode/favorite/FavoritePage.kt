@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.ListAdapter
 import android.widget.ListView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -38,19 +35,9 @@ class FavoritePage : Fragment() {
                 MainFragment()
             )
         }
-//        val btn = rootView?.findViewById<LinearLayout>(R.id.hello)
-//        btn?.setOnClickListener {
-//            showFavorList()
-//        }
         myList = rootView?.findViewById<ListView>(R.id.listview_favorite_fragment)
         showFavorList()
-        Log.e("chall2", favoriteListAdapter.toString())
-        val list_array = arrayListOf(
-            FavoriteListModel("a", "챌린지 이름", "생성자", 60, "github","algorithm"),
-        )
-        var Adapter = FavoriteListAdapter(requireContext(), list_array)
-        rootView?.findViewById<ListView>(R.id.listview_favorite_fragment)?.adapter = favoriteListAdapter
-
+//        rootView?.findViewById<ListView>(R.id.listview_favorite_fragment)?.adapter = favoriteListAdapter
         return rootView
     }
 
@@ -77,7 +64,6 @@ class FavoritePage : Fragment() {
                 }
                 favoriteListAdapter = FavoriteListAdapter(requireContext(), challengeList)
                 myList?.setAdapter(favoriteListAdapter);
-                Log.e("before", favoriteListAdapter.toString())
             },
             Response.ErrorListener { error: VolleyError ->
             }) {
@@ -92,6 +78,5 @@ class FavoritePage : Fragment() {
         sr.setShouldCache(false)
         queue = Volley.newRequestQueue(requireContext())
         queue!!.add(sr)
-        Log.e("after", favoriteListAdapter.toString())
     }
 }
