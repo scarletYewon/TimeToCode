@@ -1,6 +1,7 @@
 package com.kmu.timetocode.cdp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,12 +34,12 @@ class Done : Fragment() {
         ) }
 
         val list_array = arrayListOf<FavoriteListModel>(
-            FavoriteListModel("a","완료된","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github")
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm")
 
         )
         var Adapter = FavoriteListAdapter(requireContext(),list_array)
