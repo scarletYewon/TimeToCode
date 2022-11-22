@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/radius3"
-            android:padding="10dp"
             android:hint="지금 인기있는 챌린지를 검색해보세요!"
+            android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="15dp" />
 
@@ -36,8 +36,7 @@
     <LinearLayout
         android:id="@+id/beforeSearch"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -61,11 +60,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/beforeView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:reverseLayout="true"
-                app:stackFromEnd="true" />
+                android:layout_height="match_parent" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

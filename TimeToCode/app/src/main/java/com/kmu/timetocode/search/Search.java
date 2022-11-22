@@ -59,7 +59,10 @@ public class Search extends Fragment {
         beforeSearch = view.findViewById(R.id.beforeSearch);
 
         beforeView = view.findViewById(R.id.beforeView);
-        beforeView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager lm = new LinearLayoutManager(getContext());
+        lm.setReverseLayout(true);
+        lm.setStackFromEnd(true);
+        beforeView.setLayoutManager(lm);
         searchAdapter = new SearchAdapter(requireContext());
         beforeView.setAdapter(searchAdapter);
 
@@ -71,15 +74,17 @@ public class Search extends Fragment {
 
         searchAdapter.setOnItemClickListener((position, data) -> {
             // 최근 검색어 클릭시 검색
-            searchAdapter.delete(position);
             addSearch();
             showSearchList(editSearch.getText().toString());
             beforeSearch.setVisibility(View.GONE);
             afterView.setVisibility(View.VISIBLE);
         });
 
+        LinearLayoutManager lm2 = new LinearLayoutManager(getContext());
+        lm2.setReverseLayout(true);
+        lm2.setStackFromEnd(true);
         afterView = view.findViewById(R.id.afterView);
-        afterView.setLayoutManager(new LinearLayoutManager(getContext()));
+        afterView.setLayoutManager(lm2);
 
         btnSearch = view.findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(view1 -> {
@@ -104,7 +109,7 @@ public class Search extends Fragment {
             protected Map<String, String> getParams() throws Error {
                 Map<String, String> params = new HashMap<>();
                 params.put("idUser", Integer.toString(UserProfile.getId()));
-                params.put("Search", editSearch.getText().toString());
+                params.put("search", editSearch.getText().toString());
                 return params;
             }
         };
@@ -115,7 +120,7 @@ public class Search extends Fragment {
     }
 
     private void showSearchList(String searchText) {
-        String url = LoginActivity.url + "/challenge/nameChallenge?nameChallenge=" + searchText;
+        String url = LoginActivity.url + "/challenge/challengeList?nameChallenge=" + searchText;
         StringRequest sr = new StringRequest(Request.Method.GET, url, response -> {
             ArrayList<ChallengeListModel> challengeList = new ArrayList<>();
             try {
@@ -124,24 +129,20 @@ public class Search extends Fragment {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String nameChallenge = jsonObject.getString("nameChallenge");
                     String imageLink = jsonObject.getString("imageLink");
-                    int madeIdUser = jsonObject.getInt("madeIdUser");
-                    int countUser = jsonObject.getInt("count");
-                    challengeList.add(new ChallengeListModel(imageLink, nameChallenge, Integer.toString(madeIdUser), Integer.toString(countUser), "github", "알고리즘"));
+                    String madeName = jsonObject.getString("name");
+                    int count = jsonObject.getInt("countUser");
+                    String tag1 = jsonObject.getString("tagName1");
+                    String tag2 = jsonObject.getString("tagName2");
+                    challengeList.add(new ChallengeListModel(imageLink, nameChallenge, madeName, Integer.toString(count), tag1, tag2));
                 }
             } catch (Exception e) {
                 Log.e("SearchListJSON", response);
             }
             challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
+            afterView.setAdapter(challengeItemAdapter);
         }, error -> {
             Log.e("searchList", searchText + "/" + error.toString());
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws Error {
-                Map<String, String> params = new HashMap<>();
-//                params.put("nameChallenge", searchText);
-                return params;
-            }
-        };
+        });
 
         sr.setShouldCache(false);
         queue = Volley.newRequestQueue(requireContext());

@@ -39,20 +39,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     public SearchAdapter(Context context) {
         this.context = context;
+        refresh();
     }
 
-    public void setOnItemClickListener (OnItemClickListener listener) {
+    public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    public void delete(int position) {
-        mData.remove(position);
-        notifyDataSetChanged();
-    }
-
     public void refresh() {
-        String url = LoginActivity.url + "/usersearch/get";
+        String url = LoginActivity.url + "/usersearch/get?idUser=" + UserProfile.getId();
 
         @SuppressLint("NotifyDataSetChanged")
         StringRequest sr = new StringRequest(Request.Method.GET, url, response -> {
@@ -70,14 +65,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             notifyDataSetChanged();
         }, error -> {
             Log.e("SearchHistory", error.toString());
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws Error {
-                Map<String, String> params = new HashMap<>();
-                params.put("idUser", Integer.toString(UserProfile.getId()));
-                return params;
-            }
-        };
+        });
 
         sr.setShouldCache(false);
         queue = Volley.newRequestQueue(context);
@@ -90,11 +78,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             textSearch = itemView.findViewById(R.id.textSearch);
-            refresh();
         }
 
         public TextView getTextView() {
             return textSearch;
+        }
+
+        void onBind(String search, int position) {
+            textSearch.setText(search);
         }
     }
 
@@ -116,7 +107,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.ViewHolder holder, int position) {
-
+        Log.d("mDataSize3", Integer.toString(position) + "-" + mData.get(position));
+        holder.onBind(mData.get(position), position);
     }
 
     @Override
