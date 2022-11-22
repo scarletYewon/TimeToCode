@@ -95,11 +95,8 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();
         blur.setVisibility(View.VISIBLE);
 
-        StringBuilder loginUrl = new StringBuilder();
-        loginUrl.append(LoginActivity.url);
-        loginUrl.append("/user/login");
-
-        StringRequest sr = new StringRequest(Request.Method.POST, loginUrl.toString(), response -> {
+        String loginUrl = LoginActivity.url + "/user/login";
+        StringRequest sr = new StringRequest(Request.Method.POST, loginUrl, response -> {
             // 로그인 응답 확인하기
             if (response.equals("1")) {
                 editor.putString("id", editId.getText().toString());
@@ -140,14 +137,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setUserProfile(String email) {
-        StringBuilder loginUrl = new StringBuilder();
-        loginUrl.append(LoginActivity.url);
-        loginUrl.append("/user/email");
-
-        StringRequest sr = new StringRequest(Request.Method.POST, loginUrl.toString(), response -> {
+        // 요청하고 싶은 HTTP Url
+        String url = LoginActivity.url + "/user/email";
+        StringRequest sr = new StringRequest(Request.Method.POST, url, response -> {
+            // 직접 response를 출력해서 어떤 데이터인지 파악할것!
             try {
                 JSONObject jsonObject = new JSONObject(response);
-                int id = jsonObject.getInt("id");
+                int id = jsonObject.getInt("id"); // JSON 타입으로 얻고 싶은 데이터 명을 적으면 됨
                 String name = jsonObject.getString("name");
                 int level = jsonObject.getInt("level");
                 UserProfile.setRef(id, name, email, level);
@@ -159,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
         }) {
             @Override
             protected Map<String, String> getParams() throws Error {
+                // 파라미터로 넘겨야 하는 것을 추가할 것, 대소문자 주의!
                 Map<String, String> params = new HashMap<>();
                 params.put("email", email);
                 return params;
