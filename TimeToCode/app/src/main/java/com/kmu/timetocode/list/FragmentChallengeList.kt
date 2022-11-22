@@ -1,4 +1,4 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.list
 
 import android.content.Intent
 import android.os.Bundle

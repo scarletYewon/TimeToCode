@@ -1,4 +1,4 @@
-package com.kmu.timetocode
+package com.kmu.timetocode.list
 
 data class ChallengeListModel(
     val image: String,

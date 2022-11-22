@@ -9,6 +9,7 @@ import com.kmu.timetocode.favorite.FavoritePage
 import com.kmu.timetocode.notice.NoticePage
 import com.kmu.timetocode.search.Search
 import com.kmu.timetocode.certicenter.CertificationFragment
+import com.kmu.timetocode.list.FragmentChallengeList
 
 class NavActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
