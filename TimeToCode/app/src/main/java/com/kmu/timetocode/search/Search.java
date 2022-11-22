@@ -54,10 +54,7 @@ public class Search extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        editSearch = view.findViewById(R.id.editSearch);
-
         beforeSearch = view.findViewById(R.id.beforeSearch);
-
         beforeView = view.findViewById(R.id.beforeView);
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         lm.setReverseLayout(true);
@@ -69,6 +66,7 @@ public class Search extends Fragment {
         refresh = view.findViewById(R.id.refresh);
         refresh.setOnRefreshListener(() -> {
             searchAdapter.refresh();
+            beforeView.setAdapter(searchAdapter);
             refresh.setRefreshing(false);
         });
 
@@ -85,14 +83,24 @@ public class Search extends Fragment {
         lm2.setStackFromEnd(true);
         afterView = view.findViewById(R.id.afterView);
         afterView.setLayoutManager(lm2);
+        showSearchList("");
 
         btnSearch = view.findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(view1 -> {
             // 검색 버튼 클릭시 검색
+            editSearch.clearFocus();
             addSearch();
             showSearchList(editSearch.getText().toString());
             beforeSearch.setVisibility(View.GONE);
             afterView.setVisibility(View.VISIBLE);
+            searchAdapter.refresh();
+        });
+
+        editSearch = view.findViewById(R.id.editSearch);
+        editSearch.setOnFocusChangeListener((view12, b) -> {
+            beforeView.setAdapter(searchAdapter);
+            beforeSearch.setVisibility(View.VISIBLE);
+            afterView.setVisibility(View.GONE);
         });
 
         return view;
@@ -104,6 +112,7 @@ public class Search extends Fragment {
         StringRequest sr = new StringRequest(Request.Method.POST, url, response -> {
         }, error -> {
             Log.e("searchAdd", error.toString());
+            searchAdapter.refresh();
         }) {
             @Override
             protected Map<String, String> getParams() throws Error {
