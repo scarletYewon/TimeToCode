@@ -37,7 +37,6 @@ class FavoritePage : Fragment() {
         }
         myList = rootView?.findViewById<ListView>(R.id.listview_favorite_fragment)
         showFavorList()
-//        rootView?.findViewById<ListView>(R.id.listview_favorite_fragment)?.adapter = favoriteListAdapter
         return rootView
     }
 
@@ -58,12 +57,14 @@ class FavoritePage : Fragment() {
                         val tag1 = jsonObject.getString("tagName1")
                         val tag2 = jsonObject.getString("tagName2")
                         challengeList.add(FavoriteListModel(imageLink, nameChallenge, madeIdUser, countUser, tag1, tag2))
+                        Log.e("challengeList",challengeList.toString())
                     }
                 } catch (e: Exception) {
                     Log.e("FavoriteListJSON", response!!)
                 }
                 favoriteListAdapter = FavoriteListAdapter(requireContext(), challengeList)
-                myList?.setAdapter(favoriteListAdapter);
+                Log.e("List",favoriteListAdapter.toString())
+                myList?.setAdapter(favoriteListAdapter)
             },
             Response.ErrorListener { error: VolleyError ->
             }) {
