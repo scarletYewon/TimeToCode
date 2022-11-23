@@ -6,10 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
@@ -18,7 +18,6 @@ import com.kmu.timetocode.cdp.Done
 import com.kmu.timetocode.cdp.Proceeding
 import com.kmu.timetocode.cdp.UserCreated
 import com.kmu.timetocode.certicenter.CertificationFragment
-import com.kmu.timetocode.login.LoginActivity
 import com.kmu.timetocode.login.UserProfile
 import com.prolificinteractive.materialcalendarview.*
 import com.prolificinteractive.materialcalendarview.spans.DotSpan
@@ -27,7 +26,10 @@ import java.util.*
 
 
 class MainFragment : Fragment() {
-    val level = arrayOf("코딩 새싹", "코딩 병아리", "코린이", "전공자", "전문가", "컴퓨터")
+    var queue: RequestQueue? = null
+    var proceeding:TextView?=null
+    var complete:TextView?=null
+    var upload:TextView?=null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,15 +39,17 @@ class MainFragment : Fragment() {
         val rootView : View = inflater.inflate(R.layout.fragment_main, container, false)
 
         val userName = rootView.findViewById<TextView>(R.id.userName)
-        val userLevel = rootView.findViewById<TextView>(R.id.userLevel)
         userName?.text = UserProfile.getName()
-        userLevel?.text = "Lv. " + level[UserProfile.getLevel()-1]
 
-        val ingChallenge = rootView.findViewById<Button>(R.id.ingChallenge)
-        val doneChallenge = rootView.findViewById<Button>(R.id.doneChallenge)
-        val madeByMe = rootView.findViewById<Button>(R.id.madeByMe)
+        val ingChallenge = rootView.findViewById<ViewGroup>(R.id.ingChallenge)
+        val doneChallenge = rootView.findViewById<ViewGroup>(R.id.doneChallenge)
+        val madeByMe = rootView.findViewById<ViewGroup>(R.id.madeByMe)
+        proceeding = rootView.findViewById(R.id.proceeding)
+        complete = rootView.findViewById(R.id.complete)
+        upload = rootView.findViewById(R.id.upload)
+        showCount()
 
-        val gotoCerti = rootView.findViewById<ImageButton>(R.id.gotoCerti)
+        val gotoCerti = rootView.findViewById<ViewGroup>(R.id.gotoCerti)
         val calendarView = rootView.findViewById<MaterialCalendarView>(R.id.calenderView)
         calendarView?.state()?.edit()
             ?.setMinimumDate(CalendarDay.from(2022, 11, 1))
@@ -53,9 +57,8 @@ class MainFragment : Fragment() {
 
         calendarView?.addDecorator(EventDecorator(Color.parseColor("#645EFF"), Collections.singleton(CalendarDay.today())));
 
-        val toNoticeButton = rootView.findViewById<ImageButton>(R.id.toNotice)
-        val toSupportButton = rootView.findViewById<ImageButton>(R.id.toSupport)
-
+        val toNoticeButton = rootView.findViewById<ViewGroup>(R.id.toNotice)
+        val toSupportButton = rootView.findViewById<ViewGroup>(R.id.toSupport)
 
 
         ingChallenge?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Proceeding()) }
@@ -83,4 +86,37 @@ class MainFragment : Fragment() {
             this.dates = HashSet(dates)
         }
     }
+
+    private fun showCount() {
+        val myId = UserProfile.getId()
+        val url = "https://android-pkfbl.run.goorm.io/userChallenge/getRef?idUser=" + myId
+        val sr: StringRequest = object : StringRequest(Method.GET, url,
+            Response.Listener { response: String? ->
+                try {
+                    val jsonObject = JSONObject(response)
+                    val progressCount = jsonObject.getInt("progress")
+                    val completeCount = jsonObject.getInt("complete")
+                    val uploadCount = jsonObject.getInt("upload")
+                    proceeding?.text = progressCount.toString()
+                    complete?.text = completeCount.toString()
+                    upload?.text = uploadCount.toString()
+                } catch (e: Exception) {
+                    Log.e("Challenge Counting JSON", response!!)
+                }
+            },
+            Response.ErrorListener { error: VolleyError ->
+            }) {
+            @Throws(java.lang.Error::class)
+            override fun getParams(): MutableMap<String,String>? {
+                val params: MutableMap<String, String> = HashMap()
+//                    params["idUser"] = myId.toString()
+//                    Log.e(params.toString(),"params")
+                return params
+            }
+        }
+        sr.setShouldCache(false)
+        queue = Volley.newRequestQueue(requireContext())
+        queue!!.add(sr)
+    }
+
 }

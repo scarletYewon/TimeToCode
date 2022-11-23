@@ -11,6 +11,7 @@ import com.kmu.timetocode.Certifbox
 import com.kmu.timetocode.MainFragment
 import com.kmu.timetocode.NavActivity
 import com.kmu.timetocode.R
+import com.kmu.timetocode.login.UserProfile
 import com.kmu.timetocode.recordcenter.RecordFragment
 
 class CertificationFragment : Fragment() {
@@ -27,10 +28,10 @@ class CertificationFragment : Fragment() {
 
         var challengeList = ArrayList<Challenge>() // 챌린지 전체 목록을 담고 있는 리스트
 
-        var adapter = ListViewAdapter(requireContext(), challengeList)
+        val adapter = ListViewAdapter(requireContext(), challengeList)
         // challenge 추가하는 부분
-        adapter!!.addItem(Challenge(1, "Github Commit", "설명1", "만든이", R.drawable.ttcwhite))
-        adapter!!.addItem(Challenge(2, "BOJ algorithm", "설명2", "만든사람", R.drawable.ttcwhite))
+        adapter.addItem(Challenge("Github Commit\n", "생성자1", R.drawable.ttcwhite))
+        adapter.addItem(Challenge("BOJ algorithm\n", "maker2", R.drawable.ttcwhite))
 
         listView?.setAdapter(adapter)
         rootView?.findViewById<ListView>(R.id.list)?.adapter = adapter
@@ -53,18 +54,14 @@ class CertificationFragment : Fragment() {
                 view = LayoutInflater.from(parent?.context).inflate(R.layout.listview_challenge, parent, false)
                 holder = ViewHolder()
 
-                holder.ch_number = view.findViewById(R.id.challengeNum)
                 holder.ch_title = view.findViewById(R.id.challengeTitle)
-                holder.ch_explain = view.findViewById(R.id.challengeExplain)
                 holder.ch_maker = view.findViewById(R.id.challengeMaker)
                 holder.ch_image = view.findViewById(R.id.challengeImage)
                 holder.btn_certificaion = view.findViewById(R.id.btnCertification)
                 holder.btn_gallery = view.findViewById(R.id.btnGallery)
 
-                holder.ch_number?.text = list[position].num.toString()
                 holder.ch_title?.text = list[position].title
                 holder.ch_maker?.text = list[position].maker
-                holder.ch_explain?.text = list[position].explain
                 list[position].resId?.let {holder.ch_image?.setImageResource(it)}
 
                 holder.btn_certificaion?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Certifbox()) }
@@ -83,9 +80,7 @@ class CertificationFragment : Fragment() {
             return view //뷰 객체 반환
         }
         private inner class ViewHolder {
-            var ch_number: TextView? = null
             var ch_title: TextView? = null
-            var ch_explain: TextView? = null
             var ch_maker: TextView? = null
             var ch_image: ImageButton? = null
             var btn_certificaion: Button? = null
