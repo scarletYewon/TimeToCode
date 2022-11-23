@@ -2,19 +2,27 @@ package com.kmu.timetocode.certicenter
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import com.kmu.timetocode.Certifbox
-import com.kmu.timetocode.MainFragment
-import com.kmu.timetocode.NavActivity
+import com.android.volley.Response
+import com.android.volley.RequestQueue
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.kmu.timetocode.*
 import com.kmu.timetocode.R
-import com.kmu.timetocode.login.UserProfile
 import com.kmu.timetocode.recordcenter.RecordFragment
+import com.kmu.timetocode.login.UserProfile
+import org.json.JSONArray
 
 class CertificationFragment : Fragment() {
+    var adapter: ListViewAdapter?=null
+    var queue: RequestQueue?=null
+    var myList: ListView?= null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,12 +34,12 @@ class CertificationFragment : Fragment() {
         val backCertification = rootView?.findViewById<ImageButton>(R.id.backCertification)
         backCertification?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(MainFragment()) }
 
-        var challengeList = ArrayList<Challenge>() // 챌린지 전체 목록을 담고 있는 리스트
+        myList = rootView?.findViewById<ListView>(R.id.list)
 
-        val adapter = ListViewAdapter(requireContext(), challengeList)
-        // challenge 추가하는 부분
-        adapter.addItem(Challenge("Github Commit\n", "생성자1", R.drawable.ttcwhite))
-        adapter.addItem(Challenge("BOJ algorithm\n", "maker2", R.drawable.ttcwhite))
+//         challenge 추가하는 부분
+//        adapter!!.addItem(Challenge("Github Commit\n", "생성자1", R.drawable.ttcwhite))
+//        adapter!!.addItem(Challenge("BOJ algorithm\n", "maker2", R.drawable.ttcwhite))
+        showMyList()
 
         listView?.setAdapter(adapter)
         rootView?.findViewById<ListView>(R.id.list)?.adapter = adapter
@@ -88,4 +96,39 @@ class CertificationFragment : Fragment() {
         }
     }
 
+    private fun showMyList() {
+        val myId = UserProfile.getId()
+        val url = "https://android-pkfbl.run.goorm.io/userChallenge/UserChallengeList?idUser=" + myId
+        val sr: StringRequest = object : StringRequest( Method.GET, url,
+            Response.Listener { response: String? ->
+                val challengeList = ArrayList<Challenge>()
+                try {
+                    val jsonArray = JSONArray(response)
+                    for (i in 0 until jsonArray.length()) {
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        val nameChallenge = jsonObject.getString("nameChallenge")
+                        val imageLink = jsonObject.getString("imageLink")
+                        val madeIdUser = jsonObject.getString("name")
+                        challengeList.add(Challenge(nameChallenge, madeIdUser, R.drawable.ttcwhite))
+                    }
+                } catch (e: Exception) {
+                    Log.e("MyListJSON", response!!)
+                }
+                adapter = ListViewAdapter(requireContext(), challengeList)
+                myList?.setAdapter(adapter);
+            },
+            Response.ErrorListener { error: VolleyError ->
+            }) {
+            @Throws(java.lang.Error::class)
+            override fun getParams(): MutableMap<String,String>? {
+                val params: MutableMap<String, String> = HashMap()
+//                params["idUser"] = myId.toString()
+//                Log.e(params.toString(),"params")
+                return params
+            }
+        }
+        sr.setShouldCache(false)
+        queue = Volley.newRequestQueue(requireContext())
+        queue!!.add(sr)
+    }
 }
