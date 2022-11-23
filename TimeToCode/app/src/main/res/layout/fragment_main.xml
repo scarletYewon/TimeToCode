@@ -11,113 +11,115 @@
         android:orientation="vertical" >
 
         <LinearLayout
-            android:layout_marginTop="15dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:orientation="horizontal" >
-
+            android:layout_marginTop="20dp">
             <ImageView
-                android:id="@+id/profileImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:background="@drawable/shape_of_circle_button"
-                tools:ignore="InvalidId" />
-
-            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/profile"/>
+            <TextView
+                android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_marginStart="15dp">
-                <TextView
-                    android:id="@+id/userName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="이름"
-                    android:textColor="@color/black"
-                    android:textSize="23sp" />
-
-                <TextView
-                    android:id="@+id/userLevel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lv. 코린이"
-                    android:textColor="#999999"
-                    android:textSize="15sp" />
-            </LinearLayout>
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="20dp"
+                android:text="이름"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
         </LinearLayout>
-
-        <TableLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:elevation="5dp"
-            android:stretchColumns="*"
-            android:background="@drawable/rounded_table" >
-            <TableRow>
+            android:orientation="horizontal"
+            android:background="#dcdcdc">
+
+            <LinearLayout
+                android:id="@+id/ingChallenge"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:orientation="vertical">
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:layout_marginEnd="1dp"
                     android:padding="10dp"
                     android:textSize="15sp"
-                    android:background="@color/white"
                     android:textColor="@color/black"
-                    android:text="진행 중" />
+                    android:background="@color/white"
+                    android:text="진행중"/>
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/proceeding"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:layout_marginEnd="1dp"
+                    android:padding="10dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:background="@color/white"
+                    android:text="0"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/doneChallenge"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:padding="10dp"
                     android:textSize="15sp"
                     android:background="@color/white"
                     android:textColor="@color/black"
                     android:text="완료" />
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/complete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                    android:text="0"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/madeByMe"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:padding="10dp"
                     android:textSize="15sp"
                     android:background="@color/white"
                     android:textColor="@color/black"
-                    android:text="개설" />
-            </TableRow>
-            <TableRow>
-                <Button
-                    android:id="@+id/ingChallenge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="1dp"
+                    android:text="완료" />
+                <TextView
+                    android:id="@+id/upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:textSize="15sp"
+                    android:gravity="center"
+                    android:padding="10dp"
                     android:background="@color/white"
                     android:textColor="@color/black"
-                    android:text="0" />
-                <Button
-                    android:id="@+id/doneChallenge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="1dp"
-                    android:textSize="15sp"
-                    android:background="@color/white"
-                    android:textColor="@color/black"
-                    android:text="0" />
-                <Button
-                    android:id="@+id/madeByMe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:textSize="15sp"
-                    android:background="@color/white"
-                    android:textColor="@color/black"
-                    android:text="0" />
-            </TableRow>
-        </TableLayout>
-
+                    android:text="0"/>
+            </LinearLayout>
+        </LinearLayout>
         <LinearLayout
+            android:id="@+id/gotoCerti"
             android:layout_width="wrap_content"
             android:layout_height="31dp"
             android:layout_marginStart="20dp"
@@ -131,21 +133,19 @@
                 android:textColor="@color/main"
                 android:gravity="center_vertical"
                 android:textSize="14sp"/>
-            <ImageButton
-                android:id="@+id/gotoCerti"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:src="@drawable/rightblue"
                 android:background="@color/white"/>
         </LinearLayout>
 
-        <CalendarView
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calenderView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="3dp"
-            android:background="@color/white"
-            android:minDate="11/01/2022"/>
+            android:background="@color/white" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -153,24 +153,24 @@
             android:padding="15dp"
             android:stretchColumns="0">
             <TableRow
+                android:id="@+id/toNotice"
                 android:layout_margin="10dp">
                 <TextView
                     android:text="공지사항"
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
                 <ImageButton
-                    android:id="@+id/toNotice"
                     android:src="@drawable/right_arrow"
                     android:background="@color/white"/>
             </TableRow>
             <TableRow
+                android:id="@+id/toSupport"
                 android:layout_margin="10dp">
                 <TextView
                     android:text="고객센터"
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
                 <ImageButton
-                    android:id="@+id/toSupport"
                     android:src="@drawable/right_arrow"
                     android:background="@color/white"/>
             </TableRow>
@@ -194,7 +194,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:background="@color/white"/>
     </LinearLayout>
 </ScrollView>

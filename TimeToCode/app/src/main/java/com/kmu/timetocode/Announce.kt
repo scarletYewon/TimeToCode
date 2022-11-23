@@ -15,7 +15,7 @@ class Announce : Fragment() {
         val announce = inflater.inflate(R.layout.fragment_announce, container, false) as ViewGroup
         val backButton = announce.findViewById<ImageButton>(R.id.backCertification)
         val AnnouncePageButton = announce.findViewById<ImageButton>(R.id.announcePageButton)
-        backButton.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(MainFragment.newInstance()) }
+        backButton.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(MainFragment()) }
         AnnouncePageButton.setOnClickListener {
             (activity as NavActivity?)!!.replaceFragment(
                 AnnouncePage.newInstance()

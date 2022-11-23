@@ -29,23 +29,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginStart="10dp"
             android:orientation="vertical">
-            <Button
+            <TextView
                 android:id="@+id/challengeTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:text="Github Daily Commit"
+                android:layout_height="55dp"
+                android:text="Github Daily Commit\n(1일1커밋을해보자!)"
                 android:textSize="20sp"
+                android:textAlignment="viewStart"
                 android:textColor="@color/black"
                 android:background="@color/white" />
-            <TextView
-                android:id="@+id/challengeExplain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="(1일 1커밋을 해보자!)"
-                android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/challengeMaker"
                 android:layout_width="match_parent"
