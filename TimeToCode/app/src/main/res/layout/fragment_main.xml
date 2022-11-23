@@ -144,8 +144,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="3dp"
-            android:background="@color/white"
-            android:minDate="11/01/2022" />
+            android:background="@color/white" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -194,7 +193,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:background="@color/white"/>
     </LinearLayout>
 </ScrollView>
