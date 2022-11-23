@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="7dp">
+            android:gravity="center">
             <TextView
                 android:id="@+id/tmpChallengeTitle"
                 android:layout_width="match_parent"
@@ -77,40 +77,6 @@
                 android:text="(1일 1커밋을 해보자!)"
                 android:textColor="@color/black"
                 android:textSize="17sp"/>
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:stretchColumns="*">
-                <TableRow>
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="챌린지순위"
-                        android:textColor="@color/black" />
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="인증횟수"
-                        android:textColor="@color/black" />
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="1"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="18sp"/>
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="100"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="18sp"/>
-                </TableRow>
-            </TableLayout>
         </LinearLayout>
     </LinearLayout>
     <View
