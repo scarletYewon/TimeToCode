@@ -16,7 +16,7 @@ class Support : Fragment() {
         val backButton = support.findViewById<ImageButton>(R.id.backCertification)
         val questionButton = support.findViewById<ImageButton>(R.id.questionButton)
         val inquiryButton = support.findViewById<ImageButton>(R.id.inquiryButton)
-        backButton.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(MainFragment.newInstance()) }
+        backButton.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(MainFragment()) }
         questionButton.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Question.newInstance()) }
         inquiryButton.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Inquiry.newInstance()) }
         return support
