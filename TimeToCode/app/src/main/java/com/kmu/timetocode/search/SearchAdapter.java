@@ -107,7 +107,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.ViewHolder holder, int position) {
-        Log.d("mDataSize3", Integer.toString(position) + "-" + mData.get(position));
         holder.onBind(mData.get(position), position);
     }
 
