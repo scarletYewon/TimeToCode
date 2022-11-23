@@ -10,7 +10,6 @@ import android.widget.ListView
 import com.kmu.timetocode.MainFragment
 import com.kmu.timetocode.NavActivity
 import com.kmu.timetocode.R
-import com.kmu.timetocode.certicenter.CertificationFragment
 import com.kmu.timetocode.favorite.FavoriteListAdapter
 import com.kmu.timetocode.favorite.FavoriteListModel
 
@@ -32,12 +31,12 @@ class Proceeding : Fragment() {
         ) }
 
         val list_array = arrayListOf<FavoriteListModel>(
-            FavoriteListModel("a","진행중","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github"),
-            FavoriteListModel("a","챌린지 이름","생성자","+60명","github")
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
+            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm")
 
         )
         var Adapter = FavoriteListAdapter(requireContext(),list_array)

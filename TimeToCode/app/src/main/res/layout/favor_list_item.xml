@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/tag1"
+                    android:id="@+id/countUser"
                     android:layout_width="47dp"
                     android:layout_height="20dp"
                     android:text="+ 60명"
@@ -48,6 +48,16 @@
                     android:gravity="center"
                     android:textSize="10sp"
                     android:background="@drawable/radius"/>
+                <TextView
+                    android:id="@+id/tag1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:text="#Github"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="10sp"
+                    android:background="@drawable/radius2"/>
                 <TextView
                     android:id="@+id/tag2"
                     android:layout_marginLeft="5dp"

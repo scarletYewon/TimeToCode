@@ -20,10 +20,11 @@ class FavoriteListAdapter(val context: Context, val list: ArrayList<FavoriteList
             holder = ViewHolder()
 
             holder.view_image = view.findViewById(R.id.imageArea)
-            holder.view_text1 = view.findViewById(R.id.title)
-            holder.view_text2 = view.findViewById(R.id.owner)
-            holder.view_text3 = view.findViewById(R.id.tag1)
-            holder.view_text4 = view.findViewById(R.id.tag2)
+            holder.view_title = view.findViewById(R.id.title)
+            holder.view_owner = view.findViewById(R.id.owner)
+            holder.view_count = view.findViewById(R.id.countUser)
+            holder.view_tag1 = view.findViewById(R.id.tag1)
+            holder.view_tag2 = view.findViewById(R.id.tag2)
 
             view.tag = holder
         } else {
@@ -31,7 +32,11 @@ class FavoriteListAdapter(val context: Context, val list: ArrayList<FavoriteList
             view = convertview
         }
         val item = list[position]
-        holder.view_text1?.text = item.title
+        holder.view_title?.text = item.title
+        holder.view_owner?.text = item.owner
+        holder.view_count?.text = "+" + item.countUser.toString() + "명"
+        holder.view_tag1?.text = "#" + item.tag1
+        holder.view_tag2?.text = "#" + item.tag2
 
         return view
 
@@ -47,9 +52,10 @@ class FavoriteListAdapter(val context: Context, val list: ArrayList<FavoriteList
 
     private class ViewHolder {
         var view_image : ImageView? = null
-        var view_text1: TextView? = null
-        var view_text2: TextView? = null
-        var view_text3: TextView? = null
-        var view_text4: TextView? = null
+        var view_title: TextView? = null
+        var view_owner: TextView? = null
+        var view_count: TextView? = null
+        var view_tag1: TextView? = null
+        var view_tag2: TextView? = null
     }
 }
