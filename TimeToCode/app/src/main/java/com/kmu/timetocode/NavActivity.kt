@@ -24,12 +24,12 @@ class NavActivity : FragmentActivity() {
         val challFrag = FragmentChallengeList()
 
         val heart = findViewById<ImageView>(R.id.heart)
-        val bell = findViewById<ImageView>(R.id.bell)
+        val search = findViewById<ImageView>(R.id.Searchbtn)
         val ttc = findViewById<ImageView>(R.id.ttc)
         val btn1 = findViewById<LinearLayout>(R.id.btn1)
         val btn2 = findViewById<LinearLayout>(R.id.btn2)
         val btn3 = findViewById<LinearLayout>(R.id.btn3)
-
+        
         ttc.setOnClickListener{
             supportFragmentManager
                 .beginTransaction()
@@ -45,7 +45,7 @@ class NavActivity : FragmentActivity() {
         btn2.setOnClickListener {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragmentContainerView, searchFrag)
+                .replace(R.id.fragmentContainerView, mainFrag)
                 .commit()
         }
         btn3.setOnClickListener {
@@ -60,10 +60,10 @@ class NavActivity : FragmentActivity() {
                 .replace(R.id.fragmentContainerView, favoriteFrag)
                 .commit()
         }
-        bell.setOnClickListener {
+        search.setOnClickListener {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragmentContainerView, noticeFrag)
+                .replace(R.id.fragmentContainerView, searchFrag)
                 .commit()
         }
     }
