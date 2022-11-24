@@ -6,7 +6,6 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.kmu.timetocode.favorite.FavoritePage
-import com.kmu.timetocode.notice.NoticePage
 import com.kmu.timetocode.search.Search
 import com.kmu.timetocode.certicenter.CertificationFragment
 import com.kmu.timetocode.list.FragmentChallengeList
@@ -20,7 +19,6 @@ class NavActivity : FragmentActivity() {
         val certiFrag = CertificationFragment()
         val favoriteFrag = FavoritePage()
         val searchFrag = Search()
-        val noticeFrag = NoticePage()
         val challFrag = FragmentChallengeList()
 
         val heart = findViewById<ImageView>(R.id.heart)
@@ -29,7 +27,7 @@ class NavActivity : FragmentActivity() {
         val btn1 = findViewById<LinearLayout>(R.id.btn1)
         val btn2 = findViewById<LinearLayout>(R.id.btn2)
         val btn3 = findViewById<LinearLayout>(R.id.btn3)
-        
+
         ttc.setOnClickListener{
             supportFragmentManager
                 .beginTransaction()
