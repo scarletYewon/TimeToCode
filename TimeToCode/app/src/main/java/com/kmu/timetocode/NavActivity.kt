@@ -28,6 +28,11 @@ class NavActivity : FragmentActivity() {
         val btn2 = findViewById<LinearLayout>(R.id.btn2)
         val btn3 = findViewById<LinearLayout>(R.id.btn3)
 
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainerView, mainFrag)
+            .commit()
+
         ttc.setOnClickListener{
             supportFragmentManager
                 .beginTransaction()
