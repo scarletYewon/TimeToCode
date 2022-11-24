@@ -36,10 +36,10 @@
 
         <ImageView
             android:layout_marginRight="15dp"
-            android:id="@+id/bell"
+            android:id="@+id/Searchbtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/bell"
+            android:src="@drawable/searchicon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -92,11 +92,11 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/searchicon" />
+                android:src="@drawable/usericon" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Search"
+                android:text="MainPage"
                 android:textColor="@color/white"/>
         </LinearLayout>
         <LinearLayout

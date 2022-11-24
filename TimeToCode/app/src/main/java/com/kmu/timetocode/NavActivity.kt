@@ -6,7 +6,6 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.kmu.timetocode.favorite.FavoritePage
-import com.kmu.timetocode.notice.NoticePage
 import com.kmu.timetocode.search.Search
 import com.kmu.timetocode.certicenter.CertificationFragment
 import com.kmu.timetocode.list.FragmentChallengeList
@@ -20,15 +19,19 @@ class NavActivity : FragmentActivity() {
         val certiFrag = CertificationFragment()
         val favoriteFrag = FavoritePage()
         val searchFrag = Search()
-        val noticeFrag = NoticePage()
         val challFrag = FragmentChallengeList()
 
         val heart = findViewById<ImageView>(R.id.heart)
-        val bell = findViewById<ImageView>(R.id.bell)
+        val search = findViewById<ImageView>(R.id.Searchbtn)
         val ttc = findViewById<ImageView>(R.id.ttc)
         val btn1 = findViewById<LinearLayout>(R.id.btn1)
         val btn2 = findViewById<LinearLayout>(R.id.btn2)
         val btn3 = findViewById<LinearLayout>(R.id.btn3)
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainerView, mainFrag)
+            .commit()
 
         ttc.setOnClickListener{
             supportFragmentManager
@@ -45,7 +48,7 @@ class NavActivity : FragmentActivity() {
         btn2.setOnClickListener {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragmentContainerView, searchFrag)
+                .replace(R.id.fragmentContainerView, mainFrag)
                 .commit()
         }
         btn3.setOnClickListener {
@@ -60,10 +63,10 @@ class NavActivity : FragmentActivity() {
                 .replace(R.id.fragmentContainerView, favoriteFrag)
                 .commit()
         }
-        bell.setOnClickListener {
+        search.setOnClickListener {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragmentContainerView, noticeFrag)
+                .replace(R.id.fragmentContainerView, searchFrag)
                 .commit()
         }
     }
