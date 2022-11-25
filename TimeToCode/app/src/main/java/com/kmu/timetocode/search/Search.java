@@ -154,6 +154,7 @@ public class Search extends Fragment {
     private void showSearchList(String searchText) {
         String url = LoginActivity.url + "/challenge/challengeList?nameChallenge=" + searchText;
         StringRequest sr = new StringRequest(Request.Method.GET, url, response -> {
+            Log.d("searchList", response);
             ArrayList<ChallengeListModel> challengeList = new ArrayList<>();
             try {
                 JSONArray jsonArray = new JSONArray(response);
