@@ -21,6 +21,7 @@ import com.kmu.timetocode.login.UserProfile
 import com.prolificinteractive.materialcalendarview.*
 import com.prolificinteractive.materialcalendarview.spans.DotSpan
 import org.json.JSONObject
+import java.lang.reflect.Array.getLength
 import java.util.*
 
 
@@ -29,6 +30,7 @@ class MainFragment : Fragment() {
     var proceeding:TextView?=null
     var complete:TextView?=null
     var upload:TextView?=null
+    var calendarView:MaterialCalendarView?=null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,19 +48,17 @@ class MainFragment : Fragment() {
         proceeding = rootView.findViewById(R.id.proceeding)
         complete = rootView.findViewById(R.id.complete)
         upload = rootView.findViewById(R.id.upload)
-        showCount()
-
-        val gotoCerti = rootView.findViewById<ViewGroup>(R.id.gotoCerti)
-        val calendarView = rootView.findViewById<MaterialCalendarView>(R.id.calenderView)
+        calendarView = rootView.findViewById(R.id.calenderView)
         calendarView?.state()?.edit()
             ?.setMinimumDate(CalendarDay.from(2022, 11, 1))
             ?.setMaximumDate(CalendarDay.from(Date(System.currentTimeMillis())))
 
-        calendarView?.addDecorator(EventDecorator(Color.parseColor("#645EFF"), Collections.singleton(CalendarDay.today())));
-
+        val gotoCerti = rootView.findViewById<ViewGroup>(R.id.gotoCerti)
         val toNoticeButton = rootView.findViewById<ViewGroup>(R.id.toNotice)
         val toSupportButton = rootView.findViewById<ViewGroup>(R.id.toSupport)
 
+        showCount()
+        showDate()
 
         ingChallenge?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Proceeding()) }
         doneChallenge?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Done()) }
@@ -101,6 +101,42 @@ class MainFragment : Fragment() {
                     upload?.text = uploadCount.toString()
                 } catch (e: Exception) {
                     Log.e("Challenge Counting JSON", response!!)
+                }
+            },
+            Response.ErrorListener { error: VolleyError ->
+            }) {
+            @Throws(java.lang.Error::class)
+            override fun getParams(): MutableMap<String,String>? {
+                val params: MutableMap<String, String> = HashMap()
+//                    params["idUser"] = myId.toString()
+//                    Log.e(params.toString(),"params")
+                return params
+            }
+        }
+        sr.setShouldCache(false)
+        queue = Volley.newRequestQueue(requireContext())
+        queue!!.add(sr)
+    }
+
+    private fun showDate() {
+        val myId = UserProfile.getId()
+        val url = "https://android-pkfbl.run.goorm.io/userChallenge/allGetDate?idUser=" + myId
+        val sr: StringRequest = object : StringRequest(Method.GET, url,
+            Response.Listener { response: String? ->
+                try {
+                    val jsonObject = response!!
+                    var arr = jsonObject.split(",", "[", "]")
+                    arr = arr.filter { x: String? -> x != "" }
+                    for (i in 0 until arr.size) {
+                        val date = arr[i]
+                        val yyyymmdd = date.split("-", "\"")
+                        val yyyy = yyyymmdd[1].toInt()
+                        val mm = yyyymmdd[2].toInt()
+                        val dd = yyyymmdd[3].toInt()
+                        calendarView?.addDecorator(EventDecorator(Color.parseColor("#645EFF"), Collections.singleton(CalendarDay.from(yyyy, mm-1, dd))))
+                    }
+                } catch (e: Exception) {
+                    Log.e("Calendar JSON", response!!)
                 }
             },
             Response.ErrorListener { error: VolleyError ->
