@@ -2,14 +2,19 @@ package com.kmu.timetocode.add
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -32,15 +37,16 @@ import java.util.*
 class FragmentAddChallenge4 : Fragment() {
 
     private val model: AddChallengeViewModel by activityViewModels()
+    var queue: RequestQueue? = null
 
     private var _binding: FragmentAddChallenge4Binding? = null
     private val binding get() = _binding!!
 
-    lateinit var image : Bitmap
-
+    lateinit var image : Uri
+    lateinit var upLoadImg : Uri
+    private var howFlag = false
     private var imgFromCam : Boolean = false
 
-    var queue: RequestQueue? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +55,9 @@ class FragmentAddChallenge4 : Fragment() {
 
         _binding = FragmentAddChallenge4Binding.inflate(inflater, container, false)
 
-        binding.btnSelectExplainImg.setOnClickListener {
+        binding.editChallengeHow.addTextChangedListener(howListener)
+
+        binding.btnSelectHowImg.setOnClickListener {
             requestPermission()
         }
 
@@ -57,7 +65,7 @@ class FragmentAddChallenge4 : Fragment() {
 
         binding.btnAddFinish.setOnClickListener{
             if (imgFromCam){
-                savePhoto(image)
+                savePhoto(upLoadImg)
             }
             complete()
         }
@@ -68,11 +76,16 @@ class FragmentAddChallenge4 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnAddFinish.isEnabled = false
+
         requireActivity().supportFragmentManager.setFragmentResultListener("takeRequestKey",this) { requestKey, bundle ->
             bundle.getString("takeBundleKey")?.let {
-                val imageBytes = Base64.getDecoder().decode(it)
-                image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-                binding.explainImgView.setImageBitmap(image)
+//                val imageBytes = Base64.getDecoder().decode(it)
+//                image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+//                binding.howImgView.setImageBitmap(image)
+                binding.howImgView.scaleType = ImageView.ScaleType.CENTER_CROP
+                upLoadImg = it.toUri()
+                binding.howImgView.setImageURI(upLoadImg)
                 imgFromCam = true
                 Log.i("take","takeImg를 통해 fragment")
             }
@@ -81,11 +94,31 @@ class FragmentAddChallenge4 : Fragment() {
         requireActivity().supportFragmentManager.setFragmentResultListener("pickRequestKey",this) { requestKey, bundle ->
             bundle.getString("pickBundleKey")?.let {
                 var pickImage = Uri.parse(it)
-                binding.explainImgView.setImageURI(pickImage)
+                upLoadImg = pickImage
+                binding.howImgView.setImageURI(pickImage)
+                binding.howImgView.scaleType = ImageView.ScaleType.CENTER_CROP
                 imgFromCam= false
                 Log.i("take","pickImg를 통해 fragment")
             }
         }
+    }
+
+    private val howListener = object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            howFlag = binding.editChallengeHow.text.isNotEmpty()
+            flagCheck()
+        }
+    }
+
+    // 입력 조건에 따른 다음버튼 활성화 여부 확인
+    private fun flagCheck() {
+        binding.btnAddFinish.isEnabled = howFlag
     }
 
     private fun requestPermission() {
@@ -106,8 +139,11 @@ class FragmentAddChallenge4 : Fragment() {
             .check()
     }
 
-    private fun savePhoto(bitmap: Bitmap) {
+    private fun savePhoto(uri: Uri) {
         //사진 폴더에 저장하기 위한 경로 선언
+        val decode = ImageDecoder.createSource(requireContext().contentResolver,
+            uri)
+        val bitmap = ImageDecoder.decodeBitmap(decode)
         val folderPath = Environment.getExternalStorageDirectory().absolutePath + "/Pictures/"
         val timestamp : String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val fileName = "${timestamp}.jpeg"
@@ -127,22 +163,22 @@ class FragmentAddChallenge4 : Fragment() {
         val url = "https://android-pkfbl.run.goorm.io/challenge/add"
 
         lateinit var chName : String
-        lateinit var chTag1 : String
-        lateinit var chTag2 : String
         lateinit var chIntroduce : String
 
         lateinit var chImg : String
 
-        var chFreq : Int = 1
-        var chCount : Int = 1
+        var chFreq = 1
+        var chCount  = 1
         var chStart = 0
         var chEnd = 2359
         var chInterval = "0"
         var chPeriod = 7
 
+        val chHow = binding.editChallengeHow.text.toString()
+        val chHowImg = upLoadImg.toString()
+
         model.nameData.observe(viewLifecycleOwner, Observer{
             chName = it
-//            Toast.makeText(activity,"${chName}",Toast.LENGTH_SHORT).show()
         })
         Toast.makeText(activity,"${chName}",Toast.LENGTH_SHORT).show()
 
@@ -174,6 +210,19 @@ class FragmentAddChallenge4 : Fragment() {
             chPeriod = it
         })
 
+        Log.i("data","name: ${chName}")
+        Log.i("data","made: ${myId}")
+        Log.i("data","introduce: ${chIntroduce}")
+        Log.i("data","img: ${chImg}")
+        Log.i("data","freq: ${chFreq}")
+        Log.i("data","start: ${chStart}")
+        Log.i("data","count: ${chCount}")
+        Log.i("data","end: ${chEnd}")
+        Log.i("data","interval: ${chInterval}")
+        Log.i("data","period: ${chPeriod}")
+        Log.i("data","how: ${chHow}")
+        Log.i("data","howImg: ${chHowImg}")
+
 
 
 
@@ -185,6 +234,7 @@ class FragmentAddChallenge4 : Fragment() {
                 Toast.makeText(activity, "챌린지 생성완료", Toast.LENGTH_SHORT).show()
             },
             Response.ErrorListener { error: VolleyError? ->
+
                 Toast.makeText(
                     activity,
                     "인터넷 연결을 확인해주세요.",
@@ -196,7 +246,7 @@ class FragmentAddChallenge4 : Fragment() {
                 val params: MutableMap<String, String> = HashMap()
                 params["idChallenge"] = "0"
                 params["nameChallenge"] = chName
-                params["intruduce"] = chIntroduce
+                params["introduce"] = chIntroduce
                 params["imageLink"] = chImg
                 params["frequency"] = chFreq.toString()
                 params["count"] = chCount.toString()
@@ -205,6 +255,11 @@ class FragmentAddChallenge4 : Fragment() {
                 params["countInterval"] = chInterval
                 params["endDate"] = chPeriod.toString()
                 params["madeIdUser"] = myId.toString()
+                params["challengePostCount"] = "0"
+                params["countUser"] ="1"
+                params["certificationWay"] = chHow
+                params["certificationWayImageLink"] = chHowImg
+                Log.i("params",params.toString())
 
                 return params
             }
