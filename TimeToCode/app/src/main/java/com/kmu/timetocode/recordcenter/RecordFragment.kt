@@ -29,9 +29,11 @@ class RecordFragment : Fragment() {
         val challengeTitle = rootView?.findViewById<TextView>(R.id.challenge_title)
 
         val model = ViewModelProvider(requireActivity()).get(MyViewModel::class.java)
-        model.message.observe(viewLifecycleOwner, Observer { challengeTitle?.text = it })
 
         var recordList = ArrayList<Record>() // 기록 전체 목록을 담고 있는 리스트
+        title = model.getMessage()
+        challengeTitle?.text = title
+        challengeId(title.toString())
 
         var adapter = GridViewAdapter(requireContext(), recordList)
 

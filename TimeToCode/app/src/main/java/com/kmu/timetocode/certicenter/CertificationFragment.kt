@@ -81,7 +81,7 @@ class CertificationFragment : Fragment() {
                 holder.btn_certificaion?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Certifbox()) }
                 holder.btn_gallery?.setOnClickListener {
                     model.sendMessage(list[position].title.toString())
-                    Log.e("test", list[position].title.toString())
+                    Log.e("test sendMessage", list[position].title.toString())
                     (activity as NavActivity?)!!.replaceFragment(RecordFragment()) }
                 view.tag = holder
             } else {
