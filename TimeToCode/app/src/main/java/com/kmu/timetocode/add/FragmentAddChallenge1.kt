@@ -41,7 +41,7 @@ class FragmentAddChallenge1 : Fragment() {
         // 다음버튼 클릭 시 입력 데이터 ViewModel에 저장하고 이동
         binding.btnGoAdd2.setOnClickListener{
 
-            val name = binding.editChallengeName.text.toString()
+            val name = binding.editChallengeName.text.toString()+"%"+chipList[0]+"%"+chipList[1]
             val introduce = binding.editChallengeInfo.text.toString()
             model.addData1(name,chipList[0],chipList[1],introduce)
             findNavController().navigate(R.id.action_fragmentAddChallenge1_to_fragmentAddChallenge2)

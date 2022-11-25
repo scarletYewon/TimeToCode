@@ -155,11 +155,13 @@ class UploadImgDialog(val title: String, val dialogType: Int) : DialogFragment()
                         dismiss()
                     }
                     else{
+                        val test = Uri.fromFile(file)
                         val decode = ImageDecoder.createSource(resolver,
                             Uri.fromFile(file))
                         val bitmap = ImageDecoder.decodeBitmap(decode)
                         Log.i("file","여기는 getbitmap2")
-                        val sendData = bitmapToString(bitmap)
+//                        val sendData = bitmapToString(bitmap)
+                        val sendData = test.toString()
                         val bundle = bundleOf("takeBundleKey" to sendData)
                         requireActivity().supportFragmentManager.setFragmentResult("takeRequestKey", bundle)
                         dismiss()

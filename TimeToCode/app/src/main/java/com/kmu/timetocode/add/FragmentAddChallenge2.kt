@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -37,11 +38,14 @@ class FragmentAddChallenge2 : Fragment() {
 
         binding.btnUploadBackGround.setOnClickListener{
             binding.uploadBackGroundImgView.setImageResource(R.drawable.gray_img)
+            binding.uploadBackGroundImgView.scaleType = ImageView.ScaleType.CENTER_INSIDE
             imgFlag = false
             requestPermission()
         }
         binding.btnUploadCancel.setOnClickListener{
             binding.uploadBackGroundImgView.setImageResource(R.drawable.gray_img)
+            binding.uploadBackGroundImgView.scaleType = ImageView.ScaleType.CENTER_INSIDE
+
             imgFlag = false
         }
 
@@ -64,6 +68,7 @@ class FragmentAddChallenge2 : Fragment() {
                 selectImg = it
                 val image = Uri.parse(it)
                 binding.uploadBackGroundImgView.setImageURI(image)
+                binding.uploadBackGroundImgView.scaleType = ImageView.ScaleType.CENTER_CROP
                 imgFlag = true
                 flagCheck()
 
@@ -87,7 +92,7 @@ class FragmentAddChallenge2 : Fragment() {
                 }
             })
             .setDeniedMessage("카메라 권한을 허용해주세요.")// 권한이 없을 때
-            .setPermissions(android.Manifest.permission.READ_EXTERNAL_STORAGE,android.Manifest.permission.WRITE_EXTERNAL_STORAGE,android.Manifest.permission.CAMERA)// 얻으려는 권한
+            .setPermissions(android.Manifest.permission.READ_EXTERNAL_STORAGE,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)// 얻으려는 권한
             .check()
     }
 

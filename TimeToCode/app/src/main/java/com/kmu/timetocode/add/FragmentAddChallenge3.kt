@@ -75,16 +75,8 @@ class FragmentAddChallenge3 : Fragment() {
             var listener = TimePickerDialog.OnTimeSetListener { timePicker, i, i2 ->
                 var h ="23"
                 var m = "59"
-                h = if (i < 10){
-                    "0${i}"
-                } else{
-                    "$i"
-                }
-                m = if (i2 < 10){
-                    "0${i2}"
-                }else{
-                    "$i2"
-                }
+                h = if (i < 10){"0${i}"} else{"$i"}
+                m = if (i2 < 10){"0${i2}"}else{"$i2"}
                 binding.editStartTime.text = "${h}시 ${m}분"
                 startTime = "${h}${m}"
             }
@@ -97,16 +89,8 @@ class FragmentAddChallenge3 : Fragment() {
             var listener = TimePickerDialog.OnTimeSetListener { timePicker, i, i2 ->
                 var h ="23"
                 var m = "59"
-                h = if (i < 10){
-                    "0${i}"
-                } else{
-                    "$i"
-                }
-                m = if (i2 < 10){
-                    "0${i2}"
-                }else{
-                    "$i2"
-                }
+                h = if (i < 10){"0${i}"} else{"$i"}
+                m = if (i2 < 10){"0${i2}"}else{"$i2"}
                 var check = h+m
 
                 if(startTime.toInt() > check.toInt() ) {
