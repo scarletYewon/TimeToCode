@@ -22,6 +22,8 @@ public class Support extends Fragment{
         ImageButton backButton = support.findViewById(R.id.backCertification);
         ImageButton questionButton = support.findViewById(R.id.questionButton);
         ImageButton inquiryButton = support.findViewById(R.id.inquiryButton);
+        ImageButton TermOfServiceButton = support.findViewById(R.id.TermOfServiceButton);
+        ImageButton privacyButton = support.findViewById(R.id.privacyButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +42,20 @@ public class Support extends Fragment{
                 ((NavActivity)getActivity()).replaceFragment(Inquiry.newInstance());
             }
         });
+        TermOfServiceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((NavActivity)getActivity()).replaceFragment(TearmsConditions.newInstance());
+            }
+        });
+        privacyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((NavActivity)getActivity()).replaceFragment(Privacy.newInstance());
+            }
+        });
+
+
         return support;
     }
 }
