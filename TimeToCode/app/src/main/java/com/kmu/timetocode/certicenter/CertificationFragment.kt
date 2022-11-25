@@ -73,7 +73,12 @@ class CertificationFragment : Fragment() {
                 list[position].resId?.let {holder.ch_image?.setImageResource(it)}
 
                 holder.btn_certificaion?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Certifbox()) }
-                holder.btn_gallery?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(RecordFragment()) }
+                holder.btn_gallery?.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putString("title", list[position].title)
+                    arguments = bundle
+                    Log.e("test", arguments.toString())
+                    (activity as NavActivity?)!!.replaceFragment(RecordFragment()) }
                 view.tag = holder
             } else {
                 holder = convertview.tag as ViewHolder

@@ -2,6 +2,7 @@ package com.kmu.timetocode.recordcenter
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
@@ -22,6 +23,10 @@ class RecordFragment : Fragment() {
         val backRecord = rootView?.findViewById<ImageButton>(R.id.backRecord)
         backRecord?.setOnClickListener { (activity as NavActivity?)!!. replaceFragment(CertificationFragment()) }
 
+        val challengeTitle = rootView?.findViewById<TextView>(R.id.challenge_title)
+//        val title = arguments?.getString("name") // 프래그먼트1에서 받아온 값 넣기
+//        Log.e("test", arguments.toString())
+//        challengeTitle?.text = title
         var recordList = ArrayList<Record>() // 기록 전체 목록을 담고 있는 리스트
 
         var adapter = GridViewAdapter(requireContext(), recordList)
