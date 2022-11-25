@@ -6,7 +6,10 @@ import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.kmu.timetocode.MainFragment
+import com.kmu.timetocode.MyViewModel
 import com.kmu.timetocode.NavActivity
 import com.kmu.timetocode.R
 import com.kmu.timetocode.certicenter.CertificationFragment
@@ -24,17 +27,18 @@ class RecordFragment : Fragment() {
         backRecord?.setOnClickListener { (activity as NavActivity?)!!. replaceFragment(CertificationFragment()) }
 
         val challengeTitle = rootView?.findViewById<TextView>(R.id.challenge_title)
-//        val title = arguments?.getString("name") // 프래그먼트1에서 받아온 값 넣기
-//        Log.e("test", arguments.toString())
-//        challengeTitle?.text = title
+
+        val model = ViewModelProvider(requireActivity()).get(MyViewModel::class.java)
+        model.message.observe(viewLifecycleOwner, Observer { challengeTitle?.text = it })
+
         var recordList = ArrayList<Record>() // 기록 전체 목록을 담고 있는 리스트
 
         var adapter = GridViewAdapter(requireContext(), recordList)
 
-        adapter!!.addItem(Record(1, "제목", R.drawable.ttcwhite))
-        adapter!!.addItem(Record(2, "제목", R.drawable.ttcwhite))
-        adapter!!.addItem(Record(3, "제목", R.drawable.ttcwhite))
-        adapter!!.addItem(Record(4, "제목", R.drawable.ttcwhite))
+        adapter.addItem(Record(1, "제목", R.drawable.ttcwhite))
+        adapter.addItem(Record(2, "제목", R.drawable.ttcwhite))
+        adapter.addItem(Record(3, "제목", R.drawable.ttcwhite))
+        adapter.addItem(Record(4, "제목", R.drawable.ttcwhite))
 
         gridView?.setAdapter(adapter)
         rootView?.findViewById<GridView>(R.id.recordList)?.adapter = adapter
