@@ -21,7 +21,6 @@ import com.kmu.timetocode.login.UserProfile
 import com.prolificinteractive.materialcalendarview.*
 import com.prolificinteractive.materialcalendarview.spans.DotSpan
 import org.json.JSONObject
-import java.lang.reflect.Array.getLength
 import java.util.*
 
 
@@ -31,6 +30,12 @@ class MainFragment : Fragment() {
     var complete:TextView?=null
     var upload:TextView?=null
     var calendarView:MaterialCalendarView?=null
+    companion object {
+        @JvmStatic
+        fun newInstance(): MainFragment {
+            return MainFragment()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
