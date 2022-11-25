@@ -6,17 +6,23 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 import com.kmu.timetocode.UploadImgDialog
-import com.kmu.timetocode.databinding.FragmentAddChallenge3Binding
 import com.kmu.timetocode.databinding.FragmentAddChallenge4Binding
+import com.kmu.timetocode.login.UserProfile
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -25,13 +31,16 @@ import java.util.*
 
 class FragmentAddChallenge4 : Fragment() {
 
-    private var _binding: FragmentAddChallenge4Binding? = null
+    private val model: AddChallengeViewModel by activityViewModels()
 
+    private var _binding: FragmentAddChallenge4Binding? = null
     private val binding get() = _binding!!
 
     lateinit var image : Bitmap
 
     private var imgFromCam : Boolean = false
+
+    var queue: RequestQueue? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,17 +53,17 @@ class FragmentAddChallenge4 : Fragment() {
             requestPermission()
         }
 
-    // TODO: 챌린지 생성 후 어디로 가야하는지 결정, 완료 버튼 클릭 시 기입 정보 보내기, 촬영해서 가져온 이미지 갤러리에 저장
+    // TODO: 챌린지 생성 후 어디로 가야하는지 결정, 완료 버튼 클릭 시 기입 정보 보내기
 
         binding.btnAddFinish.setOnClickListener{
             if (imgFromCam){
                 savePhoto(image)
             }
-
+            complete()
         }
-
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -110,6 +119,99 @@ class FragmentAddChallenge4 : Fragment() {
         val out = FileOutputStream(folderPath + fileName)
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
         Toast.makeText(activity,"사진이 앨범에 저장되었습니다.",Toast.LENGTH_SHORT).show()
+    }
+
+    private fun complete() {
+
+        val myId = UserProfile.getId()
+        val url = "https://android-pkfbl.run.goorm.io/challenge/add"
+
+        lateinit var chName : String
+        lateinit var chTag1 : String
+        lateinit var chTag2 : String
+        lateinit var chIntroduce : String
+
+        lateinit var chImg : String
+
+        var chFreq : Int = 1
+        var chCount : Int = 1
+        var chStart = 0
+        var chEnd = 2359
+        var chInterval = "0"
+        var chPeriod = 7
+
+        model.nameData.observe(viewLifecycleOwner, Observer{
+            chName = it
+//            Toast.makeText(activity,"${chName}",Toast.LENGTH_SHORT).show()
+        })
+        Toast.makeText(activity,"${chName}",Toast.LENGTH_SHORT).show()
+
+        model.introduceData.observe(viewLifecycleOwner, Observer{
+            chIntroduce = it
+        })
+
+        model.chImgData.observe(viewLifecycleOwner, Observer{
+            chImg = it
+        })
+
+        model.freqData.observe(viewLifecycleOwner, Observer{
+            chFreq = it
+        })
+
+        model.countData.observe(viewLifecycleOwner, Observer{
+            chCount = it
+        })
+        model.intervalData.observe(viewLifecycleOwner, Observer{
+            chInterval = it
+        })
+        model.startTimeData.observe(viewLifecycleOwner, Observer{
+            chStart = it
+        })
+        model.endTimeData.observe(viewLifecycleOwner, Observer{
+            chEnd = it
+        })
+        model.chPeriodData.observe(viewLifecycleOwner, Observer{
+            chPeriod = it
+        })
+
+
+
+
+
+        val sr: StringRequest = object : StringRequest(
+            Method.POST, url,
+            Response.Listener { response: String? ->
+                // 회원가입 응답 확인하기
+                Toast.makeText(activity, "챌린지 생성완료", Toast.LENGTH_SHORT).show()
+            },
+            Response.ErrorListener { error: VolleyError? ->
+                Toast.makeText(
+                    activity,
+                    "인터넷 연결을 확인해주세요.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }) {
+            @Throws(Error::class)
+            override fun getParams(): Map<String, String>? {
+                val params: MutableMap<String, String> = HashMap()
+                params["idChallenge"] = "0"
+                params["nameChallenge"] = chName
+                params["intruduce"] = chIntroduce
+                params["imageLink"] = chImg
+                params["frequency"] = chFreq.toString()
+                params["count"] = chCount.toString()
+                params["possibleStartTime"] = chStart.toString()
+                params["possibleEndTime"] = chEnd.toString()
+                params["countInterval"] = chInterval
+                params["endDate"] = chPeriod.toString()
+                params["madeIdUser"] = myId.toString()
+
+                return params
+            }
+        }
+        sr.setShouldCache(false)
+        queue = Volley.newRequestQueue(requireContext())
+        queue!!.add(sr)
     }
 
     override fun onDestroyView() {
