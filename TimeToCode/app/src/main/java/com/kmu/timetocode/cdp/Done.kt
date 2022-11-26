@@ -32,12 +32,6 @@ class Done : Fragment() {
         savedInstanceState: Bundle?
     ) : View? {
         val rootView : View = inflater.inflate(R.layout.fragment_done, container, false)
-//        val mActivity = activity as MainActivity
-//        val btn_change = rootView.findViewById(R.id.button_change);
-//        btn_change.setOnClickListener{
-//            activity.changeFragment(2)
-//        }
-
         val backCertification = rootView?.findViewById<ImageButton>(R.id.backCertification)
         backCertification?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(
             MainFragment()
@@ -84,8 +78,6 @@ class Done : Fragment() {
             @Throws(java.lang.Error::class)
             override fun getParams(): MutableMap<String,String>? {
                 val params: MutableMap<String, String> = HashMap()
-//                params["idUser"] = myId.toString()
-//                Log.e(params.toString(),"params")
                 return params
             }
         }

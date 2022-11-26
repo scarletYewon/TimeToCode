@@ -31,11 +31,6 @@ class UserCreated : Fragment() {
         savedInstanceState: Bundle?
     ) : View? {
         val rootView : View = inflater.inflate(R.layout.fragment_user_created, container, false)
-//        val mActivity = activity as MainActivity
-//        val btn_change = rootView.findViewById(R.id.button_change);
-//        btn_change.setOnClickListener{
-//            activity.changeFragment(2)
-//        }
 
         val backCertification = rootView?.findViewById<ImageButton>(R.id.backCertification)
         backCertification?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(
@@ -43,15 +38,6 @@ class UserCreated : Fragment() {
         ) }
 
         showDoneList()
-//        val list_array = arrayListOf<FavoriteListModel>(
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm")
-//        )
-//        var Adapter = FavoriteListAdapter(requireContext(),list_array)
         myList = rootView?.findViewById<ListView>(R.id.listview_created_fragment)
 
         return rootView
@@ -91,8 +77,6 @@ class UserCreated : Fragment() {
             @Throws(java.lang.Error::class)
             override fun getParams(): MutableMap<String,String>? {
                 val params: MutableMap<String, String> = HashMap()
-//                params["idUser"] = myId.toString()
-//                Log.e(params.toString(),"params")
                 return params
             }
         }
