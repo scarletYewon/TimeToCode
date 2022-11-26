@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -13,16 +12,16 @@ import com.kmu.timetocode.detail.ChallengeDetail
 
 class ChallengeListAdapter(val context: Context, private val challengeListArray: ArrayList<ChallengeListModel>): RecyclerView.Adapter<ChallengeListAdapter.ListViewHolder>() {
 
-    interface OnListItemLongSelectedInterface {
-        fun onItemLongSelected(v: View?, position: Int)
-    }
-
-    interface OnListItemSelectedInterface {
-        fun onItemSelected(v: View?, position: Int)
-    }
-
-    private val mListener: OnListItemSelectedInterface? = null
-    private val mLongListener: OnListItemLongSelectedInterface? = null
+//    interface OnListItemLongSelectedInterface {
+//        fun onItemLongSelected(v: View?, position: Int)
+//    }
+//
+//    interface OnListItemSelectedInterface {
+//        fun onItemSelected(v: View?, position: Int)
+//    }
+//
+//    private val mListener: OnListItemSelectedInterface? = null
+//    private val mLongListener: OnListItemLongSelectedInterface? = null
 
 
     class ListViewHolder(val binding: ChallengeListItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -34,6 +33,7 @@ class ChallengeListAdapter(val context: Context, private val challengeListArray:
             binding.challengePrtcp.text = "+"+item.prtcp+"명"
             binding.challengeTag1.text = item.tag1
             binding.challengeTag2.text = item.tag2
+
 
 //    binding.root.setOnClickListener {
 //        itemClickedListener(item)
@@ -51,21 +51,20 @@ class ChallengeListAdapter(val context: Context, private val challengeListArray:
 
     }
 
-    // Define the listener interface
-    interface OnItemClickListener {
-        fun onItemClick(itemView: View?, position: Int)
-    }
-
-    private var listener : OnItemClickListener? = null
-    // Define listener member variable
-    fun setOnItemClickListener(listener : OnItemClickListener) {
-        this.listener = listener
-    }
+//    // Define the listener interface
+//    interface OnItemClickListener {
+//        fun onItemClick(itemView: View?, position: Int)
+//    }
+//
+//    private var listener : OnItemClickListener? = null
+//    // Define listener member variable
+//    fun setOnItemClickListener(listener : OnItemClickListener) {
+//        this.listener = listener
+//    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         return ListViewHolder(ChallengeListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
-
     }
     override fun getItemCount(): Int {
         return challengeListArray.size
@@ -75,9 +74,12 @@ class ChallengeListAdapter(val context: Context, private val challengeListArray:
 
         holder.setList(challengeListArray.get(position))
         holder.binding.root.setOnClickListener {
+            val clickTitleInList: String = holder.binding.textChallegeNameInList.text.toString().trim()
+            val clickTag1InList:String = holder.binding.challengeTag1.text.toString().trim()
+            val clickTag2InList: String = holder.binding.challengeTag2.text.toString().trim()
+            val clickChallengeInList: String = clickTitleInList+"%"+clickTag1InList+"%"+clickTag2InList
             val intent = Intent(holder.binding.root?.context, ChallengeDetail::class.java)
-            intent.putExtra("content","원하는 데이터를 보냅니다. ")
-            intent.putExtra("no",111)
+            intent.putExtra("clickChallengeInList","${clickChallengeInList} ")
             Log.i("adapter","여기는 dapter: ${holder.binding.root.id}")
             ContextCompat.startActivity(holder.binding.root.context, intent,null)
         }

@@ -174,7 +174,7 @@ class FragmentAddChallenge4 : Fragment() {
         var chInterval = "0"
         var chPeriod = 7
 
-        val chHow = binding.editChallengeHow.text.toString()
+        val chHow = binding.editChallengeHow.text.toString().trim()
         val chHowImg = upLoadImg.toString()
 
         model.nameData.observe(viewLifecycleOwner, Observer{
