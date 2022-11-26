@@ -17,12 +17,12 @@ import com.kmu.timetocode.cdp.Done
 import com.kmu.timetocode.cdp.Proceeding
 import com.kmu.timetocode.cdp.UserCreated
 import com.kmu.timetocode.certicenter.CertificationFragment
+import com.kmu.timetocode.login.LoginActivity
 import com.kmu.timetocode.login.UserProfile
 import com.prolificinteractive.materialcalendarview.*
 import com.prolificinteractive.materialcalendarview.spans.DotSpan
 import org.json.JSONObject
 import java.util.*
-
 
 class MainFragment : Fragment() {
     var queue: RequestQueue? = null
@@ -30,7 +30,7 @@ class MainFragment : Fragment() {
     var complete:TextView?=null
     var upload:TextView?=null
     var calendarView:MaterialCalendarView?=null
-    val NAME:String = UserProfile.getName()
+    var userName:TextView?=null
 
     companion object {
         @JvmStatic
@@ -46,11 +46,11 @@ class MainFragment : Fragment() {
     ) : View {
         val rootView : View = inflater.inflate(R.layout.fragment_main, container, false)
 
-        val userName = rootView.findViewById<TextView>(R.id.userName)
-
         val ingChallenge = rootView.findViewById<ViewGroup>(R.id.ingChallenge)
         val doneChallenge = rootView.findViewById<ViewGroup>(R.id.doneChallenge)
         val madeByMe = rootView.findViewById<ViewGroup>(R.id.madeByMe)
+
+        userName = rootView.findViewById<TextView>(R.id.userName)
         proceeding = rootView.findViewById(R.id.proceeding)
         complete = rootView.findViewById(R.id.complete)
         upload = rootView.findViewById(R.id.upload)
@@ -63,6 +63,7 @@ class MainFragment : Fragment() {
         val toNoticeButton = rootView.findViewById<ViewGroup>(R.id.toNotice)
         val toSupportButton = rootView.findViewById<ViewGroup>(R.id.toSupport)
 
+        showMyName()
         showCount()
         showDate()
 
@@ -74,9 +75,6 @@ class MainFragment : Fragment() {
 
         toSupportButton.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Support.newInstance()) }
         toNoticeButton.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Announce.newInstance()) }
-
-        userName?.text = NAME
-        Log.d("user name", userName?.text.toString())
 
         return rootView
     }
@@ -93,6 +91,14 @@ class MainFragment : Fragment() {
         init{
             this.dates = HashSet(dates)
         }
+    }
+
+    private fun showMyName() {
+        var name = UserProfile.getName()
+        Log.d("user name", name!!)
+        name = UserProfile.getName()
+        Log.d("user name", name!!)
+        userName?.text = name.toString()
     }
 
     private fun showCount() {
