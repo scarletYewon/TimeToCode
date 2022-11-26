@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import com.android.volley.Response
 import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
@@ -23,11 +25,15 @@ class CertificationFragment : Fragment() {
     var adapter: ListViewAdapter?=null
     var queue: RequestQueue?=null
     var myList: ListView?= null
+
+    lateinit var model: MyViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) : View? {
+        model = ViewModelProvider(requireActivity()).get(MyViewModel::class.java)
         val rootView = inflater.inflate(R.layout.fragment_certification, container, false)
         val listView = view?.findViewById<ListView>(R.id.list)
 
@@ -73,7 +79,10 @@ class CertificationFragment : Fragment() {
                 list[position].resId?.let {holder.ch_image?.setImageResource(it)}
 
                 holder.btn_certificaion?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Certifbox()) }
-                holder.btn_gallery?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(RecordFragment()) }
+                holder.btn_gallery?.setOnClickListener {
+                    model.sendMessage(list[position].title.toString())
+                    Log.d("test sendMessage", list[position].title.toString())
+                    (activity as NavActivity?)!!.replaceFragment(RecordFragment()) }
                 view.tag = holder
             } else {
                 holder = convertview.tag as ViewHolder
@@ -106,7 +115,8 @@ class CertificationFragment : Fragment() {
                     val jsonArray = JSONArray(response)
                     for (i in 0 until jsonArray.length()) {
                         val jsonObject = jsonArray.getJSONObject(i)
-                        val nameChallenge = jsonObject.getString("nameChallenge")
+                        Log.d("test challenge list in certiCenter", jsonObject.toString())
+                        val nameChallenge = jsonObject.getString("nameChallenge").split(" %").get(0)
                         val imageLink = jsonObject.getString("imageLink")
                         val madeIdUser = jsonObject.getString("name")
                         challengeList.add(Challenge(nameChallenge, madeIdUser, R.drawable.ttcwhite))

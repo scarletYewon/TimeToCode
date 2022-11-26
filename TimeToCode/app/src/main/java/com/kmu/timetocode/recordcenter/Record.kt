@@ -1,8 +1,7 @@
 package com.kmu.timetocode.recordcenter
 
-class Record(num: Int, title: String, resId: Int) {
-    var num: Int? = num
-    var title: String? = title
+class Record(chId: Int, resId: Int) {
+    var chId: Int? = chId
     var resId: Int? = resId
 
 }
