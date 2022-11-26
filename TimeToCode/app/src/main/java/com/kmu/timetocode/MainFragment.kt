@@ -30,6 +30,8 @@ class MainFragment : Fragment() {
     var complete:TextView?=null
     var upload:TextView?=null
     var calendarView:MaterialCalendarView?=null
+    val NAME:String = UserProfile.getName()
+
     companion object {
         @JvmStatic
         fun newInstance(): MainFragment {
@@ -45,7 +47,6 @@ class MainFragment : Fragment() {
         val rootView : View = inflater.inflate(R.layout.fragment_main, container, false)
 
         val userName = rootView.findViewById<TextView>(R.id.userName)
-        userName?.text = UserProfile.getName()
 
         val ingChallenge = rootView.findViewById<ViewGroup>(R.id.ingChallenge)
         val doneChallenge = rootView.findViewById<ViewGroup>(R.id.doneChallenge)
@@ -73,6 +74,9 @@ class MainFragment : Fragment() {
 
         toSupportButton.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Support.newInstance()) }
         toNoticeButton.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Announce.newInstance()) }
+
+        userName?.text = NAME
+        Log.d("user name", userName?.text.toString())
 
         return rootView
     }
