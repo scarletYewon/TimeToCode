@@ -94,11 +94,7 @@ class MainFragment : Fragment() {
     }
 
     private fun showMyName() {
-        var name = UserProfile.getName()
-        Log.d("user name", name!!)
-        name = UserProfile.getName()
-        Log.d("user name", name!!)
-        userName?.text = name.toString()
+        userName?.text = UserProfile.getName()
     }
 
     private fun showCount() {
