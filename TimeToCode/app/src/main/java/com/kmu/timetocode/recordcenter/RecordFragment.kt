@@ -50,10 +50,10 @@ class RecordFragment : Fragment() {
 
         getChallengeId()
 
-//        adapter.addItem(Record(1, "제목", R.drawable.ttcwhite))
-//        adapter.addItem(Record(2, "제목", R.drawable.ttcwhite))
-//        adapter.addItem(Record(3, "제목", R.drawable.ttcwhite))
-//        adapter.addItem(Record(4, "제목", R.drawable.ttcwhite))
+//        adapter?.addItem(Record(1, R.drawable.ttcwhite))
+//        adapter?.addItem(Record(2, R.drawable.ttcwhite))
+//        adapter?.addItem(Record(3, R.drawable.ttcwhite))
+//        adapter?.addItem(Record(4, R.drawable.ttcwhite))
 
         listView?.setAdapter(adapter)
         rootView?.findViewById<GridView>(R.id.recordList)?.adapter = adapter
@@ -77,16 +77,12 @@ class RecordFragment : Fragment() {
                 view = LayoutInflater.from(parent?.context).inflate(R.layout.gridview_record, parent, false)
                 holder = ViewHolder()
 
-                holder.rc_number = view.findViewById(R.id.recordNumber)
                 holder.rc_title = view.findViewById(R.id.recordTitle)
                 holder.rc_image = view.findViewById(R.id.recordImage)
-                holder.back_record = view.findViewById(R.id.backRecord)
 
-                holder.rc_number?.text = list[position].num.toString()
-                holder.rc_title?.text = list[position].title
+                holder.rc_title?.text = list[position].chId.toString()
                 list[position].resId?.let {holder.rc_image?.setImageResource(it)}
 
-                holder.back_record?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(MainFragment()) }
                 view.tag = holder
             } else {
                 holder = convertview.tag as ViewHolder
@@ -100,10 +96,8 @@ class RecordFragment : Fragment() {
             return view //뷰 객체 반환
         }
         private inner class ViewHolder {
-            var rc_number: TextView? = null
             var rc_title: TextView? = null
             var rc_image: ImageButton? = null
-            var back_record: Button? = null
         }
     }
 
@@ -152,7 +146,7 @@ class RecordFragment : Fragment() {
 
     private fun showMyList(chID:String) {
         val myId = UserProfile.getId()
-        val url = "https://android-pkfbl.run.goorm.io/challengePost/all?idUser=" + myId + "?idChallenge=" + chID
+        val url = "https://android-pkfbl.run.goorm.io/challengePost/all?idUser=$myId&idChallenge=$chID"
         val sr: StringRequest = object: StringRequest(Method.GET, url,
         Response.Listener{response: String? ->
             val recordList = ArrayList<Record>()
@@ -160,13 +154,14 @@ class RecordFragment : Fragment() {
                 val jsonArray = JSONArray(response)
                 for (i in 0 until jsonArray.length()) {
                     val jsonObject = jsonArray.getJSONObject(i)
+                    Log.d("test record list in recordCenter", jsonObject.toString())
                     val postPhoto = jsonObject.get("postPhoto")
                     val idUser = jsonObject.get("idUser")
-                    val idChallenge_ = jsonObject.get("idChallenge")
-                    Log.d("test", jsonObject.toString())
+                    val idChallenge = jsonObject.getInt("idChallenge")
+                    recordList.add(Record(idChallenge, R.drawable.ttcwhite))
                 }
             } catch (e: Exception) {
-                Log.e("MyListJSON", response!!)
+                Log.e("MyRecordJSON", response!!)
             }
             adapter = GridViewAdapter(requireContext(), recordList)
             myList?.setAdapter(adapter)
