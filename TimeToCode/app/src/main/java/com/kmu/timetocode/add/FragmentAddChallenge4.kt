@@ -246,7 +246,7 @@ class FragmentAddChallenge4 : Fragment() {
                 val params: MutableMap<String, String> = HashMap()
                 params["idChallenge"] = "0"
                 params["nameChallenge"] = chName
-                params["introduce"] = chIntroduce
+                params["intruduce"] = chIntroduce
                 params["imageLink"] = chImg
                 params["frequency"] = chFreq.toString()
                 params["count"] = chCount.toString()
