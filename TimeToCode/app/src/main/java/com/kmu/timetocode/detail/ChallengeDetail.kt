@@ -12,6 +12,8 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
+import com.google.firebase.storage.FirebaseStorage
 import com.kmu.timetocode.NavActivity
 import com.kmu.timetocode.R
 import com.kmu.timetocode.databinding.ActivityChallengeDetailBinding
@@ -92,7 +94,9 @@ class ChallengeDetail : AppCompatActivity() {
                     val id = jsonObject.getInt("idChallenge")
 
                     val nameTag = jsonObject.getString("nameChallenge").split(" %").get(0)
-                    val imageLink = jsonObject.getString("imageLink")
+                    val imageLink = FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener {
+                        Log.d("Firebase", "사진 가져옴")
+                    }.toString()
                     val chCount = jsonObject.getInt("count")
                     val prtcp = jsonObject.getInt("countUser")
                     val introduce = jsonObject.getString("intruduce")
@@ -110,7 +114,11 @@ class ChallengeDetail : AppCompatActivity() {
                     Toast.makeText(this,"${nameTagList[0]}",Toast.LENGTH_SHORT).show()
 
                     chId = id
-                    binding.challengeMainImg.setImageURI(imageLink.toUri())
+                    // binding.challengeMainImg.setImageURI(imageLink.toUri())
+                    Glide.with(this)
+                        .load(imageLink.toUri())
+                        .into(binding.challengeMainImg)
+                    Log.d("FirebaseImageDetail", imageLink)
                     binding.detailChallengePtcpCount.text = chCount.toString()
                     binding.detailChallengeExpText.text = introduce
                     binding.detailChallengeHowText.text = how
