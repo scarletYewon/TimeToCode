@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.firebase.storage.FirebaseStorage
 import com.kmu.timetocode.add.AddChallenge
 import com.kmu.timetocode.databinding.FragmentChallengeListBinding
 import com.kmu.timetocode.login.UserProfile
@@ -131,12 +132,15 @@ class FragmentChallengeList : Fragment() {
             { response: String? ->
                 challengeListArray =
                     ArrayList<ChallengeListModel>()
+                challengeItemArray = ArrayList<ChallengeItemModel>()
                 try {
                     val jsonArray = JSONArray(response)
                     for (i in 0 until jsonArray.length()) {
                         val jsonObject = jsonArray.getJSONObject(i)
                         val nameTag = jsonObject.getString("nameChallenge")
-                        val imageLink = jsonObject.getString("imageLink")
+                        val imageLink = FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener {
+                            Log.d("Firebase", "사진 가져옴")
+                        }.toString()
                         val madeName = jsonObject.getString("name")
                         val count = jsonObject.getInt("countUser")
                         val nameTagList = nameTag.split("%")
@@ -151,7 +155,29 @@ class FragmentChallengeList : Fragment() {
                             )
                         )
                     }
-
+                    if (jsonArray.length() < 6){
+                        for (i in jsonArray.length()-1 downTo 0){
+                            val jsonObject = jsonArray.getJSONObject(i)
+                            val name = jsonObject.getString("nameChallenge").split("%")[0]
+                            val imageLink = jsonObject.getString("imageLink")
+                            val tag = jsonObject.getString("nameChallenge").split("%")[1]
+                            val tag2 = jsonObject.getString("nameChallenge").split("%")[2]
+                            val whoMade = jsonObject.getString("name")
+                            challengeItemArray.add(ChallengeItemModel(imageLink.toUri(),name,tag,tag2,whoMade))
+                            Log.i("item","아이템??: ${challengeItemArray}")
+                        }
+                    }else{
+                        for (i in jsonArray.length()-1 downTo jsonArray.length()-7){
+                            val jsonObject = jsonArray.getJSONObject(i)
+                            val name = jsonObject.getString("nameChallenge").split("%")[0]
+                            val imageLink = jsonObject.getString("imageLink")
+                            val tag = jsonObject.getString("nameChallenge").split("%")[1]
+                            val tag2 = jsonObject.getString("nameChallenge").split("%")[2]
+                            val whoMade = jsonObject.getString("name")
+                            challengeItemArray.add(ChallengeItemModel(imageLink.toUri(),name,tag,tag2,whoMade))
+                            Log.i("item","아이템??: ${challengeItemArray}")
+                        }
+                    }
                 } catch (e: Exception) {
                     Log.e("SearchListJSON", response!!)
                 }
