@@ -46,6 +46,7 @@
             android:textStyle="bold" />
 
         <RadioGroup
+            android:id="@+id/selectImgGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
@@ -56,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/test_radio"
+                android:drawableTop="@drawable/non_select_img_radio"
                 android:button="@null"
                 android:gravity="center"
                 android:text="RadioButton" />
@@ -66,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/test_radio"
+                android:drawableTop="@drawable/select_img_radio"
                 android:button="@null"
                 android:gravity="center"
                 android:text="RadioButton" />
@@ -75,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/test_radio"
+                android:drawableTop="@drawable/select_img_radio"
                 android:button="@null"
                 android:gravity="center"
                 android:text="RadioButton" />

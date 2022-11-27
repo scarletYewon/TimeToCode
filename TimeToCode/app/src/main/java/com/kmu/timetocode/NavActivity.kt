@@ -9,6 +9,8 @@ import com.kmu.timetocode.favorite.FavoritePage
 import com.kmu.timetocode.search.Search
 import com.kmu.timetocode.certicenter.CertificationFragment
 import com.kmu.timetocode.list.FragmentChallengeList
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.replace
 
 class NavActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,11 +29,6 @@ class NavActivity : FragmentActivity() {
         val btn1 = findViewById<LinearLayout>(R.id.btn1)
         val btn2 = findViewById<LinearLayout>(R.id.btn2)
         val btn3 = findViewById<LinearLayout>(R.id.btn3)
-
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainerView, mainFrag)
-            .commit()
 
         ttc.setOnClickListener{
             supportFragmentManager

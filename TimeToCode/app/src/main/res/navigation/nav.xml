@@ -3,8 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/mainFrag">
+    app:startDestination="@id/screenSaver">
 
+    <fragment
+        android:id="@+id/screenSaver"
+        android:name="com.kmu.timetocode.ScreenSaver"
+        android:label="screen_saver"
+        tools:layout="@layout/screen_saver">
+    </fragment>
     <fragment
         android:id="@+id/mainFrag"
         android:name="com.kmu.timetocode.MainFragment"

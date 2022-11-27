@@ -28,16 +28,23 @@ class FavoritePage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView: View = inflater.inflate(R.layout.fragment_favorite_page, container, false)
-
+        val Hbtn = rootView?.findViewById<ListView>(R.id.listview_favorite_fragment)?.findViewById<ImageButton>(R.id.btnHeart)
         val backCertification = rootView?.findViewById<ImageButton>(R.id.backCertification)
         backCertification?.setOnClickListener {
             (activity as NavActivity?)!!.replaceFragment(
                 MainFragment()
             )
         }
+        Hbtn?.setOnClickListener{
+            Hbtn.isSelected = true
+            heartBtnClicked()
+        }
         myList = rootView?.findViewById<ListView>(R.id.listview_favorite_fragment)
         showFavorList()
         return rootView
+    }
+
+    private fun heartBtnClicked() {
     }
 
     private fun showFavorList() {
@@ -54,9 +61,13 @@ class FavoritePage : Fragment() {
                         val imageLink = jsonObject.getString("imageLink")
                         val madeIdUser = jsonObject.getString("name")
                         val countUser = jsonObject.getInt("countUser")
-                        val tag1 = jsonObject.getString("tagName1")
-                        val tag2 = jsonObject.getString("tagName2")
-                        challengeList.add(FavoriteListModel(imageLink, nameChallenge, madeIdUser, countUser, tag1, tag2))
+                        // 여기서 데이터 나눠줄거임
+                        //받아올 challengeName
+                        val challengeTag = nameChallenge.split("%").toTypedArray()
+                        val ChallengeName = challengeTag[0]
+                        val tag1 = challengeTag[1]
+                        val tag2 = challengeTag[2]
+                        challengeList.add(FavoriteListModel(imageLink, ChallengeName, madeIdUser, countUser, tag1, tag2))
                         Log.e("challengeList",challengeList.toString())
                     }
                 } catch (e: Exception) {

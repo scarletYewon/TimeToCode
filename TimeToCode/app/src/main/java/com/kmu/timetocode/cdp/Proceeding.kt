@@ -31,27 +31,11 @@ class Proceeding : Fragment() {
         savedInstanceState: Bundle?
     ) : View? {
         val rootView : View = inflater.inflate(R.layout.fragment_proceeding, container, false)
-//        val mActivity = activity as MainActivity
-//        val btn_change = rootView.findViewById(R.id.button_change);
-//        btn_change.setOnClickListener{
-//            activity.changeFragment(2)
-//        }
         val backCertification = rootView?.findViewById<ImageButton>(R.id.backCertification)
         backCertification?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(
             MainFragment()
         ) }
         showDoneList()
-
-//        val list_array = arrayListOf<FavoriteListModel>(
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm")
-//
-//        )
-//        var Adapter = FavoriteListAdapter(requireContext(),list_array)
         myList = rootView?.findViewById<ListView>(R.id.listview_proceed_fragment)
 
         return rootView
@@ -71,9 +55,13 @@ class Proceeding : Fragment() {
                         val imageLink = jsonObject.getString("imageLink")
                         val madeIdUser = jsonObject.getString("name")
                         val countUser = jsonObject.getInt("countUser")
-                        val tag1 = jsonObject.getString("tagName1")
-                        val tag2 = jsonObject.getString("tagName2")
-                        challengeList.add(FavoriteListModel(imageLink, nameChallenge, madeIdUser, countUser, tag1, tag2))
+                        // 여기서 데이터 나눠줄거임
+                        //받아올 challengeName
+                        val challengeTag = nameChallenge.split("%").toTypedArray()
+                        val ChallengeName = challengeTag[0]
+                        val tag1 = challengeTag[1]
+                        val tag2 = challengeTag[2]
+                        challengeList.add(FavoriteListModel(imageLink, ChallengeName, madeIdUser, countUser, tag1, tag2))
                         Log.e("challengeList",challengeList.toString())
                     }
                 } catch (e: Exception) {
@@ -88,8 +76,6 @@ class Proceeding : Fragment() {
             @Throws(java.lang.Error::class)
             override fun getParams(): MutableMap<String,String>? {
                 val params: MutableMap<String, String> = HashMap()
-//                params["idUser"] = myId.toString()
-//                Log.e(params.toString(),"params")
                 return params
             }
         }

@@ -9,11 +9,23 @@
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/imageArea"
-            android:layout_width="106dp"
-            android:layout_height="110dp"
-            android:src="@drawable/gray"/>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imageArea"
+                android:layout_width="106dp"
+                android:layout_height="110dp"
+                android:src="@drawable/gray"/>
+            <ImageButton
+                android:id="@+id/btnHeart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="78dp"
+                android:layout_marginTop="8dp"
+                android:background="#00000000"
+                android:src="@drawable/img_btn_click_favorite" />
+        </FrameLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
