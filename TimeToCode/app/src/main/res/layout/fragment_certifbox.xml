@@ -53,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:text="Github Daily Commit \n (1일 1커밋을 해보자!)"
@@ -78,7 +78,7 @@
                 android:id="@+id/uploadCertifImg"
                 android:background="@drawable/radius3"
                 android:orientation="horizontal"
-                android:layout_width="390dp"
+                android:layout_width="360dp"
                 android:layout_height="45dp"
                 android:gravity="center">
                 <ImageView
@@ -107,7 +107,7 @@
         <TextView
             android:layout_marginBottom="150dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="잠깐! 인증 방법을 확인하고 사진을 업로드 해주세요."
@@ -117,7 +117,7 @@
         <LinearLayout
             android:layout_marginBottom="125dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -137,10 +137,10 @@
         <Button
             android:background="@drawable/radius2"
             android:textColor="@color/white"
-            android:layout_marginBottom="70dp"
+            android:layout_marginBottom="75dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_width="395dp"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:text="제출하기"
             android:textSize="17sp"
