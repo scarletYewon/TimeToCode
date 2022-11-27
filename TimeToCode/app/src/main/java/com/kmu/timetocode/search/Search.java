@@ -162,8 +162,14 @@ public class Search extends Fragment {
                     String madeName = jsonObject.getString("name");
                     int count = jsonObject.getInt("countUser");
                     String[] list = nameChallenge.split("%");
-                    String tag1 = list[1];
-                    String tag2 = list[2];
+                    String tag1 = "";
+                    String tag2 = "";
+                    try {
+                        tag1 = list[1];
+                        tag2 = list[2];
+                    } catch (Exception e) {
+                        Log.e("SearchListJSON", "no tag");
+                    }
                     nameChallenge = list[0];
                     challengeList.add(new ChallengeListModel(imageLink, nameChallenge, madeName, Integer.toString(count), tag1, tag2));
                 }
