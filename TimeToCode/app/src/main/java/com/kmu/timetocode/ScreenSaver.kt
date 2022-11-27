@@ -14,7 +14,7 @@ class ScreenSaver : Fragment() {
         savedInstanceState: Bundle?
     ) : View {
         val rootView : View = inflater.inflate(R.layout.screen_saver, container, false)
-        val start = rootView.findViewById<ImageView>(R.id.start)
+        val start = rootView.findViewById<ViewGroup>(R.id.start)
 
         start?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(MainFragment()) }
         return rootView
