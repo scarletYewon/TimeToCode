@@ -16,13 +16,11 @@ import com.android.volley.toolbox.Volley
 import com.kmu.timetocode.MainFragment
 import com.kmu.timetocode.NavActivity
 import com.kmu.timetocode.R
-import com.kmu.timetocode.favorite.FavoriteListAdapter
-import com.kmu.timetocode.favorite.FavoriteListModel
 import com.kmu.timetocode.login.UserProfile
 import org.json.JSONArray
 
 class UserCreated : Fragment() {
-    var favoriteListAdapter: FavoriteListAdapter?=null
+    var favoriteListAdapter: CdpListAdapter?=null
     var queue: RequestQueue? = null
     var myList: ListView? = null
     override fun onCreateView(
@@ -47,7 +45,7 @@ class UserCreated : Fragment() {
         val url = "https://android-pkfbl.run.goorm.io/userChallenge/userUploadChallenge?idUser=" + myId
         val sr: StringRequest = object : StringRequest( Method.GET, url,
             Response.Listener { response: String? ->
-                val challengeList = ArrayList<FavoriteListModel>()
+                val challengeList = ArrayList<CdpListModel>()
                 try {
                     val jsonArray = JSONArray(response)
                     for (i in 0 until jsonArray.length()) {
@@ -62,13 +60,13 @@ class UserCreated : Fragment() {
                         val ChallengeName = challengeTag[0]
                         val tag1 = challengeTag[1]
                         val tag2 = challengeTag[2]
-                        challengeList.add(FavoriteListModel(imageLink, ChallengeName, madeIdUser, countUser, tag1, tag2))
+                        challengeList.add(CdpListModel(imageLink, ChallengeName, madeIdUser, countUser, tag1, tag2))
                         Log.e("challengeList",challengeList.toString())
                     }
                 } catch (e: Exception) {
                     Log.e("FavoriteListJSON", response!!)
                 }
-                favoriteListAdapter = FavoriteListAdapter(requireContext(), challengeList)
+                favoriteListAdapter = CdpListAdapter(requireContext(), challengeList)
                 Log.e("List",favoriteListAdapter.toString())
                 myList?.setAdapter(favoriteListAdapter)
             },
