@@ -42,6 +42,7 @@ class ChallengeItemAdapter(val context: Context, val challengeItemArray: ArrayLi
         Glide.with(context)
             .load(currentItem.image)
             .into(holder.binding.itemImg)
+        Log.d("FirebaseImageItem", currentItem.image.toString())
         holder.binding.textChallengeNameInNew.text = currentItem.title
 
         if(currentItem.title.length > 8){

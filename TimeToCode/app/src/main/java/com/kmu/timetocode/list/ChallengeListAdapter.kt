@@ -4,9 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.ListAdapter
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kmu.timetocode.R
@@ -40,9 +41,8 @@ class ChallengeListAdapter(val context: Context, private val challengeListArray:
 //        this.listener = listener
 //    }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        return ListViewHolder(ChallengeListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+       return ListViewHolder(ChallengeListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
     override fun getItemCount(): Int {
         return challengeListArray.size
@@ -62,6 +62,11 @@ class ChallengeListAdapter(val context: Context, private val challengeListArray:
         }
         holder.binding.textChallegeNameInList.text = currentItem.title
         holder.binding.textMadeUserInList.text = currentItem.owner
+
+        Glide.with(context)
+            .load(currentItem.image.toUri())
+            .into(holder.binding.itemImg)
+        Log.d("FirebaseImage", currentItem.image)
         holder.binding.challengePrtcp.text = "+"+currentItem.prtcp+"명"
         holder.binding.challengeTag1.text = "#"+currentItem.tag1
         holder.binding.challengeTag2.text = "#"+currentItem.tag2

@@ -72,6 +72,7 @@ class FavoritePage : Fragment() {
                         val nameChallenge = jsonObject.getString("nameChallenge")
                         val imageLink = jsonObject.getString("imageLink")
                         val madeIdUser = jsonObject.getString("name")
+                        Challname =  nameChallenge
 //                        val countUser = jsonObject.getInt("countUser")
                         // 여기서 데이터 나눠줄거임
                         //받아올 challengeName
@@ -79,7 +80,6 @@ class FavoritePage : Fragment() {
                         val ChallengeName = challengeTag[0]
 //                        val tag1 = challengeTag[1]
 //                        val tag2 = challengeTag[2]
-                        Challname = ChallengeName
                         challengeList.add(FavorListModel(imageLink, ChallengeName, madeIdUser))
                         Log.e("challengeList",challengeList.toString())
                     }
