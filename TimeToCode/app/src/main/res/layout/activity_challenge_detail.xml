@@ -70,8 +70,8 @@
                             android:textColor="@color/grey"
                             android:textSize="13dp" />
                         <TextView
-                            android:layout_weight="1"
                             android:id="@+id/favorBtn"
+                            android:layout_weight="1"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
                             android:text="찜하기"

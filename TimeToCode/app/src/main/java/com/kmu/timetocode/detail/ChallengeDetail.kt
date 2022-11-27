@@ -20,6 +20,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 class ChallengeDetail : AppCompatActivity() {
+    var Challname = ""
     var queue: RequestQueue? = null
 
     private lateinit var binding : ActivityChallengeDetailBinding
@@ -34,6 +35,7 @@ class ChallengeDetail : AppCompatActivity() {
 
         var intent = getIntent()
         var text = intent.getStringExtra("clickChallengeInList").toString()
+        Challname = text
         var clickList =text.split("%")
         var clickTitle = clickList[0]
         showDetailData(text)
@@ -45,10 +47,33 @@ class ChallengeDetail : AppCompatActivity() {
 
         binding.btnJoinChallenge.setOnClickListener {
             joinChallenge()
-
+        }
+        binding.favorBtn.setOnClickListener {
+            NewFavor()
         }
     }
 
+    private fun NewFavor() {
+        val myId = UserProfile.getId()
+        val url = "https://android-pkfbl.run.goorm.io/UserFavoriteChallenge/post"
+        val sr: StringRequest = object : StringRequest(Method.POST, url,
+            Response.Listener { response: String? ->
+            },
+            Response.ErrorListener { error: VolleyError ->
+            }) {
+            @Throws(java.lang.Error::class)
+            override fun getParams(): MutableMap<String, String>? {
+                val params: MutableMap<String, String> = HashMap()
+                params["idUser"] = myId.toString()
+                params["idChallenge"] = Challname
+                Log.e("params",params.toString())
+                return params
+            }
+        }
+        sr.setShouldCache(false)
+        queue = Volley.newRequestQueue(this)
+        queue!!.add(sr)
+    }
     private fun joinChallenge() {
         val myId = UserProfile.getId()
         val url = "https://android-pkfbl.run.goorm.io/userChallenge/add"
