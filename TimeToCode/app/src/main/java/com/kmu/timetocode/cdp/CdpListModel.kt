@@ -1,6 +1,6 @@
-package com.kmu.timetocode.favorite
+package com.kmu.timetocode.cdp
 
-data class FavoriteListModel(
+data class CdpListModel(
 
     val image : String,
     val title: String,

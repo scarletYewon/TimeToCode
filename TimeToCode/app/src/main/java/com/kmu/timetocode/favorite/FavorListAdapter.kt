@@ -8,9 +8,9 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.kmu.timetocode.R
+import com.kmu.timetocode.cdp.CdpListModel
 
-class FavoriteListAdapter(val context: Context, val list: ArrayList<FavoriteListModel>): BaseAdapter() {
-
+class FavorListAdapter(val context: Context, val list: ArrayList<FavorListModel>): BaseAdapter() {
     override fun getView(position: Int, convertview: View?, parent: ViewGroup?): View {
         val view: View
         val holder : ViewHolder
@@ -22,9 +22,6 @@ class FavoriteListAdapter(val context: Context, val list: ArrayList<FavoriteList
             holder.view_image = view.findViewById(R.id.imageArea)
             holder.view_title = view.findViewById(R.id.title)
             holder.view_owner = view.findViewById(R.id.owner)
-            holder.view_count = view.findViewById(R.id.countUser)
-            holder.view_tag1 = view.findViewById(R.id.tag1)
-            holder.view_tag2 = view.findViewById(R.id.tag2)
 
             view.tag = holder
         } else {
@@ -34,9 +31,6 @@ class FavoriteListAdapter(val context: Context, val list: ArrayList<FavoriteList
         val item = list[position]
         holder.view_title?.text = item.title
         holder.view_owner?.text = item.owner
-        holder.view_count?.text = "+" + item.countUser.toString() + "명"
-        holder.view_tag1?.text = "#" + item.tag1
-        holder.view_tag2?.text = "#" + item.tag2
 
         return view
 
@@ -54,8 +48,5 @@ class FavoriteListAdapter(val context: Context, val list: ArrayList<FavoriteList
         var view_image : ImageView? = null
         var view_title: TextView? = null
         var view_owner: TextView? = null
-        var view_count: TextView? = null
-        var view_tag1: TextView? = null
-        var view_tag2: TextView? = null
     }
 }

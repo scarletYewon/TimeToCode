@@ -19,7 +19,7 @@ import org.json.JSONArray
 
 
 class FavoritePage : Fragment() {
-    var favoriteListAdapter: FavoriteListAdapter?=null
+    var favoriteListAdapter: FavorListAdapter?=null
     var queue: RequestQueue? = null
     var myList: ListView? = null
     override fun onCreateView(
@@ -28,23 +28,15 @@ class FavoritePage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView: View = inflater.inflate(R.layout.fragment_favorite_page, container, false)
-        val Hbtn = rootView?.findViewById<ListView>(R.id.listview_favorite_fragment)?.findViewById<ImageButton>(R.id.btnHeart)
         val backCertification = rootView?.findViewById<ImageButton>(R.id.backCertification)
         backCertification?.setOnClickListener {
             (activity as NavActivity?)!!.replaceFragment(
                 MainFragment()
             )
         }
-        Hbtn?.setOnClickListener{
-            Hbtn.isSelected = true
-            heartBtnClicked()
-        }
         myList = rootView?.findViewById<ListView>(R.id.listview_favorite_fragment)
         showFavorList()
         return rootView
-    }
-
-    private fun heartBtnClicked() {
     }
 
     private fun showFavorList() {
@@ -52,7 +44,7 @@ class FavoritePage : Fragment() {
         val url = "https://android-pkfbl.run.goorm.io/challenge/challengeFavorite?idUser=" + myId
         val sr: StringRequest = object : StringRequest( Method.GET, url,
             Response.Listener { response: String? ->
-                val challengeList = ArrayList<FavoriteListModel>()
+                val challengeList = ArrayList<FavorListModel>()
                 try {
                     val jsonArray = JSONArray(response)
                     for (i in 0 until jsonArray.length()) {
@@ -60,20 +52,20 @@ class FavoritePage : Fragment() {
                         val nameChallenge = jsonObject.getString("nameChallenge")
                         val imageLink = jsonObject.getString("imageLink")
                         val madeIdUser = jsonObject.getString("name")
-                        val countUser = jsonObject.getInt("countUser")
+//                        val countUser = jsonObject.getInt("countUser")
                         // 여기서 데이터 나눠줄거임
                         //받아올 challengeName
                         val challengeTag = nameChallenge.split("%").toTypedArray()
                         val ChallengeName = challengeTag[0]
-                        val tag1 = challengeTag[1]
-                        val tag2 = challengeTag[2]
-                        challengeList.add(FavoriteListModel(imageLink, ChallengeName, madeIdUser, countUser, tag1, tag2))
+//                        val tag1 = challengeTag[1]
+//                        val tag2 = challengeTag[2]
+                        challengeList.add(FavorListModel(imageLink, ChallengeName, madeIdUser))
                         Log.e("challengeList",challengeList.toString())
                     }
                 } catch (e: Exception) {
                     Log.e("FavoriteListJSON", response!!)
                 }
-                favoriteListAdapter = FavoriteListAdapter(requireContext(), challengeList)
+                favoriteListAdapter = FavorListAdapter(requireContext(), challengeList)
                 Log.e("List",favoriteListAdapter.toString())
                 myList?.setAdapter(favoriteListAdapter)
             },
