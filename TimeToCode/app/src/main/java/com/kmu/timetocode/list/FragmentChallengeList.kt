@@ -132,7 +132,7 @@ class FragmentChallengeList : Fragment() {
             { response: String? ->
                 challengeListArray =
                     ArrayList<ChallengeListModel>()
-                challengeItemArray = ArrayList<ChallengeItemModel>()
+
                 try {
                     val jsonArray = JSONArray(response)
                     for (i in 0 until jsonArray.length()) {
@@ -189,8 +189,7 @@ class FragmentChallengeList : Fragment() {
 
                 binding.listChallenge.adapter = chAdapter
 
-                var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-                binding.listNew.adapter = newAdapter
+
             }
         ) { error: VolleyError ->
             Log.e(
