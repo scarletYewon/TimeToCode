@@ -38,6 +38,8 @@ class UploadImgDialog(val title: String, val dialogType: Int) : DialogFragment()
     lateinit var currentPhotoPath : String //문자열 형태의 사진 경로값
     val REQUEST_IMAGE_PICK = 10
 
+    var photo = "none"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -86,14 +88,15 @@ class UploadImgDialog(val title: String, val dialogType: Int) : DialogFragment()
                         null
                     }
 
-                // 그림파일을 성공적으로 만들었다면 onActivityForResult로 보내기
+                // 파일을 성공적으로 만들었다면 onActivityForResult로 보내기
                 photoFile?.also {
                     Log.i("also","여기는 also")
                     val photoURI: Uri = FileProvider.getUriForFile(
                         requireContext(), "com.kmu.timetocode.fileprovider", it
                     )
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    Log.i("also","여기는 also2")
+                    photo = photoURI.toString()
+                    Log.i("also","여기는 also2, photoURI: ${photoURI}")
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
                     Log.i("also","여기는 also3")
 
@@ -123,24 +126,7 @@ class UploadImgDialog(val title: String, val dialogType: Int) : DialogFragment()
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val resolver = requireActivity().contentResolver
 //        Log.i("test","실행??")
-//
-//
-//        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-//            val imageString = data?.extras?.get("data") as String
-//            val bundle = bundleOf("bundleKey" to imageString)
-//            Log.v("test","실행2")
-//
-//            setFragmentResult("requestKey", bundle)
-//
-//        }else if (requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK) {
-//            val currentImageUrl : Uri? = data?.data
-//            try{
-//                val bitmap = MediaStore.Images.Media.getBitmap(resolver, currentImageUrl)
-////                imageView.setImageBitmap(bitmap)
-//            }catch (e: Exception){
-//                e.printStackTrace()
-//            }
-//        }
+
         when (requestCode){
             1 -> {
                 if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
@@ -162,7 +148,7 @@ class UploadImgDialog(val title: String, val dialogType: Int) : DialogFragment()
                         Log.i("file","여기는 getbitmap2")
 //                        val sendData = bitmapToString(bitmap)
                         val sendData = test.toString()
-                        val bundle = bundleOf("takeBundleKey" to sendData)
+                        val bundle = bundleOf("takeBundleKey" to photo)
                         requireActivity().supportFragmentManager.setFragmentResult("takeRequestKey", bundle)
                         dismiss()
                     }

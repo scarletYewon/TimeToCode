@@ -25,9 +25,13 @@ class FragmentAddChallenge3 : Fragment() {
 
     private val binding get() = _binding!!
 
+    private var periodFlag = false
+
+    private var freq = 1
     private var count = 1
     private var startTime = "0000"
     private var endTime = "2359"
+    private var period = 7
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +41,23 @@ class FragmentAddChallenge3 : Fragment() {
         _binding = FragmentAddChallenge3Binding.inflate(inflater, container, false)
         binding.selectCount.visibility = View.GONE
         binding.interval.visibility = View.GONE
+
+        binding.rGroupFreq.setOnCheckedChangeListener { radioGroup, i ->
+            when(i){
+                binding.rBtnFreq1.id->{freq=1}
+                else->{
+                    val builder = AlertDialog.Builder(requireContext())
+                    builder.setTitle("서비스 준비 중입니다.")
+                        .setMessage("다음 업데이트를 기다려주세요. 감사합니다:)")
+                        .setPositiveButton("확인",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                binding.rBtnCountOption1.isChecked=true
+                            })
+                    // 다이얼로그를 띄워주기
+                    builder.show()
+                }
+            }
+        }
 
         binding.rGroupCount.setOnCheckedChangeListener{radioGroup, i->
             when(i){
@@ -110,12 +131,24 @@ class FragmentAddChallenge3 : Fragment() {
             picker.show()
         }
 
+        binding.rGroupPeriod.setOnCheckedChangeListener { radioGroup, i ->
+            when(i){
+                binding.rBtnPeriod1.id-> period=7
+                binding.rBtnPeriod2.id-> period=14
+                binding.rBtnPeriod3.id-> period=21
+                binding.rBtnPeriod4.id-> period=28
+                binding.rBtnPeriod5.id-> period=50
+                binding.rBtnPeriod6.id-> period=100
+            }
+            periodFlag = true
+            flagCheck()
+        }
 
 
         binding.btnGoAdd4.setOnClickListener{
             val start = startTime.toInt()
             val end = endTime.toInt()
-            model.addData3(1,count,"0",start,end,7)
+            model.addData3(1,count,"0",start,end,period)
 
             findNavController().navigate(R.id.action_fragmentAddChallenge3_to_fragmentAddChallenge4)
         }
@@ -126,6 +159,7 @@ class FragmentAddChallenge3 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupSpinnerCount()
+        binding.btnGoAdd4.isEnabled = false
 
     }
 
@@ -134,6 +168,10 @@ class FragmentAddChallenge3 : Fragment() {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, counts)
         binding.spinner.adapter = adapter
 
+    }
+
+    private fun flagCheck() {
+        binding.btnGoAdd4.isEnabled = periodFlag
     }
 
     override fun onDestroyView() {

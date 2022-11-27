@@ -1,5 +1,8 @@
 package com.kmu.timetocode.add
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
@@ -25,6 +28,8 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
+import com.kmu.timetocode.NavActivity
+import com.kmu.timetocode.R
 import com.kmu.timetocode.UploadImgDialog
 import com.kmu.timetocode.databinding.FragmentAddChallenge4Binding
 import com.kmu.timetocode.login.UserProfile
@@ -42,9 +47,9 @@ class FragmentAddChallenge4 : Fragment() {
     private var _binding: FragmentAddChallenge4Binding? = null
     private val binding get() = _binding!!
 
-    lateinit var image : Uri
-    lateinit var upLoadImg : Uri
+    var image : String = "none"
     private var howFlag = false
+    private var selectImgFlag = false
     private var imgFromCam : Boolean = false
 
 
@@ -58,18 +63,43 @@ class FragmentAddChallenge4 : Fragment() {
         binding.editChallengeHow.addTextChangedListener(howListener)
 
         binding.btnSelectHowImg.setOnClickListener {
-            requestPermission()
+            if (selectImgFlag){
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("사진첨부를 정말로 취소하시겠습니까?")
+                    .setPositiveButton("예",
+                        DialogInterface.OnClickListener { dialog, id ->
+                            binding.howImgView.setImageResource(R.drawable.gray_img)
+                            binding.howImgView.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                            binding.textBtnSelectHowImg.text = "사진 첨부하기"
+                            selectImgFlag = false
+                            image="none"
+                            Toast.makeText(activity,"사진첨부를 취소했습니다.",Toast.LENGTH_SHORT).show()
+                        })
+                    .setNegativeButton("아니요",DialogInterface.OnClickListener{dialog, id->})
+                // 다이얼로그를 띄워주기
+                builder.show()
+            }else{
+                requestPermission()
+                checkSelect()
+            }
         }
 
     // TODO: 챌린지 생성 후 어디로 가야하는지 결정, 완료 버튼 클릭 시 기입 정보 보내기
 
         binding.btnAddFinish.setOnClickListener{
             if (imgFromCam){
-                savePhoto(upLoadImg)
+                savePhoto(image.toUri())
             }
             complete()
         }
         return binding.root
+    }
+
+    private fun checkSelect() {
+        if (image != "none"){
+            binding.textBtnSelectHowImg.text ="사진 첨부 취소하기"
+            selectImgFlag = true
+        }
     }
 
 
@@ -84,7 +114,8 @@ class FragmentAddChallenge4 : Fragment() {
 //                image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 //                binding.howImgView.setImageBitmap(image)
                 binding.howImgView.scaleType = ImageView.ScaleType.CENTER_CROP
-                upLoadImg = it.toUri()
+                image = it
+                var upLoadImg = it.toUri()
                 binding.howImgView.setImageURI(upLoadImg)
                 imgFromCam = true
                 Log.i("take","takeImg를 통해 fragment")
@@ -94,7 +125,7 @@ class FragmentAddChallenge4 : Fragment() {
         requireActivity().supportFragmentManager.setFragmentResultListener("pickRequestKey",this) { requestKey, bundle ->
             bundle.getString("pickBundleKey")?.let {
                 var pickImage = Uri.parse(it)
-                upLoadImg = pickImage
+                image = it
                 binding.howImgView.setImageURI(pickImage)
                 binding.howImgView.scaleType = ImageView.ScaleType.CENTER_CROP
                 imgFromCam= false
@@ -175,7 +206,7 @@ class FragmentAddChallenge4 : Fragment() {
         var chPeriod = 7
 
         val chHow = binding.editChallengeHow.text.toString().trim()
-        val chHowImg = upLoadImg.toString()
+        val chHowImg = image
 
         model.nameData.observe(viewLifecycleOwner, Observer{
             chName = it
@@ -267,6 +298,11 @@ class FragmentAddChallenge4 : Fragment() {
         sr.setShouldCache(false)
         queue = Volley.newRequestQueue(requireContext())
         queue!!.add(sr)
+
+        val intent = Intent(context, NavActivity::class.java)
+        startActivity(intent)
+
+
     }
 
     override fun onDestroyView() {

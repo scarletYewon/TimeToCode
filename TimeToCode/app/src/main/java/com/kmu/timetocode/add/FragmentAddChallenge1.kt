@@ -41,7 +41,7 @@ class FragmentAddChallenge1 : Fragment() {
         // 다음버튼 클릭 시 입력 데이터 ViewModel에 저장하고 이동
         binding.btnGoAdd2.setOnClickListener{
 
-            val name = binding.editChallengeName.text.toString().trim()+"%"+chipList[0].trim()+"%"+chipList[1].trim()
+            val name = binding.editChallengeName.text.toString().replace(" ","_").trim()+"%"+chipList[0].trim()+"%"+chipList[1].trim()
             val introduce = binding.editChallengeInfo.text.toString().trim()
             model.addData1(name,chipList[0],chipList[1],introduce)
             findNavController().navigate(R.id.action_fragmentAddChallenge1_to_fragmentAddChallenge2)
@@ -59,12 +59,12 @@ class FragmentAddChallenge1 : Fragment() {
                     isCloseIconVisible = true
                     setOnCloseIconClickListener {
                         binding.tagChipGroup.removeView(this)
-                        val delItem = this.text
+                        val delItem = "#"+this.text.toString().replace(" ","_")
                         chipList.remove(delItem.toString())
                         tagCheck(chipList)
                     }
                 })
-                chipList.add("#" + string.toString())
+                chipList.add("#"+string.toString().replace(" ","_"))
                 tagCheck(chipList)
                 binding.editChallengeTagAdd.text.clear()
             }
@@ -96,7 +96,7 @@ class FragmentAddChallenge1 : Fragment() {
 
     // 태그 필수 2개 생성 확인
     private fun tagCheck(chipList: ArrayList<String>) {
-        tagFlag = chipList.size == 2
+        tagFlag = chipList.size >= 2
         flagCheck()
     }
 

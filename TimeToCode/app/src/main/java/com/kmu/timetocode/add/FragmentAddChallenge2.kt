@@ -1,5 +1,7 @@
 package com.kmu.timetocode.add
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +28,7 @@ class FragmentAddChallenge2 : Fragment() {
     private val binding get() = _binding!!
 
     private var imgFlag = false
+    private var basicImgFlag = false
 
     lateinit var selectImg : String
 
@@ -36,10 +39,40 @@ class FragmentAddChallenge2 : Fragment() {
 
         _binding = FragmentAddChallenge2Binding.inflate(inflater, container, false)
 
+        binding.selectImgGroup.setOnCheckedChangeListener { radioGroup, i ->
+            when(i){
+                binding.selectImgOption1.id->{
+                    basicImgFlag = false
+                    flagCheck()
+                }
+                binding.selectImgOption2.id->{
+                    if(imgFlag){
+                        //앨범에서 가져온 이미지 업로드 취소 여부 확인
+                        selectImg="basic1"
+                        selectImgDialog()
+                    }else{
+                        basicImgFlag = true
+                        flagCheck()
+                    }
+                }
+                binding.selectImgOption3.id -> {
+                    if(imgFlag){
+                        //앨범에서 가져온 이미지 업로드 취소 여부 확인
+                        selectImg="basic2"
+                        selectImgDialog()
+                    }else{
+                        basicImgFlag = true
+                        flagCheck()
+                    }
+                }
+            }
+        }
+
         binding.btnUploadBackGround.setOnClickListener{
             binding.uploadBackGroundImgView.setImageResource(R.drawable.gray_img)
             binding.uploadBackGroundImgView.scaleType = ImageView.ScaleType.CENTER_INSIDE
             imgFlag = false
+            flagCheck()
             requestPermission()
         }
         binding.btnUploadCancel.setOnClickListener{
@@ -47,6 +80,7 @@ class FragmentAddChallenge2 : Fragment() {
             binding.uploadBackGroundImgView.scaleType = ImageView.ScaleType.CENTER_INSIDE
 
             imgFlag = false
+            flagCheck()
         }
 
         binding.btnGoAdd3.setOnClickListener{
@@ -55,6 +89,28 @@ class FragmentAddChallenge2 : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun selectImgDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("기본이미지를 선택하셨네요!")
+            .setMessage("갤러리에서 가져온 이미지 업로드를 취소할까요?")
+            .setPositiveButton("예",
+                DialogInterface.OnClickListener { dialog, id ->
+                    basicImgFlag = true
+                    imgFlag = false
+                    binding.uploadBackGroundImgView.setImageResource(R.drawable.gray_img)
+                    binding.uploadBackGroundImgView.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                    flagCheck()
+                })
+            .setNegativeButton("아니요",DialogInterface.OnClickListener { dialogInterface, i ->
+                basicImgFlag = false
+                imgFlag = true
+                binding.selectImgOption1.isChecked=true
+                flagCheck()
+            })
+        // 다이얼로그를 띄워주기
+        builder.show()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,6 +126,8 @@ class FragmentAddChallenge2 : Fragment() {
                 binding.uploadBackGroundImgView.setImageURI(image)
                 binding.uploadBackGroundImgView.scaleType = ImageView.ScaleType.CENTER_CROP
                 imgFlag = true
+                basicImgFlag = false
+                binding.selectImgOption1.isChecked = true
                 flagCheck()
 
                 Log.i("take","pickImg를 통해 fragment")
@@ -97,7 +155,8 @@ class FragmentAddChallenge2 : Fragment() {
     }
 
     private fun flagCheck() {
-        binding.btnGoAdd3.isEnabled = imgFlag
+        binding.btnGoAdd3.isEnabled = (imgFlag == !basicImgFlag)
+        Toast.makeText(activity,"basic: ${basicImgFlag}, img: ${imgFlag}", Toast.LENGTH_SHORT).show()
     }
 
 
