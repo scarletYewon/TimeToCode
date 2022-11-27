@@ -40,7 +40,7 @@
                 android:layout_marginTop="15dp"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/countUser"
+                    android:id="@+id/cancelFav"
                     android:layout_width="100dp"
                     android:layout_height="25dp"
                     android:text="찜 취소하기"

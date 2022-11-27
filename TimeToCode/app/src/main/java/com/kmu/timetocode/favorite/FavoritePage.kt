@@ -1,12 +1,12 @@
 package com.kmu.timetocode.favorite
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ListView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -17,8 +17,8 @@ import com.kmu.timetocode.*
 import com.kmu.timetocode.login.UserProfile
 import org.json.JSONArray
 
-
 class FavoritePage : Fragment() {
+    var Challname = ""
     var favoriteListAdapter: FavorListAdapter?=null
     var queue: RequestQueue? = null
     var myList: ListView? = null
@@ -38,7 +38,27 @@ class FavoritePage : Fragment() {
         showFavorList()
         return rootView
     }
-
+    private fun CancelFav() {
+        val myId = UserProfile.getId()
+        val url = "https://android-pkfbl.run.goorm.io/UserFavoriteChallenge/delete"
+        val sr: StringRequest = object : StringRequest(Method.POST, url,
+            Response.Listener { response: String? ->
+            },
+            Response.ErrorListener { error: VolleyError ->
+            }) {
+            @Throws(java.lang.Error::class)
+            override fun getParams(): MutableMap<String, String>? {
+                val params: MutableMap<String, String> = HashMap()
+                params["idUser"] = myId.toString()
+                params["idChallenge"] = Challname
+                Log.e("params",params.toString())
+                return params
+            }
+        }
+        sr.setShouldCache(false)
+        queue = Volley.newRequestQueue(requireContext())
+        queue!!.add(sr)
+    }
     private fun showFavorList() {
         val myId = UserProfile.getId()
         val url = "https://android-pkfbl.run.goorm.io/challenge/challengeFavorite?idUser=" + myId
@@ -59,6 +79,7 @@ class FavoritePage : Fragment() {
                         val ChallengeName = challengeTag[0]
 //                        val tag1 = challengeTag[1]
 //                        val tag2 = challengeTag[2]
+                        Challname = ChallengeName
                         challengeList.add(FavorListModel(imageLink, ChallengeName, madeIdUser))
                         Log.e("challengeList",challengeList.toString())
                     }
@@ -82,5 +103,46 @@ class FavoritePage : Fragment() {
         sr.setShouldCache(false)
         queue = Volley.newRequestQueue(requireContext())
         queue!!.add(sr)
+    }
+    inner class FavorListAdapter(val context: Context, val list: ArrayList<FavorListModel>): BaseAdapter() {
+        var queue: RequestQueue? = null
+        override fun getView(position: Int, convertview: View?, parent: ViewGroup?): View {
+            val view: View
+            val holder : ViewHolder
+
+            if (convertview == null) {
+                view = LayoutInflater.from(parent?.context).inflate(R.layout.favor_list_item,parent,false)
+                holder = ViewHolder()
+
+                holder.view_image = view.findViewById(R.id.imageArea)
+                holder.view_title = view.findViewById(R.id.title)
+                holder.view_owner = view.findViewById(R.id.owner)
+
+                view.tag = holder
+            } else {
+                holder = convertview.tag as ViewHolder
+                view = convertview
+            }
+            val item = list[position]
+            holder.view_title?.text = item.title
+            holder.view_owner?.text = item.owner
+
+            val favorCancelBtn = view.findViewById<TextView>(R.id.cancelFav)
+            favorCancelBtn.setOnClickListener {
+                CancelFav()
+                Log.e("click","ok")
+            }
+            return view
+        }
+        override fun getCount(): Int {
+            return list.size
+        }
+        override fun getItem(position: Int): Any = list.get(position)
+        override fun getItemId(position: Int): Long = position.toLong()
+        private inner class ViewHolder {
+            var view_image : ImageView? = null
+            var view_title: TextView? = null
+            var view_owner: TextView? = null
+        }
     }
 }
