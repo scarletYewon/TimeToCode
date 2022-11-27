@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kmu.timetocode.databinding.ChallengeListItemBinding
 import com.kmu.timetocode.detail.ChallengeDetail
@@ -77,7 +78,7 @@ class ChallengeListAdapter(val context: Context, private val challengeListArray:
             val clickTitleInList: String = holder.binding.textChallegeNameInList.text.toString().trim()
             val clickTag1InList:String = holder.binding.challengeTag1.text.toString().trim()
             val clickTag2InList: String = holder.binding.challengeTag2.text.toString().trim()
-            val clickChallengeInList: String = clickTitleInList+"%"+clickTag1InList+"%"+clickTag2InList
+            val clickChallengeInList: String = clickTitleInList+"%25"+clickTag1InList+"%25"+clickTag2InList
             val intent = Intent(holder.binding.root?.context, ChallengeDetail::class.java)
             intent.putExtra("clickChallengeInList","${clickChallengeInList} ")
             Log.i("adapter","여기는 dapter: ${holder.binding.root.id}")

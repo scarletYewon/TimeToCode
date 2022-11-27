@@ -1,12 +1,12 @@
 package com.kmu.timetocode.list
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
@@ -58,6 +58,8 @@ class FragmentChallengeList : Fragment() {
 //        )
 
 
+
+
         binding.listChallenge.setHasFixedSize(true)
 
         var manager = LinearLayoutManager(requireContext())
@@ -68,8 +70,28 @@ class FragmentChallengeList : Fragment() {
         binding.listChallenge.adapter = chAdapter
         showAllList()
 
-        binding.listNew.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-        binding.listNew.adapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+//        chAdapter.setOnItemClickListener(object : ChallengeListAdapter.OnItemClickListener{
+//            override fun onItemClick(v: View, data: ChallengeListModel, pos : Int) {
+//                Intent(this@MainActivity, ProfileDetailActivity::class.java).apply {
+//                    putExtra("data", data)
+//                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                }.run { startActivity(this) }
+//            }
+//
+//        })
+
+
+
+        binding. listNew.setHasFixedSize(true)
+
+        var newManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        binding.listNew.layoutManager = newManager
+
+        var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+        binding.listNew.adapter = newAdapter
+
+//        binding.listNew.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+//        binding.listNew.adapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
 
         binding.btnGoAddChallenge.setOnClickListener{
             val intent = Intent(context, AddChallenge::class.java)

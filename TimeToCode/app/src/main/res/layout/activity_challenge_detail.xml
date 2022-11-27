@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".detail.FragmentChallengeDetail">
+    tools:context=".detail.ChallengeDetail">
 
 
     <FrameLayout
@@ -14,7 +14,7 @@
         android:layout_weight="1">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/challengeMainImg"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:src="@drawable/test3"
@@ -92,7 +92,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginHorizontal="5dp"
                                 android:layout_marginBottom="15dp"
-                                android:src="@drawable/userleft" />
+                                android:src="@drawable/prtcp_img" />
 
                             <ImageView
                                 android:id="@+id/detailChallengeFinishIcon"
@@ -100,7 +100,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginHorizontal="5dp"
-                                android:src="@drawable/userleft" />
+                                android:src="@drawable/goal" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -222,7 +222,7 @@
                         android:textSize="15dp" />
 
                     <ImageView
-                        android:id="@+id/imageView3"
+                        android:id="@+id/detailChallengeHowImg"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:src="@drawable/gray" />

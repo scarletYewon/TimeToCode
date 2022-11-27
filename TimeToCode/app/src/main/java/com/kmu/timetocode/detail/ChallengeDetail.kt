@@ -10,7 +10,6 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.kmu.timetocode.R
-import com.kmu.timetocode.databinding.ActivityAddChallengeBinding
 import com.kmu.timetocode.databinding.ActivityChallengeDetailBinding
 import org.json.JSONObject
 
@@ -36,27 +35,36 @@ class ChallengeDetail : AppCompatActivity() {
     }
 
     private fun showDetailData(title:String){
-        val url = "https://android-pkfbl.run.goorm.io/challenge/challengeList?nameChallenge=" + title
+        val url = "https://android-pkfbl.run.goorm.io/challenge/nameChallenge?nameChallenge=" + title
         val sr: StringRequest = object : StringRequest(Method.GET, url,
             Response.Listener { response: String? ->
                 try {
                     val jsonObject = JSONObject(response)
-                    val nameTag = jsonObject.getString("nameChallenge")
+                    val id = jsonObject.getInt("idChallenge")
+                    val who = jsonObject.getInt("madeIdUser")
+                    val nameTag = jsonObject.getString("nameChallenge").split(" %").get(0)
                     val imageLink = jsonObject.getString("imageLink")
-                    val madeName = jsonObject.getString("name")
-                    val count = jsonObject.getInt("countUser")
-//                    val introduce = jsonObject.getString("intruduce")
-//                    val how = jsonObject.getString("certificationWay")
+                    val chCount = jsonObject.getInt("count")
+                    val prtcp = jsonObject.getInt("countUser")
+                    val introduce = jsonObject.getString("intruduce")
+                    val freq = jsonObject.getInt("frequency")
+                    val start = jsonObject.getInt("possibleStartTime")
+                    val end = jsonObject.getInt("possibleEndTime")
+                    val interval = jsonObject.getString("countInterval")
+                    val period = jsonObject.getInt("endDate")
+                    val how = jsonObject.getString("certificationWay")
+                    val howImg = jsonObject.getString("certificationWayImageLink")
+                    val post = jsonObject.getInt("challengePostCount")
                     // 여기서 데이터 입력
                     val nameTagList = nameTag.split("%")
                     Log.i("여기는 데이터","${nameTagList[0]}")
-                    Toast.makeText(this,"${madeName}",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"${nameTagList[0]}",Toast.LENGTH_SHORT).show()
 
-                    binding.detailChallengeName.text = nameTagList[0]
-                    binding.detailChallengeOwner.text = madeName
-                    binding.detailChallengePtcpCount.text = count.toString()
-//                    binding.detailChallengeExpText.text = introduce
-//                    binding.detailChallengeHowText.text = how
+                    binding.detailChallengeName.text = nameTag
+
+                    binding.detailChallengePtcpCount.text = chCount.toString()
+                    binding.detailChallengeExpText.text = introduce
+                    binding.detailChallengeHowText.text = how
                 } catch (e: Exception) {
                     Log.e("Challenge Counting JSON", response!!)
                 }
