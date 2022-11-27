@@ -26,6 +26,7 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.firebase.storage.FirebaseStorage
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 import com.kmu.timetocode.NavActivity
@@ -254,9 +255,8 @@ class FragmentAddChallenge4 : Fragment() {
         Log.i("data","how: ${chHow}")
         Log.i("data","howImg: ${chHowImg}")
 
-
-
-
+        //파이어베이스에 사진 올리기
+        AddImg.AddUri(chImg.toUri(), chName)
 
         val sr: StringRequest = object : StringRequest(
             Method.POST, url,
@@ -279,6 +279,8 @@ class FragmentAddChallenge4 : Fragment() {
                 params["nameChallenge"] = chName
                 params["intruduce"] = chIntroduce
                 params["imageLink"] = chImg
+
+                chImg.toUri()
                 params["frequency"] = chFreq.toString()
                 params["count"] = chCount.toString()
                 params["possibleStartTime"] = chStart.toString()
