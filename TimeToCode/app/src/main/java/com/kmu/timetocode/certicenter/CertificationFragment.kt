@@ -116,7 +116,7 @@ class CertificationFragment : Fragment() {
                     for (i in 0 until jsonArray.length()) {
                         val jsonObject = jsonArray.getJSONObject(i)
                         Log.d("test challenge list in certiCenter", jsonObject.toString())
-                        val nameChallenge = jsonObject.getString("nameChallenge").split(" %").get(0)
+                        val nameChallenge = jsonObject.getString("nameChallenge").split("%").get(0)
                         val imageLink = jsonObject.getString("imageLink")
                         val madeIdUser = jsonObject.getString("name")
                         challengeList.add(Challenge(nameChallenge, madeIdUser, R.drawable.ttcwhite))
