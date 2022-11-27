@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.kmu.timetocode.databinding.ChallengeNewItemBinding
 import com.kmu.timetocode.detail.ChallengeDetail
 
@@ -37,7 +38,10 @@ class ChallengeItemAdapter(val context: Context, val challengeItemArray: ArrayLi
         holder.setList(challengeItemArray.get(position))
 
         val currentItem = challengeItemArray[position]
-        holder.binding.itemImg.setImageURI(currentItem.image)
+        // 사진 적용
+        Glide.with(context)
+            .load(currentItem.image)
+            .into(holder.binding.itemImg)
         holder.binding.textChallengeNameInNew.text = currentItem.title
 
         if(currentItem.title.length > 8){

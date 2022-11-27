@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.firebase.storage.FirebaseStorage
 import com.kmu.timetocode.add.AddChallenge
 import com.kmu.timetocode.databinding.FragmentChallengeListBinding
 import com.kmu.timetocode.login.UserProfile
@@ -136,7 +137,9 @@ class FragmentChallengeList : Fragment() {
                     for (i in 0 until jsonArray.length()) {
                         val jsonObject = jsonArray.getJSONObject(i)
                         val nameTag = jsonObject.getString("nameChallenge")
-                        val imageLink = jsonObject.getString("imageLink")
+                        val imageLink = FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener {
+                            Log.d("Firebase", "사진 가져옴")
+                        }.toString()
                         val madeName = jsonObject.getString("name")
                         val count = jsonObject.getInt("countUser")
                         val nameTagList = nameTag.split("%")
