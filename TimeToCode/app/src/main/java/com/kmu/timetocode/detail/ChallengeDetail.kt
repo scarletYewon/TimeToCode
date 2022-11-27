@@ -1,5 +1,6 @@
 package com.kmu.timetocode.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +12,7 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.kmu.timetocode.NavActivity
 import com.kmu.timetocode.R
 import com.kmu.timetocode.databinding.ActivityChallengeDetailBinding
 import com.kmu.timetocode.login.UserProfile
@@ -21,6 +23,8 @@ class ChallengeDetail : AppCompatActivity() {
     var queue: RequestQueue? = null
 
     private lateinit var binding : ActivityChallengeDetailBinding
+
+    private var chId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,15 +43,43 @@ class ChallengeDetail : AppCompatActivity() {
         Toast.makeText(this, clickTitle, Toast.LENGTH_SHORT).show()
         setContentView(view)
 
-//        binding.btnJoinChallenge.setOnClickListener {
-//            joinChallenge()
-//
-//        }
+        binding.btnJoinChallenge.setOnClickListener {
+            joinChallenge()
+
+        }
     }
 
     private fun joinChallenge() {
         val myId = UserProfile.getId()
         val url = "https://android-pkfbl.run.goorm.io/userChallenge/add"
+        val sr: StringRequest = object : StringRequest(
+            Method.POST, url,
+            Response.Listener { response: String? ->
+                // 챌린지 참여 완료 확인하기
+                Toast.makeText(this, "함께 열심히 해봐요!!", Toast.LENGTH_SHORT).show()
+            },
+            Response.ErrorListener { error: VolleyError? ->
+
+                Toast.makeText(
+                    this,
+                    "인터넷 연결을 확인해주세요.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }) {
+            @Throws(Error::class)
+            override fun getParams(): Map<String, String>? {
+                val params: MutableMap<String, String> = java.util.HashMap()
+                params["idChallenge"] = chId.toString()
+                params["idUser"]=myId.toString()
+                Log.i("params",params.toString())
+
+                return params
+            }
+        }
+        sr.setShouldCache(false)
+        queue = Volley.newRequestQueue(this)
+        queue!!.add(sr)
+
     }
 
     private fun showDetailData(title:String){
@@ -77,7 +109,7 @@ class ChallengeDetail : AppCompatActivity() {
                     Log.i("여기는 데이터","${nameTagList[0]}")
                     Toast.makeText(this,"${nameTagList[0]}",Toast.LENGTH_SHORT).show()
 
-
+                    chId = id
                     binding.challengeMainImg.setImageURI(imageLink.toUri())
                     binding.detailChallengePtcpCount.text = chCount.toString()
                     binding.detailChallengeExpText.text = introduce
