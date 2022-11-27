@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -38,7 +39,14 @@ class ChallengeItemAdapter(val context: Context, val challengeItemArray: ArrayLi
         val currentItem = challengeItemArray[position]
         holder.binding.itemImg.setImageURI(currentItem.image)
         holder.binding.textChallengeNameInNew.text = currentItem.title
-        holder.binding.firstTag.text = "#"+currentItem.tag
+
+        if(currentItem.title.length > 8){
+            holder.binding.firstTag.visibility = View.GONE
+        }else{
+            holder.binding.firstTag.text = "#"+currentItem.tag
+        }
+
+
         val tag2 = currentItem.tag2
         val whoMade = currentItem.whoMade
 
