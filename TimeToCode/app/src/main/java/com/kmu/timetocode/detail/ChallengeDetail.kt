@@ -2,8 +2,10 @@ package com.kmu.timetocode.detail
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
@@ -11,6 +13,8 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.kmu.timetocode.R
 import com.kmu.timetocode.databinding.ActivityChallengeDetailBinding
+import com.kmu.timetocode.login.UserProfile
+import org.json.JSONArray
 import org.json.JSONObject
 
 class ChallengeDetail : AppCompatActivity() {
@@ -29,9 +33,21 @@ class ChallengeDetail : AppCompatActivity() {
         var clickList =text.split("%")
         var clickTitle = clickList[0]
         showDetailData(text)
+        var owner = intent.getStringExtra("whoMade").toString()
         binding.detailChallengeName.text = clickTitle
+        binding.detailChallengeOwner.text = owner
         Toast.makeText(this, clickTitle, Toast.LENGTH_SHORT).show()
         setContentView(view)
+
+//        binding.btnJoinChallenge.setOnClickListener {
+//            joinChallenge()
+//
+//        }
+    }
+
+    private fun joinChallenge() {
+        val myId = UserProfile.getId()
+        val url = "https://android-pkfbl.run.goorm.io/userChallenge/add"
     }
 
     private fun showDetailData(title:String){
@@ -39,9 +55,10 @@ class ChallengeDetail : AppCompatActivity() {
         val sr: StringRequest = object : StringRequest(Method.GET, url,
             Response.Listener { response: String? ->
                 try {
-                    val jsonObject = JSONObject(response)
+                    val jsonArray = JSONArray(response)
+                    val jsonObject = jsonArray.getJSONObject(0)
                     val id = jsonObject.getInt("idChallenge")
-                    val who = jsonObject.getInt("madeIdUser")
+
                     val nameTag = jsonObject.getString("nameChallenge").split(" %").get(0)
                     val imageLink = jsonObject.getString("imageLink")
                     val chCount = jsonObject.getInt("count")
@@ -60,11 +77,16 @@ class ChallengeDetail : AppCompatActivity() {
                     Log.i("여기는 데이터","${nameTagList[0]}")
                     Toast.makeText(this,"${nameTagList[0]}",Toast.LENGTH_SHORT).show()
 
-                    binding.detailChallengeName.text = nameTag
 
+                    binding.challengeMainImg.setImageURI(imageLink.toUri())
                     binding.detailChallengePtcpCount.text = chCount.toString()
                     binding.detailChallengeExpText.text = introduce
                     binding.detailChallengeHowText.text = how
+                    if (howImg.contains("content")){
+                        binding.detailChallengeHowImg.setImageURI(howImg.toUri())
+                    }else{
+                        binding.detailChallengeHowImg.visibility=View.GONE
+                    }
                 } catch (e: Exception) {
                     Log.e("Challenge Counting JSON", response!!)
                 }

@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
@@ -22,10 +24,18 @@ import org.json.JSONArray
 
 class FragmentChallengeList : Fragment() {
 
+//    private lateinit var tadapter : ChallengeListAdapter
+    private lateinit var recyclerView: RecyclerView
+//    private lateinit var challengeListArray : ArrayList<ChallengeListModel>
+
+
+
+
 
     var queue: RequestQueue?=null
     var challengeListAdapter: ChallengeListAdapter? = null
     var challengeListArray: ArrayList<ChallengeListModel> = ArrayList()
+    var challengeItemArray: ArrayList<ChallengeItemModel> = ArrayList()
 
     private var _binding: FragmentChallengeListBinding? = null
 
@@ -39,14 +49,14 @@ class FragmentChallengeList : Fragment() {
         _binding = FragmentChallengeListBinding.inflate(inflater, container, false)
 
 
-        val challengeItemArray = arrayListOf<ChallengeItemModel>(
-            ChallengeItemModel("a","챌린지 이름","github"),
-            ChallengeItemModel("a","챌린지 이름","github"),
-            ChallengeItemModel("a","챌린지 이름","github"),
-            ChallengeItemModel("a","챌린지 이름","github"),
-            ChallengeItemModel("a","챌린지 이름","github"),
-            ChallengeItemModel("a","챌린지 이름","github")
-        )
+//        val challengeItemArray = arrayListOf<ChallengeItemModel>(
+//            ChallengeItemModel("a","챌린지 이름","github"),
+//            ChallengeItemModel("a","챌린지 이름","github"),
+//            ChallengeItemModel("a","챌린지 이름","github"),
+//            ChallengeItemModel("a","챌린지 이름","github"),
+//            ChallengeItemModel("a","챌린지 이름","github"),
+//            ChallengeItemModel("a","챌린지 이름","github")
+//        )
 //        val challengeListArray = arrayListOf<ChallengeListModel>(
 //            ChallengeListModel("a","챌린지 이름","생성자","60","github", "알고리즘"),
 //            ChallengeListModel("a","챌린지 이름","생성자","60","github", "알고리즘"),
@@ -58,7 +68,7 @@ class FragmentChallengeList : Fragment() {
 //        )
 
 
-
+        showAllList()
 
         binding.listChallenge.setHasFixedSize(true)
 
@@ -68,7 +78,7 @@ class FragmentChallengeList : Fragment() {
         var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
 
         binding.listChallenge.adapter = chAdapter
-        showAllList()
+//        showAllList()
 
 //        chAdapter.setOnItemClickListener(object : ChallengeListAdapter.OnItemClickListener{
 //            override fun onItemClick(v: View, data: ChallengeListModel, pos : Int) {
@@ -81,7 +91,7 @@ class FragmentChallengeList : Fragment() {
 //        })
 
 
-
+        showNewList()
         binding. listNew.setHasFixedSize(true)
 
         var newManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
@@ -102,10 +112,19 @@ class FragmentChallengeList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        showAllList()
+        showNewList()
+
+
+
+
+//        var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
+//
+//        binding.listChallenge.adapter = chAdapter
     }
 
     private fun showAllList() {
-        val myId = UserProfile.getId()
         val url = "https://android-pkfbl.run.goorm.io/challenge/allChallengeDataList"
         val sr = StringRequest(
             Request.Method.GET, url,
@@ -132,11 +151,69 @@ class FragmentChallengeList : Fragment() {
                             )
                         )
                     }
+
                 } catch (e: Exception) {
                     Log.e("SearchListJSON", response!!)
                 }
-                challengeListAdapter = ChallengeListAdapter(requireContext(), challengeListArray)
-                binding.listChallenge.adapter= challengeListAdapter
+//                var manager = LinearLayoutManager(requireContext())
+//
+//                binding.listChallenge.layoutManager = manager
+//                binding.listChallenge.setHasFixedSize(true)
+                var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
+
+                binding.listChallenge.adapter = chAdapter
+
+                var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+                binding.listNew.adapter = newAdapter
+            }
+        ) { error: VolleyError ->
+            Log.e(
+                "ChallengeList",
+                "ee"
+            )
+        }
+        sr.setShouldCache(false)
+        queue = Volley.newRequestQueue(requireContext())
+        queue!!.add(sr)
+    }
+
+    private fun showNewList() {
+        val myId = UserProfile.getId()
+        val url = "https://android-pkfbl.run.goorm.io/challenge/allChallengeDataList"
+        val sr = StringRequest(
+            Request.Method.GET, url,
+            { response: String? ->
+                challengeItemArray = ArrayList<ChallengeItemModel>()
+                try {
+                    val jsonArray = JSONArray(response)
+                    if (jsonArray.length() < 6){
+                        for (i in jsonArray.length()-1 downTo 0){
+                            val jsonObject = jsonArray.getJSONObject(i)
+                            val name = jsonObject.getString("nameChallenge").split("%")[0]
+                            val imageLink = jsonObject.getString("imageLink").toUri()
+                            val tag = jsonObject.getString("nameChallenge").split("%")[1]
+                            val tag2 = jsonObject.getString("nameChallenge").split("%")[2]
+                            val madeName = jsonObject.getString("name")
+                            challengeItemArray.add(ChallengeItemModel(imageLink,name,tag,tag2,madeName))
+                            Log.i("item","아이템??: ${challengeItemArray}")
+                        }
+                    }else{
+                        for (i in jsonArray.length()-1 downTo jsonArray.length()-7){
+                            val jsonObject = jsonArray.getJSONObject(i)
+                            val name = jsonObject.getString("nameChallenge").split("%")[0]
+                            val imageLink = jsonObject.getString("imageLink").toUri()
+                            val tag = jsonObject.getString("nameChallenge").split("%")[1]
+                            val tag2 = jsonObject.getString("nameChallenge").split("%")[2]
+                            val madeName = jsonObject.getString("name")
+                            challengeItemArray.add(ChallengeItemModel(imageLink,name,tag,tag2,madeName))
+                            Log.i("item","아이템??: ${challengeItemArray}")
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e("SearchListJSON", response!!)
+                }
+                var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+                binding.listNew.adapter = newAdapter
             }
         ) { error: VolleyError ->
             Log.e(
