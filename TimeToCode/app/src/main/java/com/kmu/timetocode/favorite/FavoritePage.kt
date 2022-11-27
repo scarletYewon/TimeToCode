@@ -28,16 +28,23 @@ class FavoritePage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView: View = inflater.inflate(R.layout.fragment_favorite_page, container, false)
-
+        val Hbtn = rootView?.findViewById<ListView>(R.id.listview_favorite_fragment)?.findViewById<ImageButton>(R.id.btnHeart)
         val backCertification = rootView?.findViewById<ImageButton>(R.id.backCertification)
         backCertification?.setOnClickListener {
             (activity as NavActivity?)!!.replaceFragment(
                 MainFragment()
             )
         }
+        Hbtn?.setOnClickListener{
+            Hbtn.isSelected = true
+            heartBtnClicked()
+        }
         myList = rootView?.findViewById<ListView>(R.id.listview_favorite_fragment)
         showFavorList()
         return rootView
+    }
+
+    private fun heartBtnClicked() {
     }
 
     private fun showFavorList() {

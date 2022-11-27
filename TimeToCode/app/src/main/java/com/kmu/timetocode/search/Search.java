@@ -1,6 +1,7 @@
 package com.kmu.timetocode.search;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.kmu.timetocode.list.ChallengeListAdapter;
 import com.kmu.timetocode.list.ChallengeListModel;
 import com.kmu.timetocode.R;
+import com.kmu.timetocode.login.CustomProgressDialog;
 import com.kmu.timetocode.login.LoginActivity;
 import com.kmu.timetocode.login.UserProfile;
 
@@ -37,11 +39,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Search extends Fragment {
+    CustomProgressDialog dialog;
+    View blur;
+
     EditText editSearch;
     ImageView btnSearch;
-
     LinearLayout beforeSearch;
-    SwipeRefreshLayout refresh;
 
     String historyText = "";
     RecyclerView beforeView, afterView;
@@ -55,13 +58,15 @@ public class Search extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+        blur = view.findViewById(R.id.blur);
+        dialog = new CustomProgressDialog(requireContext());
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         beforeSearch = view.findViewById(R.id.beforeSearch);
         beforeView = view.findViewById(R.id.beforeView);
         editSearch = view.findViewById(R.id.editSearch);
         btnSearch = view.findViewById(R.id.btnSearch);
         refresh2 = view.findViewById(R.id.refresh2);
         afterView = view.findViewById(R.id.afterView);
-        refresh = view.findViewById(R.id.refresh);
 
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
@@ -70,12 +75,6 @@ public class Search extends Fragment {
         beforeView.setLayoutManager(lm);
         searchAdapter = new SearchAdapter(requireContext());
         beforeView.setAdapter(searchAdapter);
-
-        refresh.setOnRefreshListener(() -> {
-            searchAdapter.refresh();
-            beforeView.setAdapter(searchAdapter);
-            refresh.setRefreshing(false);
-        });
 
         searchAdapter.setOnItemClickListener((position, data) -> {
             // 최근 검색어 클릭시 검색
@@ -111,6 +110,7 @@ public class Search extends Fragment {
             beforeSearch.setVisibility(View.GONE);
             afterView.setVisibility(View.VISIBLE);
             searchAdapter.refresh();
+            beforeView.setAdapter(searchAdapter);
         });
 
         editSearch.setOnFocusChangeListener((view12, b) -> {
@@ -147,8 +147,11 @@ public class Search extends Fragment {
     }
 
     private void showSearchList(String searchText) {
+        blur.setVisibility(View.VISIBLE);
+        dialog.show();
         String url = LoginActivity.url + "/challenge/challengeList?nameChallenge=" + searchText;
         StringRequest sr = new StringRequest(Request.Method.GET, url, response -> {
+            Log.d("searchList", response);
             ArrayList<ChallengeListModel> challengeList = new ArrayList<>();
             try {
                 JSONArray jsonArray = new JSONArray(response);
@@ -167,6 +170,8 @@ public class Search extends Fragment {
             }
             challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
             afterView.setAdapter(challengeItemAdapter);
+            blur.setVisibility(View.INVISIBLE);
+            dialog.dismiss();
         }, error -> {
             Log.e("searchList", searchText + "/" + error.toString());
         });
