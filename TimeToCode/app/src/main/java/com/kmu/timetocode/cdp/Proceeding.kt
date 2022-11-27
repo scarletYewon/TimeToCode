@@ -41,17 +41,6 @@ class Proceeding : Fragment() {
             MainFragment()
         ) }
         showDoneList()
-
-//        val list_array = arrayListOf<FavoriteListModel>(
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm"),
-//            FavoriteListModel("a","챌린지","생성자",60,"github","algorithm")
-//
-//        )
-//        var Adapter = FavoriteListAdapter(requireContext(),list_array)
         myList = rootView?.findViewById<ListView>(R.id.listview_proceed_fragment)
 
         return rootView
@@ -92,8 +81,6 @@ class Proceeding : Fragment() {
             @Throws(java.lang.Error::class)
             override fun getParams(): MutableMap<String,String>? {
                 val params: MutableMap<String, String> = HashMap()
-//                params["idUser"] = myId.toString()
-//                Log.e(params.toString(),"params")
                 return params
             }
         }
