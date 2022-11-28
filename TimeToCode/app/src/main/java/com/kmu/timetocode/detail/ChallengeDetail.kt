@@ -1,6 +1,7 @@
 package com.kmu.timetocode.detail
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -94,9 +95,26 @@ class ChallengeDetail : AppCompatActivity() {
                     val id = jsonObject.getInt("idChallenge")
 
                     val nameTag = jsonObject.getString("nameChallenge").split(" %").get(0)
-                    val imageLink = FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener {
-                        Log.d("Firebase", "사진 가져옴")
+
+                    var imageLink = FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnSuccessListener {
+                            uri -> Glide.with(this)
+                        .load(uri)
+                        .into(binding.challengeMainImg)
                     }.toString()
+                    if (imageLink.isNullOrEmpty()) {
+                        imageLink = FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener {
+                                uri -> Glide.with(this)
+                            .load(uri)
+                            .into(binding.challengeMainImg)
+                        }.toString()
+                    }
+                    if (imageLink.isNullOrEmpty()) {
+                        imageLink = FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnSuccessListener {
+                                uri -> Glide.with(this)
+                            .load(uri)
+                            .into(binding.challengeMainImg)
+                        }.toString()
+                    }
                     val chCount = jsonObject.getInt("count")
                     val prtcp = jsonObject.getInt("countUser")
                     val introduce = jsonObject.getString("intruduce")
@@ -116,7 +134,7 @@ class ChallengeDetail : AppCompatActivity() {
                     chId = id
                     // binding.challengeMainImg.setImageURI(imageLink.toUri())
                     Glide.with(this)
-                        .load(imageLink.toUri())
+                        .load(imageLink)
                         .into(binding.challengeMainImg)
                     Log.d("FirebaseImageDetail", imageLink)
                     binding.detailChallengePtcpCount.text = chCount.toString()
