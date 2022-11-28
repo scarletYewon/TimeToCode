@@ -161,52 +161,52 @@ class FragmentChallengeList : Fragment() {
                                 var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
                                 binding.listNew.adapter = newAdapter
                             }.toString()
-                        if (imageLink.isNullOrEmpty()) {
-                            imageLink = FirebaseStorage.getInstance().getReference()
-                                .child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener { uri ->
-                                    challengeListArray.add(
-                                        ChallengeListModel(
-                                            uri.toString(),
-                                            nameTagList[0],
-                                            madeName,
-                                            Integer.toString(count),
-                                            nameTagList[1],
-                                            nameTagList[2]
-                                        )
-                                    )
-
-                                    var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
-
-                                    binding.listChallenge.adapter = chAdapter
-
-                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-                                    binding.listNew.adapter = newAdapter
-                                }.toString()
-                        }
-                        if (imageLink.isNullOrEmpty()) {
-                            imageLink = FirebaseStorage.getInstance().getReference()
-                                .child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnSuccessListener { uri ->
-
-                                    challengeListArray.add(
-                                        ChallengeListModel(
-                                            uri.toString(),
-                                            nameTagList[0],
-                                            madeName,
-                                            Integer.toString(count),
-                                            nameTagList[1],
-                                            nameTagList[2]
-                                        )
-                                    )
-
-                                    var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
-
-                                    binding.listChallenge.adapter = chAdapter
-
-                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-                                    binding.listNew.adapter = newAdapter
-                                }.toString()
-
-                    }
+//                        if (imageLink.isNullOrEmpty()) {
+//                            imageLink = FirebaseStorage.getInstance().getReference()
+//                                .child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener { uri ->
+//                                    challengeListArray.add(
+//                                        ChallengeListModel(
+//                                            uri.toString(),
+//                                            nameTagList[0],
+//                                            madeName,
+//                                            Integer.toString(count),
+//                                            nameTagList[1],
+//                                            nameTagList[2]
+//                                        )
+//                                    )
+//
+//                                    var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
+//
+//                                    binding.listChallenge.adapter = chAdapter
+//
+//                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+//                                    binding.listNew.adapter = newAdapter
+//                                }.toString()
+//                        }
+//                        if (imageLink.isNullOrEmpty()) {
+//                            imageLink = FirebaseStorage.getInstance().getReference()
+//                                .child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnSuccessListener { uri ->
+//
+//                                    challengeListArray.add(
+//                                        ChallengeListModel(
+//                                            uri.toString(),
+//                                            nameTagList[0],
+//                                            madeName,
+//                                            Integer.toString(count),
+//                                            nameTagList[1],
+//                                            nameTagList[2]
+//                                        )
+//                                    )
+//
+//                                    var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
+//
+//                                    binding.listChallenge.adapter = chAdapter
+//
+//                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+//                                    binding.listNew.adapter = newAdapter
+//                                }.toString()
+//
+//                    }
 
 
 
@@ -220,12 +220,12 @@ class FragmentChallengeList : Fragment() {
 //
 //                binding.listChallenge.layoutManager = manager
 //                binding.listChallenge.setHasFixedSize(true)
-                var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
-
-                binding.listChallenge.adapter = chAdapter
-
-                var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-                binding.listNew.adapter = newAdapter
+//                var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
+//
+//                binding.listChallenge.adapter = chAdapter
+//
+//                var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+//                binding.listNew.adapter = newAdapter
             }
         ) { error: VolleyError ->
             Log.e(
