@@ -42,7 +42,7 @@ class Done : Fragment() {
     }
     private fun showDoneList() {
         val myId = UserProfile.getId()
-        val url = "https://android-pkfbl.run.goorm.io//userChallenge/completeChallenge?idUser=" + myId
+        val url = "https://android-pkfbl.run.goorm.io/userChallenge/completeChallenge?idUser=" + myId
         val sr: StringRequest = object : StringRequest( Method.GET, url,
             Response.Listener { response: String? ->
                 val challengeList = ArrayList<CdpListModel>()
