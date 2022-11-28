@@ -23,6 +23,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.storage.FirebaseStorage;
 import com.kmu.timetocode.list.ChallengeListAdapter;
 import com.kmu.timetocode.list.ChallengeListModel;
 import com.kmu.timetocode.R;
@@ -157,7 +158,6 @@ public class Search extends Fragment {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String nameChallenge = jsonObject.getString("nameChallenge");
-                    String imageLink = jsonObject.getString("imageLink");
                     String madeName = jsonObject.getString("name");
                     int count = jsonObject.getInt("countUser");
                     String[] list = nameChallenge.split("%");
@@ -169,16 +169,50 @@ public class Search extends Fragment {
                     } catch (Exception e) {
                         Log.e("SearchListJSON", "no tag");
                     }
-                    nameChallenge = list[0];
-                    challengeList.add(new ChallengeListModel(imageLink, nameChallenge, madeName, Integer.toString(count), tag1, tag2));
+                    String nameChallengeTemp = list[0];
+                    String finalTag = tag1;
+                    String finalTag1 = tag2;
+                    FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge).getDownloadUrl().addOnSuccessListener(
+                            uri -> {
+                                challengeList.add(new ChallengeListModel(uri.toString(), nameChallengeTemp, madeName, Integer.toString(count), finalTag, finalTag1));
+                                challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
+                                afterView.setAdapter(challengeItemAdapter);
+                                blur.setVisibility(View.INVISIBLE);
+                                dialog.dismiss();
+                                Log.d("FirebaseImageSuccess", uri.toString());
+                            }
+                    ).addOnFailureListener(
+                            uri -> {
+                                FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge + ".jpeg").getDownloadUrl().addOnSuccessListener(
+                                        uri1 -> {
+                                            challengeList.add(new ChallengeListModel(uri1.toString(), nameChallengeTemp, madeName, Integer.toString(count), finalTag, finalTag1));
+                                            challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
+                                            afterView.setAdapter(challengeItemAdapter);
+                                            blur.setVisibility(View.INVISIBLE);
+                                            dialog.dismiss();
+                                            Log.e("FirebaseImageError", uri.toString());
+                                        }
+                                ).addOnFailureListener(
+                                        uri1 -> {
+                                            FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge + ".jpg").getDownloadUrl().addOnSuccessListener(
+                                                    uri2 -> {
+                                                        challengeList.add(new ChallengeListModel(uri2.toString(), nameChallengeTemp, madeName, Integer.toString(count), finalTag, finalTag1));
+                                                        challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
+                                                        afterView.setAdapter(challengeItemAdapter);
+                                                        blur.setVisibility(View.INVISIBLE);
+                                                        dialog.dismiss();
+                                                        Log.e("FirebaseImageError", uri.toString());
+                                                    }
+                                            );
+                                        }
+                                );
+                            }
+                    );
                 }
             } catch (Exception e) {
                 Log.e("SearchListJSON", response);
             }
-            challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
-            afterView.setAdapter(challengeItemAdapter);
-            blur.setVisibility(View.INVISIBLE);
-            dialog.dismiss();
+
         }, error -> {
             Log.e("searchList", searchText + "/" + error.toString());
         });
