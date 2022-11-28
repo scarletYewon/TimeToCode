@@ -38,9 +38,9 @@ class ChallengeDetail : AppCompatActivity() {
 
         var intent = getIntent()
         var text = intent.getStringExtra("clickChallengeInList").toString()
-        Challname = text
         var clickList =text.split("%")
         var clickTitle = clickList[0]
+        Challname = clickTitle
         showDetailData(text)
         var owner = intent.getStringExtra("whoMade").toString()
         binding.detailChallengeName.text = clickTitle
@@ -61,6 +61,11 @@ class ChallengeDetail : AppCompatActivity() {
         val url = "https://android-pkfbl.run.goorm.io/UserFavoriteChallenge/post"
         val sr: StringRequest = object : StringRequest(Method.POST, url,
             Response.Listener { response: String? ->
+                Toast.makeText(
+                    this,
+                    Challname +" 찜 완료",
+                    Toast.LENGTH_SHORT
+                ).show()
             },
             Response.ErrorListener { error: VolleyError ->
             }) {
@@ -68,7 +73,7 @@ class ChallengeDetail : AppCompatActivity() {
             override fun getParams(): MutableMap<String, String>? {
                 val params: MutableMap<String, String> = HashMap()
                 params["idUser"] = myId.toString()
-                params["idChallenge"] = Challname
+                params["nameChallenge"] = Challname
                 Log.e("params",params.toString())
                 return params
             }
