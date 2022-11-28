@@ -43,6 +43,11 @@ class FavoritePage : Fragment() {
         val url = "https://android-pkfbl.run.goorm.io/UserFavoriteChallenge/delete"
         val sr: StringRequest = object : StringRequest(Method.POST, url,
             Response.Listener { response: String? ->
+                Toast.makeText(
+                    requireContext(),
+                    Challname + " 찜 취소 완료",
+                    Toast.LENGTH_SHORT
+                ).show()
             },
             Response.ErrorListener { error: VolleyError ->
             }) {
@@ -50,7 +55,7 @@ class FavoritePage : Fragment() {
             override fun getParams(): MutableMap<String, String>? {
                 val params: MutableMap<String, String> = HashMap()
                 params["idUser"] = myId.toString()
-                params["idChallenge"] = Challname
+                params["nameChallenge"] = Challname
                 Log.e("params",params.toString())
                 return params
             }
@@ -72,12 +77,12 @@ class FavoritePage : Fragment() {
                         val nameChallenge = jsonObject.getString("nameChallenge")
                         val imageLink = jsonObject.getString("imageLink")
                         val madeIdUser = jsonObject.getString("name")
-                        Challname =  nameChallenge
 //                        val countUser = jsonObject.getInt("countUser")
                         // 여기서 데이터 나눠줄거임
                         //받아올 challengeName
                         val challengeTag = nameChallenge.split("%").toTypedArray()
                         val ChallengeName = challengeTag[0]
+                        Challname =  ChallengeName
 //                        val tag1 = challengeTag[1]
 //                        val tag2 = challengeTag[2]
                         challengeList.add(FavorListModel(imageLink, ChallengeName, madeIdUser))

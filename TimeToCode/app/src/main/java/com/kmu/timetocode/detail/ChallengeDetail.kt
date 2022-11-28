@@ -26,7 +26,7 @@ class ChallengeDetail : AppCompatActivity() {
     var Challname = ""
     var queue: RequestQueue? = null
 
-    private lateinit var binding : ActivityChallengeDetailBinding
+    private lateinit var binding: ActivityChallengeDetailBinding
 
     private var chId = 0
 
@@ -35,12 +35,11 @@ class ChallengeDetail : AppCompatActivity() {
         binding = ActivityChallengeDetailBinding.inflate(layoutInflater)
         val view = binding.root
 
-
         var intent = getIntent()
         var text = intent.getStringExtra("clickChallengeInList").toString()
-        Challname = text
         var clickList =text.split("%")
         var clickTitle = clickList[0]
+        Challname = clickTitle
         showDetailData(text)
         var owner = intent.getStringExtra("whoMade").toString()
         binding.detailChallengeName.text = clickTitle
@@ -61,6 +60,11 @@ class ChallengeDetail : AppCompatActivity() {
         val url = "https://android-pkfbl.run.goorm.io/UserFavoriteChallenge/post"
         val sr: StringRequest = object : StringRequest(Method.POST, url,
             Response.Listener { response: String? ->
+                Toast.makeText(
+                    this,
+                    Challname +" 찜 완료",
+                    Toast.LENGTH_SHORT
+                ).show()
             },
             Response.ErrorListener { error: VolleyError ->
             }) {
@@ -68,7 +72,7 @@ class ChallengeDetail : AppCompatActivity() {
             override fun getParams(): MutableMap<String, String>? {
                 val params: MutableMap<String, String> = HashMap()
                 params["idUser"] = myId.toString()
-                params["idChallenge"] = Challname
+                params["nameChallenge"] = Challname
                 Log.e("params",params.toString())
                 return params
             }
@@ -77,6 +81,7 @@ class ChallengeDetail : AppCompatActivity() {
         queue = Volley.newRequestQueue(this)
         queue!!.add(sr)
     }
+
     private fun joinChallenge() {
         val myId = UserProfile.getId()
         val url = "https://android-pkfbl.run.goorm.io/userChallenge/add"
@@ -98,8 +103,8 @@ class ChallengeDetail : AppCompatActivity() {
             override fun getParams(): Map<String, String>? {
                 val params: MutableMap<String, String> = java.util.HashMap()
                 params["idChallenge"] = chId.toString()
-                params["idUser"]=myId.toString()
-                Log.i("params",params.toString())
+                params["idUser"] = myId.toString()
+                Log.i("params", params.toString())
 
                 return params
             }
@@ -110,8 +115,9 @@ class ChallengeDetail : AppCompatActivity() {
 
     }
 
-    private fun showDetailData(title:String){
-        val url = "https://android-pkfbl.run.goorm.io/challenge/nameChallenge?nameChallenge=" + title
+    private fun showDetailData(title: String) {
+        val url =
+            "https://android-pkfbl.run.goorm.io/challenge/nameChallenge?nameChallenge=" + title
         val sr: StringRequest = object : StringRequest(Method.GET, url,
             Response.Listener { response: String? ->
                 try {
@@ -121,25 +127,26 @@ class ChallengeDetail : AppCompatActivity() {
 
                     val nameTag = jsonObject.getString("nameChallenge").split(" %").get(0)
 
-                    var imageLink = FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnSuccessListener {
-                            uri -> Glide.with(this)
-                        .load(uri)
-                        .into(binding.challengeMainImg)
-                    }.toString()
-                    if (imageLink.isNullOrEmpty()) {
-                        imageLink = FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener {
-                                uri -> Glide.with(this)
-                            .load(uri)
-                            .into(binding.challengeMainImg)
-                        }.toString()
-                    }
-                    if (imageLink.isNullOrEmpty()) {
-                        imageLink = FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnSuccessListener {
-                                uri -> Glide.with(this)
-                            .load(uri)
-                            .into(binding.challengeMainImg)
-                        }.toString()
-                    }
+                    FirebaseStorage.getInstance().getReference()
+                        .child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnSuccessListener { uri ->
+                            Glide.with(this)
+                                .load(uri)
+                                .into(binding.challengeMainImg)
+                        }.addOnFailureListener { uri ->
+                            FirebaseStorage.getInstance().getReference()
+                                .child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener { uri1 ->
+                                    Glide.with(this)
+                                        .load(uri1)
+                                        .into(binding.challengeMainImg)
+                                }.addOnFailureListener { uri1 ->
+                                    FirebaseStorage.getInstance().getReference()
+                                        .child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnSuccessListener { uri2 ->
+                                            Glide.with(this)
+                                                .load(uri2)
+                                                .into(binding.challengeMainImg)
+                                        }
+                                }
+                        }
                     val chCount = jsonObject.getInt("count")
                     val prtcp = jsonObject.getInt("countUser")
                     val introduce = jsonObject.getString("intruduce")
@@ -153,22 +160,18 @@ class ChallengeDetail : AppCompatActivity() {
                     val post = jsonObject.getInt("challengePostCount")
                     // 여기서 데이터 입력
                     val nameTagList = nameTag.split("%")
-                    Log.i("여기는 데이터","${nameTagList[0]}")
-                    Toast.makeText(this,"${nameTagList[0]}",Toast.LENGTH_SHORT).show()
+                    Log.i("여기는 데이터", "${nameTagList[0]}")
+                    Toast.makeText(this, "${nameTagList[0]}", Toast.LENGTH_SHORT).show()
 
                     chId = id
                     // binding.challengeMainImg.setImageURI(imageLink.toUri())
-                    Glide.with(this)
-                        .load(imageLink)
-                        .into(binding.challengeMainImg)
-                    Log.d("FirebaseImageDetail", imageLink)
                     binding.detailChallengePtcpCount.text = chCount.toString()
                     binding.detailChallengeExpText.text = introduce
                     binding.detailChallengeHowText.text = how
-                    if (howImg.contains("content")){
+                    if (howImg.contains("content")) {
                         binding.detailChallengeHowImg.setImageURI(howImg.toUri())
-                    }else{
-                        binding.detailChallengeHowImg.visibility=View.GONE
+                    } else {
+                        binding.detailChallengeHowImg.visibility = View.GONE
                     }
                 } catch (e: Exception) {
                     Log.e("Challenge Counting JSON", response!!)
@@ -177,7 +180,7 @@ class ChallengeDetail : AppCompatActivity() {
             Response.ErrorListener { error: VolleyError ->
             }) {
             @Throws(java.lang.Error::class)
-            override fun getParams(): MutableMap<String,String>? {
+            override fun getParams(): MutableMap<String, String>? {
                 val params: MutableMap<String, String> = HashMap()
 //                    params["idUser"] = myId.toString()
 //                    Log.e(params.toString(),"params")
