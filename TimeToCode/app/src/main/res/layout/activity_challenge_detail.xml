@@ -44,7 +44,6 @@
                         android:id="@+id/detailChallengeName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
                         android:text="챌린지명"
                         android:textColor="@color/black"
                         android:textSize="27dp"
@@ -58,14 +57,29 @@
 
                     </com.google.android.material.chip.ChipGroup>
 
-                    <TextView
-                        android:id="@+id/detailChallengeOwner"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
-                        android:text="생성자"
-                        android:textColor="@color/grey"
-                        android:textSize="13dp" />
+                        android:layout_marginBottom="15dp">
+                        <TextView
+                            android:layout_weight="7"
+                            android:id="@+id/detailChallengeOwner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="생성자"
+                            android:textColor="@color/grey"
+                            android:textSize="13dp" />
+                        <TextView
+                            android:id="@+id/favorBtn"
+                            android:layout_weight="1"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
+                            android:text="찜하기"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:textSize="13sp"
+                            android:background="@drawable/radius2"/>
+                    </LinearLayout>
 
                     <View
                         android:id="@+id/divider3"

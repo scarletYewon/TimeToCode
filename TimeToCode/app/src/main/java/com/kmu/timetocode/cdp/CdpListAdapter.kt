@@ -1,4 +1,4 @@
-package com.kmu.timetocode.favorite
+package com.kmu.timetocode.cdp
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,14 +9,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.kmu.timetocode.R
 
-class FavoriteListAdapter(val context: Context, val list: ArrayList<FavoriteListModel>): BaseAdapter() {
+class CdpListAdapter(val context: Context, val list: ArrayList<CdpListModel>): BaseAdapter() {
 
     override fun getView(position: Int, convertview: View?, parent: ViewGroup?): View {
         val view: View
         val holder : ViewHolder
 
         if (convertview == null) {
-            view = LayoutInflater.from(parent?.context).inflate(R.layout.favor_list_item,parent,false)
+            view = LayoutInflater.from(parent?.context).inflate(R.layout.cdp_list_item,parent,false)
             holder = ViewHolder()
 
             holder.view_image = view.findViewById(R.id.imageArea)

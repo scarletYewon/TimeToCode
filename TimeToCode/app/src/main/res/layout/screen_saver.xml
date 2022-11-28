@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/start"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#11FFFFFF"
@@ -8,20 +9,19 @@
     android:gravity="center"
     tools:context=".ScreenSaver">
 
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ttcblack"
+        android:alpha="0.3"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="오늘의 코딩 시작하기!"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
-    <ImageView
-        android:id="@+id/start"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/arrow_circle_right"/>
+        android:layout_marginBottom="100dp"
+        android:text="화면을 누르세요"
+        android:textSize="15dp"
+        android:textColor="#999999"/>
 
 </LinearLayout>
