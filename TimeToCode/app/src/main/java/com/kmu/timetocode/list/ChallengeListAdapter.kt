@@ -54,12 +54,7 @@ class ChallengeListAdapter(val context: Context, private val challengeListArray:
         Glide.with(context)
             .load(currentItem.image)
             .into(holder.binding.itemImg)
-        when(currentItem.title){
-            "될까"-> {holder.binding.textChallegeNameInList.text = "1일_1코딩_함께 해봐요!"
-            holder.binding.itemImg.setImageResource(R.drawable.test3)}
-            "세현"-> holder.binding.textChallegeNameInList.text = "안드로이드 스튜디오 예제 따라가기~"
-            "라디오버튼_및_태그_동작_테스트1" ->holder.binding.textChallegeNameInList.text = "깃헙에 잔디 심으러 가요!"
-        }
+
         holder.binding.textChallegeNameInList.text = currentItem.title
         holder.binding.textMadeUserInList.text = currentItem.owner
 

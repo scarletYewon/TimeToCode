@@ -40,7 +40,7 @@ class ChallengeDetail : AppCompatActivity() {
         var clickList =text.split("%")
         var clickTitle = clickList[0]
         Challname = clickTitle
-        showDetailData(text)
+        showDetailData(clickTitle)
         var owner = intent.getStringExtra("whoMade").toString()
         binding.detailChallengeName.text = clickTitle
         binding.detailChallengeOwner.text = owner
@@ -117,7 +117,7 @@ class ChallengeDetail : AppCompatActivity() {
 
     private fun showDetailData(title: String) {
         val url =
-            "https://android-pkfbl.run.goorm.io/challenge/nameChallenge?nameChallenge=" + title
+            "https://android-pkfbl.run.goorm.io/challenge/Detail?nameChallenge=" + title
         val sr: StringRequest = object : StringRequest(Method.GET, url,
             Response.Listener { response: String? ->
                 try {
@@ -149,6 +149,7 @@ class ChallengeDetail : AppCompatActivity() {
                         }
                     val chCount = jsonObject.getInt("count")
                     val prtcp = jsonObject.getInt("countUser")
+                    val completeUser = jsonObject.getInt("countCompleteUser")
                     val introduce = jsonObject.getString("intruduce")
                     val freq = jsonObject.getInt("frequency")
                     val start = jsonObject.getInt("possibleStartTime")

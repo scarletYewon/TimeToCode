@@ -17,7 +17,7 @@ class ChallengeItemAdapter(val context: Context, val challengeItemArray: ArrayLi
 
     class ItemViewHolder(val binding: ChallengeNewItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun setList(item: ChallengeItemModel){
-            binding.itemImg.setImageURI(item.image)
+            binding.itemImg.setImageURI(item.image.toUri())
             binding.textChallengeNameInNew.text = item.title
             binding.firstTag.text = "#"+item.tag
             val tag2 = item.tag2
@@ -35,7 +35,7 @@ class ChallengeItemAdapter(val context: Context, val challengeItemArray: ArrayLi
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
-        holder.setList(challengeItemArray.get(position))
+//        holder.setList(challengeItemArray.get(position))
 
         val currentItem = challengeItemArray[position]
         // 사진 적용
@@ -44,12 +44,7 @@ class ChallengeItemAdapter(val context: Context, val challengeItemArray: ArrayLi
             .into(holder.binding.itemImg)
         Log.d("FirebaseImageItem", currentItem.image.toString())
         holder.binding.textChallengeNameInNew.text = currentItem.title
-
-        if(currentItem.title.length > 8){
-            holder.binding.firstTag.visibility = View.GONE
-        }else{
-            holder.binding.firstTag.text = "#"+currentItem.tag
-        }
+        holder.binding.firstTag.text = "#"+currentItem.tag
 
 
         val tag2 = currentItem.tag2
