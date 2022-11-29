@@ -98,8 +98,14 @@ class FragmentAddChallenge3 : Fragment() {
                 var m = "59"
                 h = if (i < 10){"0${i}"} else{"$i"}
                 m = if (i2 < 10){"0${i2}"}else{"$i2"}
-                binding.editStartTime.text = "${h}시 ${m}분"
-                startTime = "${h}${m}"
+                var check = h+m
+
+                if(endTime.toInt() < check.toInt() ) {
+                    Toast.makeText(activity, "시작시간은 종료시간 이전이어야 합니다.", Toast.LENGTH_SHORT).show()
+                }else{
+                    binding.editStartTime.text = h+"시"+m+"분"
+                    startTime = "${h}${m}"
+                }
             }
             var picker = TimePickerDialog(requireContext(),listener, 0, 0, true)
             picker.setMessage("시작시간")
