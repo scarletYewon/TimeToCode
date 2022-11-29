@@ -51,7 +51,7 @@ class FragmentAddChallenge3 : Fragment() {
                         .setMessage("다음 업데이트를 기다려주세요. 감사합니다:)")
                         .setPositiveButton("확인",
                             DialogInterface.OnClickListener { dialog, id ->
-                                binding.rBtnCountOption1.isChecked=true
+                                binding.rBtnFreq1.isChecked=true
                             })
                     // 다이얼로그를 띄워주기
                     builder.show()
@@ -139,6 +139,7 @@ class FragmentAddChallenge3 : Fragment() {
                 binding.rBtnPeriod4.id-> period=28
                 binding.rBtnPeriod5.id-> period=50
                 binding.rBtnPeriod6.id-> period=100
+                binding.rBtnPeriod7.id-> period=100000000
             }
             periodFlag = true
             flagCheck()
