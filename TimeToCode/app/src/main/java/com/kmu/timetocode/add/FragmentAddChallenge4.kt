@@ -289,7 +289,7 @@ class FragmentAddChallenge4 : Fragment() {
                 params["endDate"] = chPeriod.toString()
                 params["madeIdUser"] = myId.toString()
                 params["challengePostCount"] = "0"
-                params["countUser"] ="1"
+                params["countUser"] ="0"
                 params["certificationWay"] = chHow
                 params["certificationWayImageLink"] = chHowImg
                 Log.i("params",params.toString())

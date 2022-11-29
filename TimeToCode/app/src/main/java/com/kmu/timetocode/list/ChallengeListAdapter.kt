@@ -51,9 +51,9 @@ class ChallengeListAdapter(val context: Context, private val challengeListArray:
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
 
         val currentItem = challengeListArray[position]
-        Glide.with(context)
-            .load(currentItem.image)
-            .into(holder.binding.itemImg)
+//        Glide.with(context)
+//            .load(currentItem.image)
+//            .into(holder.binding.itemImg)
 
         holder.binding.textChallegeNameInList.text = currentItem.title
         holder.binding.textMadeUserInList.text = currentItem.owner
