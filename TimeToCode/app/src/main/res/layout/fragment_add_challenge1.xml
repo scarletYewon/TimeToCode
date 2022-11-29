@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:text="# 2개 필수 생성! "
+            android:text="태그는 2개 이상으로 꼭 생성해주세요! 아래 배치되는 순서에 따라 챌린지를 대표하는 태그입니다. "
             android:textColor="@color/main"/>
 
         <LinearLayout

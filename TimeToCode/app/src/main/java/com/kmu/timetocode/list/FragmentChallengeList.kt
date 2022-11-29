@@ -93,7 +93,7 @@ class FragmentChallengeList : Fragment() {
 //        })
 
 
-        showNewList()
+//        showNewList()
         binding. listNew.setHasFixedSize(true)
 
         var newManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
@@ -112,20 +112,8 @@ class FragmentChallengeList : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        showAllList()
-        showNewList()
 
 
-
-
-//        var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
-//
-//        binding.listChallenge.adapter = chAdapter
-    }
-    var imageLinki = ""
     private fun showAllList() {
         val url = "https://android-pkfbl.run.goorm.io/challenge/allChallengeDataList"
         val sr = StringRequest(
@@ -133,6 +121,7 @@ class FragmentChallengeList : Fragment() {
             { response: String? ->
                 challengeListArray =
                     ArrayList<ChallengeListModel>()
+                challengeItemArray = ArrayList<ChallengeItemModel>()
                 try {
                     val jsonArray = JSONArray(response)
                     for (i in 0 until jsonArray.length()) {
@@ -141,76 +130,98 @@ class FragmentChallengeList : Fragment() {
                         val madeName = jsonObject.getString("name")
                         val count = jsonObject.getInt("countUser")
                         val nameTagList = nameTag.split("%")
-                        var imageLink = FirebaseStorage.getInstance().getReference()
-                            .child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnSuccessListener { uri ->
-                                challengeListArray.add(
-                                    ChallengeListModel(
-                                        uri.toString(),
-                                        nameTagList[0],
-                                        madeName,
-                                        Integer.toString(count),
-                                        nameTagList[1],
-                                        nameTagList[2]
-                                    )
-                                )
+                        FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnSuccessListener{
+                            uri ->
+                            challengeListArray.add(ChallengeListModel(uri.toString(), nameTagList[0], madeName, Integer.toString(count), nameTagList[1], nameTagList[2]))
+                            var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
+                            binding.listChallenge.adapter = chAdapter
+                        }.addOnFailureListener {
+                            uri -> FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener {
+                                uri ->
+                            challengeListArray.add(ChallengeListModel(uri.toString(), nameTagList[0], madeName, Integer.toString(count), nameTagList[1], nameTagList[2]))
+                            var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
+                            binding.listChallenge.adapter = chAdapter
 
-                                var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
+                        }.addOnFailureListener {
+                            uri -> FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnSuccessListener{
+                                uri ->
+                            challengeListArray.add(ChallengeListModel(uri.toString(), nameTagList[0], madeName, Integer.toString(count), nameTagList[1], nameTagList[2]))
+                            var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
+                            binding.listChallenge.adapter = chAdapter
+                        }
 
-                                binding.listChallenge.adapter = chAdapter
+                        }
+                        }
+                    }
 
-                                var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-                                binding.listNew.adapter = newAdapter
-                            }.toString()
-//                        if (imageLink.isNullOrEmpty()) {
-//                            imageLink = FirebaseStorage.getInstance().getReference()
-//                                .child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener { uri ->
-//                                    challengeListArray.add(
-//                                        ChallengeListModel(
-//                                            uri.toString(),
-//                                            nameTagList[0],
-//                                            madeName,
-//                                            Integer.toString(count),
-//                                            nameTagList[1],
-//                                            nameTagList[2]
-//                                        )
-//                                    )
-//
-//                                    var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
-//
-//                                    binding.listChallenge.adapter = chAdapter
-//
-//                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-//                                    binding.listNew.adapter = newAdapter
-//                                }.toString()
+                    for(i in jsonArray.length()-1 downTo 0){
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        val nameTag = jsonObject.getString("nameChallenge")
+                        val name = jsonObject.getString("nameChallenge").split("%")[0]
+                        val tag = jsonObject.getString("nameChallenge").split("%")[1]
+                        val tag2 = jsonObject.getString("nameChallenge").split("%")[2]
+                        val whoMade = jsonObject.getString("name")
+                        FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnSuccessListener{
+                                uri ->
+                            challengeItemArray.add(ChallengeItemModel(uri.toString(), name, tag, tag2,whoMade))
+                            var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+                            binding.listNew.adapter = newAdapter
+                        }.addOnFailureListener {
+                                uri -> FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener {
+                                uri ->
+                            challengeItemArray.add(ChallengeItemModel(uri.toString(), name, tag, tag2,whoMade))
+                            var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+                            binding.listNew.adapter = newAdapter
+
+                        }.addOnFailureListener {
+                                uri -> FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnSuccessListener{
+                                uri2 ->
+                            challengeItemArray.add(ChallengeItemModel(uri2.toString(), name, tag, tag2,whoMade))
+                            var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+                            binding.listNew.adapter = newAdapter
+                        }
+                        }
+                        }
+
+
+
+//                    if (jsonArray.length() < 6){
+//                        for (i in jsonArray.length()-1 downTo 0){
+//                            val jsonObject = jsonArray.getJSONObject(i)
+//                            val name = jsonObject.getString("nameChallenge").split("%")[0]
+//                            val imageLink = jsonObject.getString("imageLink")
+//                            val tag = jsonObject.getString("nameChallenge").split("%")[1]
+//                            val tag2 = jsonObject.getString("nameChallenge").split("%")[2]
+//                            val whoMade = jsonObject.getString("name")
+//                            challengeItemArray.add(ChallengeItemModel(imageLink.toUri(),name,tag,tag2,whoMade))
+//                            Log.i("item","아이템: ${challengeItemArray}")
 //                        }
-//                        if (imageLink.isNullOrEmpty()) {
-//                            imageLink = FirebaseStorage.getInstance().getReference()
-//                                .child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnSuccessListener { uri ->
+//                    }else{
+//                        for (i in jsonArray.length()-1 downTo jsonArray.length()-7){
+//                            val jsonObject = jsonArray.getJSONObject(i)
+//                            val nameTag = jsonObject.getString("nameChallenge")
+//                            val name = jsonObject.getString("nameChallenge").split("%")[0]
 //
-//                                    challengeListArray.add(
-//                                        ChallengeListModel(
-//                                            uri.toString(),
-//                                            nameTagList[0],
-//                                            madeName,
-//                                            Integer.toString(count),
-//                                            nameTagList[1],
-//                                            nameTagList[2]
+//                            val tag = jsonObject.getString("nameChallenge").split("%")[1]
+//                            val tag2 = jsonObject.getString("nameChallenge").split("%")[2]
+//                            val whoMade = jsonObject.getString("name")
+//                            var imageLink = FirebaseStorage.getInstance().getReference()
+//                                .child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnSuccessListener { uri ->
+//                                    challengeItemArray.add(ChallengeItemModel(
+//                                            uri,
+//                                            name,
+//                                            tag,
+//                                            tag2,
+//                                        whoMade
 //                                        )
 //                                    )
-//
-//                                    var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
-//
-//                                    binding.listChallenge.adapter = chAdapter
 //
 //                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
 //                                    binding.listNew.adapter = newAdapter
 //                                }.toString()
-//
-//                    }
-
-
-
-                }
+//                            challengeItemArray.add(ChallengeItemModel(imageLink.toUri(),name,tag,tag2,whoMade))
+                            Log.i("item","아이템?: ${challengeItemArray}")
+                        }
 
 
                 } catch (e: Exception) {
@@ -220,12 +231,14 @@ class FragmentChallengeList : Fragment() {
 //
 //                binding.listChallenge.layoutManager = manager
 //                binding.listChallenge.setHasFixedSize(true)
+
 //                var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
 //
 //                binding.listChallenge.adapter = chAdapter
-//
-//                var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-//                binding.listNew.adapter = newAdapter
+                Log.i("imageAdd","이미지addlist확인: ${challengeListArray}")
+
+
+
             }
         ) { error: VolleyError ->
             Log.e(
@@ -250,24 +263,100 @@ class FragmentChallengeList : Fragment() {
                     if (jsonArray.length() < 6){
                         for (i in jsonArray.length()-1 downTo 0){
                             val jsonObject = jsonArray.getJSONObject(i)
+                            val nameTag = jsonObject.getString("nameChallenge")
+                            val imageLink = FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener {
+                                Log.d("Firebase", "사진 가져옴3")
+                            }.toString()
+
                             val name = jsonObject.getString("nameChallenge").split("%")[0]
-                            val imageLink = jsonObject.getString("imageLink").toUri()
                             val tag = jsonObject.getString("nameChallenge").split("%")[1]
                             val tag2 = jsonObject.getString("nameChallenge").split("%")[2]
                             val madeName = jsonObject.getString("name")
+//                            var imageLink = FirebaseStorage.getInstance().getReference()
+//                                .child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnSuccessListener { uri ->
+//                                    challengeItemArray.add(ChallengeItemModel(
+//                                            uri,
+//                                            name,
+//                                            tag,
+//                                            tag2,
+//                                            madeName
+//                                        )
+//                                    )
+//
+//                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+//                                    binding.listNew.adapter = newAdapter
+//                                }.toString()
                             challengeItemArray.add(ChallengeItemModel(imageLink,name,tag,tag2,madeName))
                             Log.i("item","아이템??: ${challengeItemArray}")
                         }
                     }else{
                         for (i in jsonArray.length()-1 downTo jsonArray.length()-7){
                             val jsonObject = jsonArray.getJSONObject(i)
+                            val nameTag = jsonObject.getString("nameChallenge")
                             val name = jsonObject.getString("nameChallenge").split("%")[0]
-                            val imageLink = jsonObject.getString("imageLink").toUri()
+                            val imageLink = FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener {
+                                Log.d("Firebase", "사진 가져옴4")
+                            }.toString()
                             val tag = jsonObject.getString("nameChallenge").split("%")[1]
                             val tag2 = jsonObject.getString("nameChallenge").split("%")[2]
                             val madeName = jsonObject.getString("name")
+//                            var imageLink = FirebaseStorage.getInstance().getReference()
+//                                .child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnSuccessListener { uri ->
+//                                    challengeItemArray.add(ChallengeItemModel(
+//                                        uri,
+//                                        name,
+//                                        tag,
+//                                        tag2,
+//                                        madeName
+//                                    )
+//                                    )
+//
+//                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+//                                    binding.listNew.adapter = newAdapter
+//                                }.toString()
+//                            if (imageLink.isNullOrEmpty()) {
+//                            imageLink = FirebaseStorage.getInstance().getReference()
+//                                .child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener { uri ->
+//                                    challengeItemArray.add(ChallengeItemModel(
+//                                        uri,
+//                                        name,
+//                                        tag,
+//                                        tag2,
+//                                        madeName
+//                                    )
+//                                    )
+//
+//                                    var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
+//
+//                                    binding.listChallenge.adapter = chAdapter
+//
+//                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+//                                    binding.listNew.adapter = newAdapter
+//                                }.toString()
+//                        }
+//                        if (imageLink.isNullOrEmpty()) {
+//                            imageLink = FirebaseStorage.getInstance().getReference()
+//                                .child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnSuccessListener { uri ->
+//
+//                                    challengeItemArray.add(ChallengeItemModel(
+//                                        uri,
+//                                        name,
+//                                        tag,
+//                                        tag2,
+//                                        madeName
+//                                    )
+//                                    )
+//
+//                                    var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
+//
+//                                    binding.listChallenge.adapter = chAdapter
+//
+//                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+//                                    binding.listNew.adapter = newAdapter
+//                                }.toString()}
+
                             challengeItemArray.add(ChallengeItemModel(imageLink,name,tag,tag2,madeName))
-                            Log.i("item","아이템??: ${challengeItemArray}")
+                            Log.i("item","아이템???: ${challengeItemArray}")
                         }
                     }
                 } catch (e: Exception) {

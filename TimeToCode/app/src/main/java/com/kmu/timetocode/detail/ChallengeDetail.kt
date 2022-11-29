@@ -14,10 +14,12 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
+import com.google.android.material.chip.Chip
 import com.google.firebase.storage.FirebaseStorage
 import com.kmu.timetocode.NavActivity
 import com.kmu.timetocode.R
 import com.kmu.timetocode.databinding.ActivityChallengeDetailBinding
+import com.kmu.timetocode.databinding.ChoiceTagBinding
 import com.kmu.timetocode.login.UserProfile
 import org.json.JSONArray
 import org.json.JSONObject
@@ -29,6 +31,7 @@ class ChallengeDetail : AppCompatActivity() {
     private lateinit var binding: ActivityChallengeDetailBinding
 
     private var chId = 0
+    var tagList : MutableList<String> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +43,7 @@ class ChallengeDetail : AppCompatActivity() {
         var clickList =text.split("%")
         var clickTitle = clickList[0]
         Challname = clickTitle
-        showDetailData(text)
+        showDetailData(clickTitle)
         var owner = intent.getStringExtra("whoMade").toString()
         binding.detailChallengeName.text = clickTitle
         binding.detailChallengeOwner.text = owner
@@ -53,6 +56,22 @@ class ChallengeDetail : AppCompatActivity() {
         binding.favorBtn.setOnClickListener {
             NewFavor()
         }
+    }
+
+    private fun setupChip(list: MutableList<String>, where:Int) {
+
+        for (name in list) {
+            val chip = createChip(name)
+            when(where){
+                1 -> binding.detailChallengeTagGroup.addView(chip)
+                2 -> binding.detailChallengeHowChipGroup.addView(chip)
+            }
+        }
+    }
+    private fun createChip(label: String): Chip {
+        val chip = ChoiceTagBinding.inflate(layoutInflater).root
+        chip.text = label
+        return chip
     }
 
     private fun NewFavor() {
@@ -117,7 +136,7 @@ class ChallengeDetail : AppCompatActivity() {
 
     private fun showDetailData(title: String) {
         val url =
-            "https://android-pkfbl.run.goorm.io/challenge/nameChallenge?nameChallenge=" + title
+            "https://android-pkfbl.run.goorm.io/challenge/Detail?nameChallenge=" + title
         val sr: StringRequest = object : StringRequest(Method.GET, url,
             Response.Listener { response: String? ->
                 try {
@@ -149,6 +168,7 @@ class ChallengeDetail : AppCompatActivity() {
                         }
                     val chCount = jsonObject.getInt("count")
                     val prtcp = jsonObject.getInt("countUser")
+                    val completeUser = jsonObject.getInt("countCompleteUser")
                     val introduce = jsonObject.getString("intruduce")
                     val freq = jsonObject.getInt("frequency")
                     val start = jsonObject.getInt("possibleStartTime")
@@ -162,6 +182,11 @@ class ChallengeDetail : AppCompatActivity() {
                     val nameTagList = nameTag.split("%")
                     Log.i("여기는 데이터", "${nameTagList[0]}")
                     Toast.makeText(this, "${nameTagList[0]}", Toast.LENGTH_SHORT).show()
+
+                    for ( i in 1 until nameTagList.size){
+                        tagList.add(nameTagList[i])
+                    }
+                    setupChip(tagList,1)
 
                     chId = id
                     // binding.challengeMainImg.setImageURI(imageLink.toUri())

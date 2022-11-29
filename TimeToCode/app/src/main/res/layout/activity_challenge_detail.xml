@@ -17,7 +17,7 @@
             android:id="@+id/challengeMainImg"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:src="@drawable/test3"
+            android:src="@drawable/gray"
             android:scaleType="centerCrop"/>
 
         <ScrollView
