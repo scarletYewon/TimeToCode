@@ -17,7 +17,7 @@
             android:id="@+id/challengeMainImg"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:src="@drawable/test3"
+            android:src="@drawable/gray"
             android:scaleType="centerCrop"/>
 
         <ScrollView
@@ -53,7 +53,7 @@
                         android:id="@+id/detailChallengeTagGroup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp">
+                        android:layout_marginVertical="15dp">
 
                     </com.google.android.material.chip.ChipGroup>
 

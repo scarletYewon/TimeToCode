@@ -51,7 +51,7 @@ class FragmentAddChallenge3 : Fragment() {
                         .setMessage("다음 업데이트를 기다려주세요. 감사합니다:)")
                         .setPositiveButton("확인",
                             DialogInterface.OnClickListener { dialog, id ->
-                                binding.rBtnCountOption1.isChecked=true
+                                binding.rBtnFreq1.isChecked=true
                             })
                     // 다이얼로그를 띄워주기
                     builder.show()
@@ -98,8 +98,14 @@ class FragmentAddChallenge3 : Fragment() {
                 var m = "59"
                 h = if (i < 10){"0${i}"} else{"$i"}
                 m = if (i2 < 10){"0${i2}"}else{"$i2"}
-                binding.editStartTime.text = "${h}시 ${m}분"
-                startTime = "${h}${m}"
+                var check = h+m
+
+                if(endTime.toInt() < check.toInt() ) {
+                    Toast.makeText(activity, "시작시간은 종료시간 이전이어야 합니다.", Toast.LENGTH_SHORT).show()
+                }else{
+                    binding.editStartTime.text = h+"시"+m+"분"
+                    startTime = "${h}${m}"
+                }
             }
             var picker = TimePickerDialog(requireContext(),listener, 0, 0, true)
             picker.setMessage("시작시간")
@@ -139,6 +145,7 @@ class FragmentAddChallenge3 : Fragment() {
                 binding.rBtnPeriod4.id-> period=28
                 binding.rBtnPeriod5.id-> period=50
                 binding.rBtnPeriod6.id-> period=100
+                binding.rBtnPeriod7.id-> period=100000000
             }
             periodFlag = true
             flagCheck()

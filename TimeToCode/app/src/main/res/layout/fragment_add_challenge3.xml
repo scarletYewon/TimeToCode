@@ -406,6 +406,16 @@
                             android:button="@null"
                             android:text="100일 동안"
                             android:textColor="@drawable/add_challenge_radio_text" />
+
+                        <RadioButton
+                            android:id="@+id/rBtnPeriod7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/add_challenge_radio_btn"
+                            android:button="@null"
+                            android:text="계속"
+                            android:textColor="@drawable/add_challenge_radio_text" />
                     </RadioGroup>
                 </LinearLayout>
             </HorizontalScrollView>

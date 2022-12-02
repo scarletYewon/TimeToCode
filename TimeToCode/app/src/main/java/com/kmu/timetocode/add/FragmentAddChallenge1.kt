@@ -59,12 +59,12 @@ class FragmentAddChallenge1 : Fragment() {
                     isCloseIconVisible = true
                     setOnCloseIconClickListener {
                         binding.tagChipGroup.removeView(this)
-                        val delItem = "#"+this.text.toString().replace(" ","_")
+                        val delItem = this.text.toString().replace(" ","_")
                         chipList.remove(delItem.toString())
                         tagCheck(chipList)
                     }
                 })
-                chipList.add("#"+string.toString().replace(" ","_"))
+                chipList.add(string.toString().replace(" ","_"))
                 tagCheck(chipList)
                 binding.editChallengeTagAdd.text.clear()
             }
