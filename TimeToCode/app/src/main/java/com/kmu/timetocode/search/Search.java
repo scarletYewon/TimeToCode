@@ -172,28 +172,30 @@ public class Search extends Fragment {
                     String nameChallengeTemp = list[0];
                     String finalTag = tag1;
                     String finalTag1 = tag2;
-                    FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge).getDownloadUrl().addOnSuccessListener(
+                    FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge + ".jpeg").getDownloadUrl().addOnSuccessListener(
                             uri -> {
                                 challengeList.add(new ChallengeListModel(uri.toString(), nameChallengeTemp, madeName, Integer.toString(count), finalTag, finalTag1));
                                 challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
                                 afterView.setAdapter(challengeItemAdapter);
                                 blur.setVisibility(View.INVISIBLE);
                                 dialog.dismiss();
-                                Log.d("FirebaseImageSuccess", uri.toString());
+                                Log.d("FirebaseImageSuccess", "UserImages_" + nameChallenge + ".jpeg");
                             }
                     ).addOnFailureListener(
                             uri -> {
-                                FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge + ".jpeg").getDownloadUrl().addOnSuccessListener(
+                                Log.e("FirebaseImageError1", "UserImages_" + nameChallenge + ".jpeg");
+                                FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge).getDownloadUrl().addOnSuccessListener(
                                         uri1 -> {
                                             challengeList.add(new ChallengeListModel(uri1.toString(), nameChallengeTemp, madeName, Integer.toString(count), finalTag, finalTag1));
                                             challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
                                             afterView.setAdapter(challengeItemAdapter);
                                             blur.setVisibility(View.INVISIBLE);
                                             dialog.dismiss();
-                                            Log.e("FirebaseImageError", uri.toString());
+                                            Log.d("FirebaseImageSuccess", "UserImages_" + nameChallenge);
                                         }
                                 ).addOnFailureListener(
                                         uri1 -> {
+                                            Log.e("FirebaseImageError2", "UserImages_" + nameChallenge);
                                             FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge + ".jpg").getDownloadUrl().addOnSuccessListener(
                                                     uri2 -> {
                                                         challengeList.add(new ChallengeListModel(uri2.toString(), nameChallengeTemp, madeName, Integer.toString(count), finalTag, finalTag1));
@@ -201,8 +203,10 @@ public class Search extends Fragment {
                                                         afterView.setAdapter(challengeItemAdapter);
                                                         blur.setVisibility(View.INVISIBLE);
                                                         dialog.dismiss();
-                                                        Log.e("FirebaseImageError", uri.toString());
+                                                        Log.d("FirebaseImageSuccess", "UserImages_" + nameChallenge + ".jpg");
                                                     }
+                                            ).addOnFailureListener(
+                                                    uri2 -> Log.e("FirebaseImageError3", "UserImages_" + nameChallenge + ".jpg / " + uri2)
                                             );
                                         }
                                 );
