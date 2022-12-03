@@ -1,6 +1,7 @@
 package com.kmu.timetocode.certicenter
 
 import android.content.Context
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -93,7 +94,7 @@ class CertificationFragment : Fragment() {
 
                 holder.btn_certificaion?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Certifbox()) }
                 holder.btn_gallery?.setOnClickListener {
-                    model.sendMessage(holder.ch_title?.text.toString())
+                    model.sendMessage(fullName.toString())
                     Log.d("test sendMessage", list[position].title.toString())
                     (activity as NavActivity?)!!.replaceFragment(RecordFragment()) }
                 view.tag = holder
