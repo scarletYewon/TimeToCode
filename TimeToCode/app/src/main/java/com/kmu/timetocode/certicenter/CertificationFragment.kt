@@ -1,6 +1,7 @@
 package com.kmu.timetocode.certicenter
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,18 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
-import com.android.volley.Response
 import com.android.volley.RequestQueue
+import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.kmu.timetocode.*
-import com.kmu.timetocode.R
-import com.kmu.timetocode.recordcenter.RecordFragment
 import com.kmu.timetocode.login.UserProfile
+import com.kmu.timetocode.recordcenter.RecordFragment
 import org.json.JSONArray
+
 
 class CertificationFragment : Fragment() {
     var adapter: ListViewAdapter?=null
@@ -74,13 +74,13 @@ class CertificationFragment : Fragment() {
                 holder.btn_certificaion = view.findViewById(R.id.btnCertification)
                 holder.btn_gallery = view.findViewById(R.id.btnGallery)
 
-                holder.ch_title?.text = list[position].title
+                val fullName = list[position]
+                holder.ch_title?.text = fullName.title?.split("%")?.get(0)
                 holder.ch_maker?.text = list[position].maker
-                list[position].resId?.let {holder.ch_image?.setImageResource(it)}
 
                 holder.btn_certificaion?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Certifbox()) }
                 holder.btn_gallery?.setOnClickListener {
-                    model.sendMessage(list[position].title.toString())
+                    model.sendMessage(holder.ch_title?.text.toString())
                     Log.d("test sendMessage", list[position].title.toString())
                     (activity as NavActivity?)!!.replaceFragment(RecordFragment()) }
                 view.tag = holder
@@ -90,9 +90,10 @@ class CertificationFragment : Fragment() {
             }
 
             val challengeItem = list[position] // 챌린지 list 안의 챌린지 한개
-            val resourceId = context.resources.getIdentifier(challengeItem.resId.toString(), "drawable", context.packageName)
-            holder.ch_image?.setImageResource(resourceId)
-            challengeItem.resId?.let { holder.ch_image?.setImageResource(it) };
+
+//            val resourceId = context.resources.getIdentifier(challengeItem.resId.toString(), "drawable", context.packageName)
+//            holder.ch_image?.setImageResource(resourceId)
+//            challengeItem.resId?.let { holder.ch_image?.setImageResource(it) };
 
             return view //뷰 객체 반환
         }
@@ -116,10 +117,12 @@ class CertificationFragment : Fragment() {
                     for (i in 0 until jsonArray.length()) {
                         val jsonObject = jsonArray.getJSONObject(i)
                         Log.d("test challenge list in certiCenter", jsonObject.toString())
-                        val nameChallenge = jsonObject.getString("nameChallenge").split("%").get(0)
-                        val imageLink = jsonObject.getString("imageLink")
+                        val nameChallenge = jsonObject.getString("nameChallenge")
+                        var imageLink = jsonObject.getString("imageLink")
                         val madeIdUser = jsonObject.getString("name")
-                        challengeList.add(Challenge(nameChallenge, madeIdUser, R.drawable.ttcwhite))
+                        imageLink = imageLink.split(":").get(1).substring(1)
+                        Log.d("test challenge image in certiCenter", imageLink)
+                        challengeList.add(Challenge(nameChallenge, madeIdUser, imageLink))
                     }
                 } catch (e: Exception) {
                     Log.e("MyListJSON", response!!)
