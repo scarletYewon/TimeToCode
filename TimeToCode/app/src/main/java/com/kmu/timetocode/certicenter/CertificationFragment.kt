@@ -1,13 +1,13 @@
 package com.kmu.timetocode.certicenter
 
 import android.content.Context
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.android.volley.RequestQueue
@@ -15,6 +15,8 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
+import com.google.firebase.storage.FirebaseStorage
 import com.kmu.timetocode.*
 import com.kmu.timetocode.login.UserProfile
 import com.kmu.timetocode.recordcenter.RecordFragment
@@ -74,9 +76,20 @@ class CertificationFragment : Fragment() {
                 holder.btn_certificaion = view.findViewById(R.id.btnCertification)
                 holder.btn_gallery = view.findViewById(R.id.btnGallery)
 
-                val fullName = list[position]
-                holder.ch_title?.text = fullName.title?.split("%")?.get(0)
-                holder.ch_maker?.text = list[position].maker
+                val challengeItem = list[position] // 챌린지 list 안의 챌린지 한개
+
+                val fullName = challengeItem.title
+                holder.ch_title?.text = fullName?.split("%")?.get(0)
+                holder.ch_maker?.text = challengeItem.maker
+                Log.d("test", "UserImages_" + fullName)
+
+                val storage: FirebaseStorage = FirebaseStorage.getInstance("gs://timetocode-13747.appspot.com/")
+                val fileExt = arrayOf(".jpeg", ".jpg", "")
+                for(i in fileExt)
+                    storage.getReference().child("UserImages_" + fullName + i).downloadUrl
+                        .addOnSuccessListener { uri ->
+                            Glide.with(context).load(uri.toString().toUri()).into(holder.ch_image!!)
+                        }
 
                 holder.btn_certificaion?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Certifbox()) }
                 holder.btn_gallery?.setOnClickListener {
@@ -89,7 +102,6 @@ class CertificationFragment : Fragment() {
                 view = convertview
             }
 
-            val challengeItem = list[position] // 챌린지 list 안의 챌린지 한개
 
 //            val resourceId = context.resources.getIdentifier(challengeItem.resId.toString(), "drawable", context.packageName)
 //            holder.ch_image?.setImageResource(resourceId)
@@ -100,7 +112,7 @@ class CertificationFragment : Fragment() {
         private inner class ViewHolder {
             var ch_title: TextView? = null
             var ch_maker: TextView? = null
-            var ch_image: ImageButton? = null
+            var ch_image: ImageView? = null
             var btn_certificaion: Button? = null
             var btn_gallery: Button? = null
         }
