@@ -84,6 +84,7 @@ class CertificationFragment : Fragment() {
                 holder.ch_maker?.text = challengeItem.maker
                 Log.d("test", "UserImages_" + fullName)
 
+                holder.ch_image!!.setImageResource(R.drawable.ttcwhite)
                 val storage: FirebaseStorage = FirebaseStorage.getInstance("gs://timetocode-13747.appspot.com/")
                 val fileExt = arrayOf(".jpeg", ".jpg", "")
                 for(i in fileExt)
