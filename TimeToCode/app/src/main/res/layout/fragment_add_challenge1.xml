@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".add.FragmentAddChallenge1">
 
@@ -96,14 +97,23 @@
 
         <!-- TODO: chip height wrap_content 로 변경 필요       -->
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/tagChipGroup"
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="20dp"
-            android:paddingLeft="15dp"
+            android:paddingVertical="9dp"
+            android:layout_alignParentBottom="true"
+            android:scrollbars="none"
+            android:background="@color/light_gray_1"            >
 
-            android:background="@color/light_gray_1" />
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/tagChipGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:paddingLeft="15dp"
+                    app:singleLine="true" />
+
+        </HorizontalScrollView>
 
         <TextView
             android:id="@+id/textChallengeInfo"
