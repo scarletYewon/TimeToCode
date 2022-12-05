@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.*
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.android.volley.RequestQueue
@@ -12,7 +13,8 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.kmu.timetocode.MainFragment
+import com.bumptech.glide.Glide
+import com.google.firebase.storage.FirebaseStorage
 import com.kmu.timetocode.MyViewModel
 import com.kmu.timetocode.NavActivity
 import com.kmu.timetocode.R
@@ -33,6 +35,8 @@ class RecordFragment : Fragment() {
         savedInstanceState: Bundle?
     ) : View? {
         val rootView = inflater.inflate(R.layout.fragment_record, container, false)
+        val tmpChallenge = view?.findViewById<ImageView>(R.id.tmpChallengeImage)
+
         val listView = view?.findViewById<GridView>(R.id.recordList)
 
         val backRecord = rootView?.findViewById<ImageButton>(R.id.backRecord)
@@ -44,9 +48,11 @@ class RecordFragment : Fragment() {
 
         val model = ViewModelProvider(requireActivity()).get(MyViewModel::class.java)
 
-        title = model.getMessage()
+        val fullName = model.getMessage()
+        title = fullName?.split("%")?.get(0)
         Log.d("test getMessage", "현재 챌린지 페이지 이름은 " + title.toString())
         challengeTitle?.text = title
+
 
         getChallengeId()
 
@@ -57,6 +63,15 @@ class RecordFragment : Fragment() {
 
         listView?.setAdapter(adapter)
         rootView?.findViewById<GridView>(R.id.recordList)?.adapter = adapter
+
+        val storage: FirebaseStorage = FirebaseStorage.getInstance("gs://timetocode-13747.appspot.com/")
+        val fileExt = arrayOf(".jpeg", ".jpg", "")
+        for(i in fileExt)
+            storage.getReference().child("UserImages_" + fullName + i).downloadUrl
+                .addOnSuccessListener { uri ->
+//                    Glide.with(requireActivity().getApplicationContext()).load(uri).into(tmpChallenge!!)
+                    Log.d("인증센터 사진 불러오기", uri.toString())
+                }
 
         return rootView
     }
