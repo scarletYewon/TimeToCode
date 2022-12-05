@@ -51,6 +51,7 @@ class FavoritePage : Fragment() {
                     Challname + " 찜 취소 완료",
                     Toast.LENGTH_SHORT
                 ).show()
+                showFavorList()
             },
             Response.ErrorListener { error: VolleyError ->
             }) {
@@ -152,7 +153,6 @@ class FavoritePage : Fragment() {
             val favorCancelBtn = view.findViewById<TextView>(R.id.cancelFav)
             favorCancelBtn.setOnClickListener {
                 CancelFav()
-                showFavorList()
                 Log.e("click","ok")
             }
             return view
