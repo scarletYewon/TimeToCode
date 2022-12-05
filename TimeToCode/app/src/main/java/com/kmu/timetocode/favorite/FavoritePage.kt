@@ -7,12 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
+import com.google.firebase.storage.FirebaseStorage
 import com.kmu.timetocode.*
 import com.kmu.timetocode.login.UserProfile
 import org.json.JSONArray
@@ -48,6 +51,7 @@ class FavoritePage : Fragment() {
                     Challname + " 찜 취소 완료",
                     Toast.LENGTH_SHORT
                 ).show()
+                showFavorList()
             },
             Response.ErrorListener { error: VolleyError ->
             }) {
@@ -85,7 +89,7 @@ class FavoritePage : Fragment() {
                         Challname =  ChallengeName
 //                        val tag1 = challengeTag[1]
 //                        val tag2 = challengeTag[2]
-                        challengeList.add(FavorListModel(imageLink, ChallengeName, madeIdUser))
+                        challengeList.add(FavorListModel(imageLink, nameChallenge, madeIdUser))
                         Log.e("challengeList",challengeList.toString())
                     }
                 } catch (e: Exception) {
@@ -122,15 +126,29 @@ class FavoritePage : Fragment() {
                 holder.view_image = view.findViewById(R.id.imageArea)
                 holder.view_title = view.findViewById(R.id.title)
                 holder.view_owner = view.findViewById(R.id.owner)
-
                 view.tag = holder
+
+                val challengeItem = list[position] // 챌린지 list 안의 챌린지 한개
+
+                val fullName = challengeItem.title
+                holder.view_title?.text = fullName?.split("%")?.get(0)
+                holder.view_owner?.text = challengeItem.owner
+                Log.d("test", "UserImages_" + fullName)
+
+                val storage: FirebaseStorage = FirebaseStorage.getInstance("gs://timetocode-13747.appspot.com/")
+                val fileExt = arrayOf(".jpeg", ".jpg", "")
+                for(i in fileExt)
+                    storage.getReference().child("UserImages_" + fullName + i).downloadUrl
+                        .addOnSuccessListener { uri ->
+                            Glide.with(context).load(uri.toString().toUri()).into(holder.view_image!!)
+                        }
             } else {
                 holder = convertview.tag as ViewHolder
                 view = convertview
             }
-            val item = list[position]
-            holder.view_title?.text = item.title
-            holder.view_owner?.text = item.owner
+//            val item = list[position]
+//            holder.view_title?.text = item.title
+//            holder.view_owner?.text = item.owner
 
             val favorCancelBtn = view.findViewById<TextView>(R.id.cancelFav)
             favorCancelBtn.setOnClickListener {
