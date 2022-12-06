@@ -64,14 +64,16 @@ class RecordFragment : Fragment() {
         listView?.setAdapter(adapter)
         rootView?.findViewById<GridView>(R.id.recordList)?.adapter = adapter
 
-        val storage: FirebaseStorage = FirebaseStorage.getInstance("gs://timetocode-13747.appspot.com/")
-        val fileExt = arrayOf(".jpeg", ".jpg", "")
-        for(i in fileExt)
-            storage.getReference().child("UserImages_" + fullName + i).downloadUrl
-                .addOnSuccessListener { uri ->
-//                    Glide.with(requireActivity().getApplicationContext()).load(uri).into(tmpChallenge!!)
-                    Log.d("인증센터 사진 불러오기", uri.toString())
-                }
+        tmpChallenge!!.setImageResource(R.drawable.ttcwhite)
+
+//        val storage: FirebaseStorage = FirebaseStorage.getInstance("gs://timetocode-13747.appspot.com/")
+//        val fileExt = arrayOf(".jpeg", ".jpg", "")
+//        for(i in fileExt)
+//            storage.getReference().child("UserImages_" + fullName + i).downloadUrl
+//                .addOnSuccessListener { uri ->
+////                    Glide.with(requireActivity().getApplicationContext()).load(uri).into(tmpChallenge!!)
+//                    Log.d("인증센터 사진 불러오기", uri.toString())
+//                }
 
         return rootView
     }
