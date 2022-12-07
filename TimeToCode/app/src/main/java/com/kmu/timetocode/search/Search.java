@@ -172,13 +172,17 @@ public class Search extends Fragment {
                     String nameChallengeTemp = list[0];
                     String finalTag = tag1;
                     String finalTag1 = tag2;
+
+                    int finalI = i;
                     FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge + ".jpeg").getDownloadUrl().addOnSuccessListener(
                             uri -> {
                                 challengeList.add(new ChallengeListModel(uri.toString(), nameChallengeTemp, madeName, Integer.toString(count), finalTag, finalTag1));
-                                challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
-                                afterView.setAdapter(challengeItemAdapter);
-                                blur.setVisibility(View.INVISIBLE);
-                                dialog.dismiss();
+                                if (finalI == jsonArray.length() - 1) {
+                                    challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
+                                    afterView.setAdapter(challengeItemAdapter);
+                                    blur.setVisibility(View.INVISIBLE);
+                                    dialog.dismiss();
+                                }
                                 Log.d("FirebaseImageSuccess", "UserImages_" + nameChallenge + ".jpeg");
                             }
                     ).addOnFailureListener(
@@ -187,10 +191,12 @@ public class Search extends Fragment {
                                 FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge).getDownloadUrl().addOnSuccessListener(
                                         uri1 -> {
                                             challengeList.add(new ChallengeListModel(uri1.toString(), nameChallengeTemp, madeName, Integer.toString(count), finalTag, finalTag1));
-                                            challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
-                                            afterView.setAdapter(challengeItemAdapter);
-                                            blur.setVisibility(View.INVISIBLE);
-                                            dialog.dismiss();
+                                            if (finalI == jsonArray.length() - 1) {
+                                                challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
+                                                afterView.setAdapter(challengeItemAdapter);
+                                                blur.setVisibility(View.INVISIBLE);
+                                                dialog.dismiss();
+                                            }
                                             Log.d("FirebaseImageSuccess", "UserImages_" + nameChallenge);
                                         }
                                 ).addOnFailureListener(
@@ -199,10 +205,12 @@ public class Search extends Fragment {
                                             FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge + ".jpg").getDownloadUrl().addOnSuccessListener(
                                                     uri2 -> {
                                                         challengeList.add(new ChallengeListModel(uri2.toString(), nameChallengeTemp, madeName, Integer.toString(count), finalTag, finalTag1));
-                                                        challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
-                                                        afterView.setAdapter(challengeItemAdapter);
-                                                        blur.setVisibility(View.INVISIBLE);
-                                                        dialog.dismiss();
+                                                        if (finalI == jsonArray.length() - 1) {
+                                                            challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
+                                                            afterView.setAdapter(challengeItemAdapter);
+                                                            blur.setVisibility(View.INVISIBLE);
+                                                            dialog.dismiss();
+                                                        }
                                                         Log.d("FirebaseImageSuccess", "UserImages_" + nameChallenge + ".jpg");
                                                     }
                                             ).addOnFailureListener(
