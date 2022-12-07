@@ -214,7 +214,16 @@ public class Search extends Fragment {
                                                         Log.d("FirebaseImageSuccess", "UserImages_" + nameChallenge + ".jpg");
                                                     }
                                             ).addOnFailureListener(
-                                                    uri2 -> Log.e("FirebaseImageError3", "UserImages_" + nameChallenge + ".jpg / " + uri2)
+
+                                                    uri2 -> {
+                                                        if (finalI == jsonArray.length() - 1) {
+                                                            challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
+                                                            afterView.setAdapter(challengeItemAdapter);
+                                                            blur.setVisibility(View.INVISIBLE);
+                                                            dialog.dismiss();
+                                                        }
+                                                        Log.e("FirebaseImageError3", "UserImages_" + nameChallenge + ".jpg / " + uri2);
+                                                    }
                                             );
                                         }
                                 );
