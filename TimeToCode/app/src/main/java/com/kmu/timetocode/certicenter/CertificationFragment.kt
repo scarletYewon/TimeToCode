@@ -133,7 +133,6 @@ class CertificationFragment : Fragment() {
                         val nameChallenge = jsonObject.getString("nameChallenge")
                         var imageLink = jsonObject.getString("imageLink")
                         val madeIdUser = jsonObject.getString("name")
-                        imageLink = imageLink.split(":").get(1).substring(1)
                         Log.d("test challenge image in certiCenter", imageLink)
                         challengeList.add(Challenge(nameChallenge, madeIdUser, imageLink))
                     }
