@@ -20,27 +20,31 @@ import com.kmu.timetocode.login.UserProfile
 import org.json.JSONArray
 
 class UserCreated : Fragment() {
-    var favoriteListAdapter: CdpListAdapter?=null
+    var Challname = ""
+    var favoriteListAdapter: CdpListAdapter? = null
     var queue: RequestQueue? = null
     var myList: ListView? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) : View? {
-        val rootView : View = inflater.inflate(R.layout.fragment_user_created, container, false)
+    ): View? {
+        val rootView: View = inflater.inflate(R.layout.fragment_user_created, container, false)
 
         val backCertification = rootView?.findViewById<ImageButton>(R.id.backCertification)
-        backCertification?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(
-            MainFragment()
-        ) }
+        backCertification?.setOnClickListener {
+            (activity as NavActivity?)!!.replaceFragment(
+                MainFragment()
+            )
+        }
 
-        showDoneList()
+        showCreateList()
         myList = rootView?.findViewById<ListView>(R.id.listview_created_fragment)
 
         return rootView
     }
-    private fun showDoneList() {
+
+    private fun showCreateList() {
         val myId = UserProfile.getId()
         val url = "https://android-pkfbl.run.goorm.io/userChallenge/userUploadChallenge?idUser=" + myId
         val sr: StringRequest = object : StringRequest( Method.GET, url,
@@ -58,9 +62,10 @@ class UserCreated : Fragment() {
                         //받아올 challengeName
                         val challengeTag = nameChallenge.split("%").toTypedArray()
                         val ChallengeName = challengeTag[0]
+                        Challname =  ChallengeName
                         val tag1 = challengeTag[1]
                         val tag2 = challengeTag[2]
-                        challengeList.add(CdpListModel(imageLink, ChallengeName, madeIdUser, countUser, tag1, tag2))
+                        challengeList.add(CdpListModel(imageLink, nameChallenge, madeIdUser, countUser, tag1, tag2))
                         Log.e("challengeList",challengeList.toString())
                     }
                 } catch (e: Exception) {
@@ -75,6 +80,8 @@ class UserCreated : Fragment() {
             @Throws(java.lang.Error::class)
             override fun getParams(): MutableMap<String,String>? {
                 val params: MutableMap<String, String> = HashMap()
+//                params["idUser"] = myId.toString()
+//                Log.e(params.toString(),"params")
                 return params
             }
         }

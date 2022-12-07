@@ -16,10 +16,12 @@ import com.android.volley.toolbox.Volley
 import com.kmu.timetocode.MainFragment
 import com.kmu.timetocode.NavActivity
 import com.kmu.timetocode.R
+import com.kmu.timetocode.favorite.FavorListModel
 import com.kmu.timetocode.login.UserProfile
 import org.json.JSONArray
 
 class Done : Fragment() {
+    var Challname = ""
     var favoriteListAdapter: CdpListAdapter?=null
     var queue: RequestQueue? = null
     var myList: ListView? = null
@@ -58,9 +60,10 @@ class Done : Fragment() {
                         //받아올 challengeName
                         val challengeTag = nameChallenge.split("%").toTypedArray()
                         val ChallengeName = challengeTag[0]
+                        Challname =  ChallengeName
                         val tag1 = challengeTag[1]
                         val tag2 = challengeTag[2]
-                        challengeList.add(CdpListModel(imageLink, ChallengeName, madeIdUser, countUser, tag1, tag2))
+                        challengeList.add(CdpListModel(imageLink, nameChallenge, madeIdUser, countUser, tag1, tag2))
                         Log.e("challengeList",challengeList.toString())
                     }
                 } catch (e: Exception) {
@@ -75,6 +78,8 @@ class Done : Fragment() {
             @Throws(java.lang.Error::class)
             override fun getParams(): MutableMap<String,String>? {
                 val params: MutableMap<String, String> = HashMap()
+//                params["idUser"] = myId.toString()
+//                Log.e(params.toString(),"params")
                 return params
             }
         }
@@ -82,5 +87,47 @@ class Done : Fragment() {
         queue = Volley.newRequestQueue(requireContext())
         queue!!.add(sr)
     }
+//    private fun showDoneList() {
+//        val myId = UserProfile.getId()
+//        val url = "https://android-pkfbl.run.goorm.io/userChallenge/completeChallenge?idUser=" + myId
+//        val sr: StringRequest = object : StringRequest( Method.GET, url,
+//            Response.Listener { response: String? ->
+//                val challengeList = ArrayList<CdpListModel>()
+//                try {
+//                    val jsonArray = JSONArray(response)
+//                    for (i in 0 until jsonArray.length()) {
+//                        val jsonObject = jsonArray.getJSONObject(i)
+//                        val nameChallenge = jsonObject.getString("nameChallenge")
+//                        val imageLink = jsonObject.getString("imageLink")
+//                        val madeIdUser = jsonObject.getString("name")
+//                        val countUser = jsonObject.getInt("countUser")
+//                        // 여기서 데이터 나눠줄거임
+//                        //받아올 challengeName
+//                        val challengeTag = nameChallenge.split("%").toTypedArray()
+//                        val ChallengeName = challengeTag[0]
+//                        val tag1 = challengeTag[1]
+//                        val tag2 = challengeTag[2]
+//                        challengeList.add(CdpListModel(imageLink, ChallengeName, madeIdUser, countUser, tag1, tag2))
+//                        Log.e("challengeList",challengeList.toString())
+//                    }
+//                } catch (e: Exception) {
+//                    Log.e("FavoriteListJSON", response!!)
+//                }
+//                favoriteListAdapter = CdpListAdapter(requireContext(), challengeList)
+//                Log.e("List",favoriteListAdapter.toString())
+//                myList?.setAdapter(favoriteListAdapter)
+//            },
+//            Response.ErrorListener { error: VolleyError ->
+//            }) {
+//            @Throws(java.lang.Error::class)
+//            override fun getParams(): MutableMap<String,String>? {
+//                val params: MutableMap<String, String> = HashMap()
+//                return params
+//            }
+//        }
+//        sr.setShouldCache(false)
+//        queue = Volley.newRequestQueue(requireContext())
+//        queue!!.add(sr)
+//    }
 
 }
