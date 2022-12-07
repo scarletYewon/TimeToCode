@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.kmu.timetocode.R
 import com.kmu.timetocode.databinding.ChallengeNewItemBinding
 import com.kmu.timetocode.detail.ChallengeDetail
 

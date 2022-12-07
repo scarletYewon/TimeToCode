@@ -198,9 +198,11 @@ class ChallengeDetail : AppCompatActivity() {
                     val jsonArray = JSONArray(response)
                     val jsonObject = jsonArray.getJSONObject(0)
                     val id = jsonObject.getInt("idChallenge")
-
+                    val imageLink = jsonObject.getString("imageLink")
                     val nameTag = jsonObject.getString("nameChallenge").split(" %").get(0)
-
+                    if(imageLink == "basic1" || imageLink == "basic2"){
+                        binding.challengeMainImg.setImageResource(R.drawable.test3)
+                    }else{
                     FirebaseStorage.getInstance().getReference()
                         .child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnSuccessListener { uri ->
                             Glide.with(this)
@@ -221,6 +223,7 @@ class ChallengeDetail : AppCompatActivity() {
                                         }
                                 }
                         }
+                    }
                     val chCount = jsonObject.getInt("count")
                     val prtcp = jsonObject.getInt("countUser")
                     val completeUser = jsonObject.getInt("countCompleteUser")
@@ -231,7 +234,7 @@ class ChallengeDetail : AppCompatActivity() {
                     val interval = jsonObject.getString("countInterval")
                     val period = jsonObject.getInt("endDate")
                     val how = jsonObject.getString("certificationWay")
-//                    val howImg = jsonObject.getString("certificationWayImageLink")
+                    val howImg = jsonObject.getString("certificationWayImageLink")
                     val post = jsonObject.getInt("challengePostCount")
                     // 여기서 데이터 입력
                     val nameTagList = nameTag.split("%")
@@ -258,11 +261,30 @@ class ChallengeDetail : AppCompatActivity() {
                     binding.detailChallengeFinishCount.text = completeUser.toString()
                     binding.detailChallengeExpText.text = introduce
                     binding.detailChallengeHowText.text = how
-//                    if (howImg.contains("content")) {
-//                        binding.detailChallengeHowImg.setImageURI(howImg.toUri())
-//                    } else {
-//                        binding.detailChallengeHowImg.visibility = View.GONE
-//                    }
+                    if (howImg.contains("content")) {
+                        FirebaseStorage.getInstance().getReference()
+                            .child("UserImages_" + nameTag+"HOW" + ".jpeg").downloadUrl.addOnSuccessListener { uri ->
+                                Glide.with(this)
+                                    .load(uri)
+                                    .into(binding.detailChallengeHowImg)
+                            }.addOnFailureListener { uri ->
+                                FirebaseStorage.getInstance().getReference()
+                                    .child("UserImages_" + nameTag+"HOW").downloadUrl.addOnSuccessListener { uri1 ->
+                                        Glide.with(this)
+                                            .load(uri1)
+                                            .into(binding.detailChallengeHowImg)
+                                    }.addOnFailureListener { uri1 ->
+                                        FirebaseStorage.getInstance().getReference()
+                                            .child("UserImages_" + nameTag+"HOW" + ".jpg").downloadUrl.addOnSuccessListener { uri2 ->
+                                                Glide.with(this)
+                                                    .load(uri2)
+                                                    .into(binding.detailChallengeHowImg)
+                                            }
+                                    }
+                            }
+                    } else {
+                        binding.detailChallengeHowImg.visibility = View.GONE
+                    }
                 } catch (e: Exception) {
                     Log.e("Challenge Counting JSON", response!!)
                 }
