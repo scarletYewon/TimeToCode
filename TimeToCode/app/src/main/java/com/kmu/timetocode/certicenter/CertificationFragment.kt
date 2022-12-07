@@ -84,6 +84,7 @@ class CertificationFragment : Fragment() {
                 holder.ch_maker?.text = challengeItem.maker
                 Log.d("test", "UserImages_" + fullName)
 
+                holder.ch_image!!.setImageResource(R.drawable.ttcwhite)
                 val storage: FirebaseStorage = FirebaseStorage.getInstance("gs://timetocode-13747.appspot.com/")
                 val fileExt = arrayOf(".jpeg", ".jpg", "")
                 for(i in fileExt)
@@ -92,7 +93,10 @@ class CertificationFragment : Fragment() {
                             Glide.with(context).load(uri.toString().toUri()).into(holder.ch_image!!)
                         }
 
-                holder.btn_certificaion?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Certifbox()) }
+                holder.btn_certificaion?.setOnClickListener {
+                    model.sendMessage(fullName.toString())
+                    Log.d("test sendMessage", list[position].title.toString())
+                    (activity as NavActivity?)!!.replaceFragment(Certifbox()) }
                 holder.btn_gallery?.setOnClickListener {
                     model.sendMessage(fullName.toString())
                     Log.d("test sendMessage", list[position].title.toString())

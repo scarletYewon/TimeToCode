@@ -12,14 +12,13 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
-import com.kmu.timetocode.MainFragment
-import com.kmu.timetocode.NavActivity
-import com.kmu.timetocode.R
-import com.kmu.timetocode.UploadImgDialog
+import com.kmu.timetocode.*
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -40,10 +39,18 @@ class Certifbox : Fragment() {
 
         val backCertification = rootView?.findViewById<ImageButton>(R.id.backCertification)
         val uploadCertifImg = rootView?.findViewById<LinearLayout>(R.id.uploadCertifImg)
+        val challengeTitle = rootView?.findViewById<TextView>(R.id.challengeTitle)
 
         backCertification?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(
             CertificationFragment()
         ) }
+
+        val model = ViewModelProvider(requireActivity()).get(MyViewModel::class.java)
+
+        val fullName = model.getMessage()
+        val title = fullName?.split("%")?.get(0)
+        Log.d("test", title.toString())
+        challengeTitle?.text = title
 
         uploadCertifImg?.setOnClickListener {  requestPermission() }
 

@@ -35,7 +35,6 @@ class RecordFragment : Fragment() {
         savedInstanceState: Bundle?
     ) : View? {
         val rootView = inflater.inflate(R.layout.fragment_record, container, false)
-        val tmpChallenge = view?.findViewById<ImageView>(R.id.tmpChallengeImage)
 
         val listView = view?.findViewById<GridView>(R.id.recordList)
 
@@ -45,6 +44,7 @@ class RecordFragment : Fragment() {
         myList = rootView?.findViewById<GridView>(R.id.recordList)
 
         val challengeTitle = rootView?.findViewById<TextView>(R.id.challenge_title)
+        val tmpChallenge = rootView?.findViewById<ImageView>(R.id.tmpChallengeImage)
 
         val model = ViewModelProvider(requireActivity()).get(MyViewModel::class.java)
 
@@ -52,7 +52,6 @@ class RecordFragment : Fragment() {
         title = fullName?.split("%")?.get(0)
         Log.d("test getMessage", "현재 챌린지 페이지 이름은 " + title.toString())
         challengeTitle?.text = title
-
 
         getChallengeId()
 
@@ -64,13 +63,15 @@ class RecordFragment : Fragment() {
         listView?.setAdapter(adapter)
         rootView?.findViewById<GridView>(R.id.recordList)?.adapter = adapter
 
+        tmpChallenge?.setImageResource(R.drawable.ttcwhite)
+
         val storage: FirebaseStorage = FirebaseStorage.getInstance("gs://timetocode-13747.appspot.com/")
         val fileExt = arrayOf(".jpeg", ".jpg", "")
         for(i in fileExt)
             storage.getReference().child("UserImages_" + fullName + i).downloadUrl
                 .addOnSuccessListener { uri ->
-//                    Glide.with(requireActivity().getApplicationContext()).load(uri).into(tmpChallenge!!)
-                    Log.d("인증센터 사진 불러오기", uri.toString())
+                    Glide.with(requireActivity().getApplicationContext()).load(uri).into(tmpChallenge!!)
+                    Log.d("기록센터 사진 불러오기", uri.toString())
                 }
 
         return rootView
