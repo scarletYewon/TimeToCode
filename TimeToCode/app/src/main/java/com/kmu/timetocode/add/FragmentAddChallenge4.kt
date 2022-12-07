@@ -119,6 +119,8 @@ class FragmentAddChallenge4 : Fragment() {
                 var upLoadImg = it.toUri()
                 binding.howImgView.setImageURI(upLoadImg)
                 imgFromCam = true
+                checkSelect()
+                savePhoto(image.toUri())
                 Log.i("take","takeImg를 통해 fragment")
             }
         }
@@ -129,6 +131,7 @@ class FragmentAddChallenge4 : Fragment() {
                 image = it
                 binding.howImgView.setImageURI(pickImage)
                 binding.howImgView.scaleType = ImageView.ScaleType.CENTER_CROP
+                checkSelect()
                 imgFromCam= false
                 Log.i("take","pickImg를 통해 fragment")
             }
@@ -185,7 +188,11 @@ class FragmentAddChallenge4 : Fragment() {
         }
         //실제적인 저장 처리
         val out = FileOutputStream(folderPath + fileName)
+        Log.i("사진 저장","사진저장: ${out}")
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
+        Log.i("사진 저장","사진저장b: ${bitmap}")
+        out.close()
+
         Toast.makeText(activity,"사진이 앨범에 저장되었습니다.",Toast.LENGTH_SHORT).show()
     }
 
@@ -256,7 +263,13 @@ class FragmentAddChallenge4 : Fragment() {
         Log.i("data","howImg: ${chHowImg}")
 
         //파이어베이스에 사진 올리기
+        if(chImg != "basic1" && chImg != "basic2"){
+            AddImg.AddUri(chImg.toUri(), chName)
+        }
         AddImg.AddUri(chImg.toUri(), chName)
+        if (image != "none"){
+            AddImg.AddUri(chHowImg.toUri(),chName+"HOW")
+        }
 
         val sr: StringRequest = object : StringRequest(
             Method.POST, url,

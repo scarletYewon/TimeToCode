@@ -30,7 +30,7 @@ class FragmentAddChallenge2 : Fragment() {
     private var imgFlag = false
     private var basicImgFlag = false
 
-    lateinit var selectImg : String
+    private var selectImg = "basic1"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,6 +85,7 @@ class FragmentAddChallenge2 : Fragment() {
 
         binding.btnGoAdd3.setOnClickListener{
             model.addData2(selectImg)
+            Log.i("select이미지", "선택이미지: ${selectImg}")
             findNavController().navigate(R.id.action_fragmentAddChallenge2_to_fragmentAddChallenge3)
         }
 

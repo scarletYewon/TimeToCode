@@ -1,13 +1,12 @@
 package com.kmu.timetocode.list
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,13 +15,13 @@ import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.bumptech.glide.Glide
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.storage.FirebaseStorage
 import com.kmu.timetocode.add.AddChallenge
 import com.kmu.timetocode.databinding.FragmentChallengeListBinding
 import com.kmu.timetocode.login.UserProfile
 import org.json.JSONArray
+import java.io.IOException
+import java.lang.IllegalStateException
 
 
 class FragmentChallengeList : Fragment() {
@@ -30,9 +29,6 @@ class FragmentChallengeList : Fragment() {
 //    private lateinit var tadapter : ChallengeListAdapter
     private lateinit var recyclerView: RecyclerView
 //    private lateinit var challengeListArray : ArrayList<ChallengeListModel>
-
-
-
 
 
     var queue: RequestQueue?=null
@@ -130,24 +126,24 @@ class FragmentChallengeList : Fragment() {
                         val jsonObject = jsonArray.getJSONObject(i)
                         val nameTag = jsonObject.getString("nameChallenge")
                         val madeName = jsonObject.getString("name")
-                        val count = jsonObject.getInt("countUser")
+                        val count = jsonObject.getInt("countUser").toString()
                         val nameTagList = nameTag.split("%")
                         FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnSuccessListener{
                             uri ->
-                            challengeListArray.add(ChallengeListModel(uri.toString(), nameTagList[0], madeName, Integer.toString(count), nameTagList[1], nameTagList[2]))
+                            challengeListArray.add(ChallengeListModel(uri.toString(), nameTagList[0], madeName, count, nameTagList[1], nameTagList[2]))
                             var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
                             binding.listChallenge.adapter = chAdapter
                         }.addOnFailureListener {
                             uri -> FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener {
                                 uri1 ->
-                            challengeListArray.add(ChallengeListModel(uri1.toString(), nameTagList[0], madeName, Integer.toString(count), nameTagList[1], nameTagList[2]))
+                            challengeListArray.add(ChallengeListModel(uri1.toString(), nameTagList[0], madeName, count, nameTagList[1], nameTagList[2]))
                             var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
                             binding.listChallenge.adapter = chAdapter
 
                         }.addOnFailureListener {
                             uri1 -> FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnSuccessListener{
                                 uri2 ->
-                            challengeListArray.add(ChallengeListModel(uri2.toString(), nameTagList[0], madeName, Integer.toString(count), nameTagList[1], nameTagList[2]))
+                            challengeListArray.add(ChallengeListModel(uri2.toString(), nameTagList[0], madeName, count, nameTagList[1], nameTagList[2]))
                             var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
                             binding.listChallenge.adapter = chAdapter
                         }
@@ -155,75 +151,6 @@ class FragmentChallengeList : Fragment() {
                         }
                         }
                     }
-
-//                    for(i in jsonArray.length()-1 downTo 0){
-//                            val jsonObject = jsonArray.getJSONObject(i)
-//                            val nameTag = jsonObject.getString("nameChallenge")
-//                            val name = jsonObject.getString("nameChallenge").split("%")[0]
-//                            val tag = jsonObject.getString("nameChallenge").split("%")[1]
-//                            val tag2 = jsonObject.getString("nameChallenge").split("%")[2]
-//                            val whoMade = jsonObject.getString("name")
-//                            FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnSuccessListener{
-//                                    uri ->
-//                                challengeItemArray.add(ChallengeItemModel(uri.toString(), name, tag, tag2,whoMade))
-//                                var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-//                                binding.listNew.adapter = newAdapter
-//                            }.addOnFailureListener {
-//                                    uri -> FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener {
-//                                    uri ->
-//                                challengeItemArray.add(ChallengeItemModel(uri.toString(), name, tag, tag2,whoMade))
-//                                var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-//                                binding.listNew.adapter = newAdapter
-//
-//                            }.addOnFailureListener {
-//                                    uri -> FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnSuccessListener{
-//                                    uri2 ->
-//                                challengeItemArray.add(ChallengeItemModel(uri2.toString(), name, tag, tag2,whoMade))
-//                                var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-//                                binding.listNew.adapter = newAdapter
-//                            }
-//                            }
-//                            }
-
-
-
-//                    if (jsonArray.length() < 6){
-//                        for (i in jsonArray.length()-1 downTo 0){
-//                            val jsonObject = jsonArray.getJSONObject(i)
-//                            val name = jsonObject.getString("nameChallenge").split("%")[0]
-//                            val imageLink = jsonObject.getString("imageLink")
-//                            val tag = jsonObject.getString("nameChallenge").split("%")[1]
-//                            val tag2 = jsonObject.getString("nameChallenge").split("%")[2]
-//                            val whoMade = jsonObject.getString("name")
-//                            challengeItemArray.add(ChallengeItemModel(imageLink.toUri(),name,tag,tag2,whoMade))
-//                            Log.i("item","아이템: ${challengeItemArray}")
-//                        }
-//                    }else{
-//                        for (i in jsonArray.length()-1 downTo jsonArray.length()-7){
-//                            val jsonObject = jsonArray.getJSONObject(i)
-//                            val nameTag = jsonObject.getString("nameChallenge")
-//                            val name = jsonObject.getString("nameChallenge").split("%")[0]
-//
-//                            val tag = jsonObject.getString("nameChallenge").split("%")[1]
-//                            val tag2 = jsonObject.getString("nameChallenge").split("%")[2]
-//                            val whoMade = jsonObject.getString("name")
-//                            var imageLink = FirebaseStorage.getInstance().getReference()
-//                                .child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnSuccessListener { uri ->
-//                                    challengeItemArray.add(ChallengeItemModel(
-//                                            uri,
-//                                            name,
-//                                            tag,
-//                                            tag2,
-//                                        whoMade
-//                                        )
-//                                    )
-//
-//                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-//                                    binding.listNew.adapter = newAdapter
-//                                }.toString()
-//                            challengeItemArray.add(ChallengeItemModel(imageLink.toUri(),name,tag,tag2,whoMade))
-//                            Log.i("item","아이템?: ${challengeItemArray}")
-//                        }
 
 
                 } catch (e: Exception) {
@@ -270,51 +197,133 @@ class FragmentChallengeList : Fragment() {
                         val tag2 = jsonObject.getString("nameChallenge").split("%")[2]
                         val whoMade = jsonObject.getString("name")
                         Log.i("여기는 new","시작은 : ${jsonArray.length()-1}, 현재 위치는: ${i}, 현재 챌린지는: ${name}")
-                        FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnCompleteListener {
-                            if (it.isSuccessful){
-                            challengeItemArray.add(ChallengeItemModel(it.toString(), name, tag, tag2,whoMade))
-                            var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-                            binding.listNew.adapter = newAdapter
-                            Log.i("여기는 new의 이미지1", "챌린지 : ${name} ")
-                            Log.i("여기는 new의 이미지1", "new의 이미지 : ${it.toString()} ")
-                        }
-                        }
-                        FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnCompleteListener(
-                            OnCompleteListener { task ->
-                            if(task.isSuccessful) {
-                                challengeItemArray.add(ChallengeItemModel(task.result.toString(), name, tag, tag2,whoMade))
-                                var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+
+                        var load = false
+                        var loadRe = "F"
+                        var load1 = "F1"
+                        var load2 = "F2"
+                        var load3 = "F3"
+
+                        if (!load){FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                challengeItemArray.add(
+                                    ChallengeItemModel(
+                                        task.result.toString(),
+                                        name,
+                                        tag,
+                                        tag2,
+                                        whoMade
+                                    )
+                                )
+                                var newAdapter =
+                                    ChallengeItemAdapter(requireContext(), challengeItemArray)
                                 binding.listNew.adapter = newAdapter
+                                load = true
+                                loadRe = "T"
+                                load1 = "T1"
                                 Log.i("여기는 new의 이미지1", "챌린지 : ${name} ")
                                 Log.i("여기는 new의 이미지1", "new의 이미지 : ${task.result.toString()} ")
                             } else {
-
+                                load = false
+                                loadRe = "F1"
+                                load1 = "F1"
+                                Log.i("여기는 new의 이미지1의 실패", "챌린지 : ${load}:${loadRe}:${name} ")
                             }
-                        })
-                        FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnCompleteListener(
-                            OnCompleteListener { task ->
-                                if(task.isSuccessful) {
-                                    challengeItemArray.add(ChallengeItemModel(task.result.toString(), name, tag, tag2,whoMade))
-                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+                        }
+                        }else{load = false}
+
+                        if (!load){
+                            FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    challengeItemArray.add(
+                                        ChallengeItemModel(
+                                            task.result.toString(),
+                                            name,
+                                            tag,
+                                            tag2,
+                                            whoMade
+                                        )
+                                    )
+                                    var newAdapter =
+                                        ChallengeItemAdapter(requireContext(), challengeItemArray)
                                     binding.listNew.adapter = newAdapter
-                                    Log.i("여기는 new의 이미지2", "챌린지 : ${name} ")
+                                    load = true
+                                    load2 = "T2"
+                                    Log.i("여기는 new의 이미지2", "챌린지 : ${load}:${loadRe}:${name} ")
                                     Log.i("여기는 new의 이미지2", "new의 이미지 : ${task.result.toString()} ")
                                 } else {
-
+                                    load2 = "F2"
+                                    Log.i("여기는 new의 이미지2의 실패", "챌린지 : ${load}:${loadRe}:${name} ")
                                 }
-                            })
-                        FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnCompleteListener(
-                            OnCompleteListener { task ->
-                                if(task.isSuccessful) {
-                                    challengeItemArray.add(ChallengeItemModel(task.result.toString(), name, tag, tag2,whoMade))
-                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+                            }
+
+                        }
+
+                        if(!load){
+                            FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    challengeItemArray.add(
+                                        ChallengeItemModel(
+                                            task.result.toString(),
+                                            name,
+                                            tag,
+                                            tag2,
+                                            whoMade
+                                        )
+                                    )
+                                    var newAdapter =
+                                        ChallengeItemAdapter(requireContext(), challengeItemArray)
                                     binding.listNew.adapter = newAdapter
-                                    Log.i("여기는 new의 이미지3", "챌린지 : ${name} ")
+                                    load = true
+                                    load3 = "T3"
+                                    Log.i("여기는 new의 이미지3", "챌린지 : ${load}:${loadRe}:${name} ")
                                     Log.i("여기는 new의 이미지3", "new의 이미지 : ${task.result.toString()} ")
                                 } else {
+                                    load3 = "F3"
+                                    Log.i("여기는 new의 이미지3의 실패", "챌린지 : ${load}:${loadRe}:${name} ")
 
                                 }
-                            })
+                            }
+                        }
+
+
+//                        FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnCompleteListener(
+//                            OnCompleteListener { task ->
+//                            if(task.isSuccessful) {
+//                                challengeItemArray.add(ChallengeItemModel(task.result.toString(), name, tag, tag2,whoMade))
+//                                var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+//                                binding.listNew.adapter = newAdapter
+//                                Log.i("여기는 new의 이미지1", "챌린지 : ${name} ")
+//                                Log.i("여기는 new의 이미지1", "new의 이미지 : ${task.result.toString()} ")
+//                            } else {
+//                                Log.i("여기는 new의 이미지1의 실패", "챌린지 : ${name} ")
+//                            }
+//                        })
+//                        FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnCompleteListener(
+//                            OnCompleteListener { task ->
+//                                if(task.isSuccessful) {
+//                                    challengeItemArray.add(ChallengeItemModel(task.result.toString(), name, tag, tag2,whoMade))
+//                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+//                                    binding.listNew.adapter = newAdapter
+//                                    Log.i("여기는 new의 이미지2", "챌린지 : ${name} ")
+//                                    Log.i("여기는 new의 이미지2", "new의 이미지 : ${task.result.toString()} ")
+//                                } else {
+//
+//                                    Log.i("여기는 new의 이미지2의 실패", "챌린지 : ${name} ")
+//                                }
+//                            })
+//                        FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnCompleteListener(
+//                            OnCompleteListener { task ->
+//                                if(task.isSuccessful) {
+//                                    challengeItemArray.add(ChallengeItemModel(task.result.toString(), name, tag, tag2,whoMade))
+//                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
+//                                    binding.listNew.adapter = newAdapter
+//                                    Log.i("여기는 new의 이미지3", "챌린지 : ${name} ")
+//                                    Log.i("여기는 new의 이미지3", "new의 이미지 : ${task.result.toString()} ")
+//                                } else {
+//                                    Log.i("여기는 new의 이미지3의 실패", "챌린지 : ${name} ")
+//                                }
+//                            })
 
 //                        FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnCompleteListener {
 //                            if (it.isSuccessful){
@@ -326,35 +335,7 @@ class FragmentChallengeList : Fragment() {
 //                            }
 //                        }
 
-//                        FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnCompleteListener{
 //
-//                                uri ->
-//                            challengeItemArray.add(ChallengeItemModel(uri.toString(), name, tag, tag2,whoMade))
-//                            var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-//                            binding.listNew.adapter = newAdapter
-//                            Log.i("여기는 new의 이미지1", "챌린지 : ${name} ")
-//                            Log.i("여기는 new의 이미지1", "new의 이미지 : ${uri.toString()} ")
-//
-//                        }.addOnFailureListener {
-//                                uri -> FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnCompleteListener {
-//                                uri1 ->
-//                            challengeItemArray.add(ChallengeItemModel(uri1.toString(), name, tag, tag2,whoMade))
-//                            var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-//                            binding.listNew.adapter = newAdapter
-//                            Log.i("여기는 new의 이미지2", "챌린지 : ${name} ")
-//                            Log.i("여기는 new의 이미지2", "new의 이미지 : ${uri.toString()} ")
-//
-//                        }.addOnFailureListener {
-//                                uri1 -> FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnCompleteListener{
-//                                uri2 ->
-//                            challengeItemArray.add(ChallengeItemModel(uri2.toString(), name, tag, tag2,whoMade))
-//                            var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-//                            binding.listNew.adapter = newAdapter
-//                            Log.i("여기는 new의 이미지3", "챌린지 : ${name} ")
-//                            Log.i("여기는 new의 이미지3", "new의 이미지 : ${uri.toString()} ")
-//                        }
-//                        }
-//                        }
 //                    if (jsonArray.length() < 6){
 //                        for (i in jsonArray.length()-1 downTo 0){
 //                            val jsonObject = jsonArray.getJSONObject(i)
@@ -409,52 +390,12 @@ class FragmentChallengeList : Fragment() {
 ////                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
 ////                                    binding.listNew.adapter = newAdapter
 ////                                }.toString()
-////                            if (imageLink.isNullOrEmpty()) {
-////                            imageLink = FirebaseStorage.getInstance().getReference()
-////                                .child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener { uri ->
-////                                    challengeItemArray.add(ChallengeItemModel(
-////                                        uri,
-////                                        name,
-////                                        tag,
-////                                        tag2,
-////                                        madeName
-////                                    )
-////                                    )
 ////
-////                                    var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
 ////
-////                                    binding.listChallenge.adapter = chAdapter
-////
-////                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-////                                    binding.listNew.adapter = newAdapter
-////                                }.toString()
-////                        }
-////                        if (imageLink.isNullOrEmpty()) {
-////                            imageLink = FirebaseStorage.getInstance().getReference()
-////                                .child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnSuccessListener { uri ->
-////
-////                                    challengeItemArray.add(ChallengeItemModel(
-////                                        uri,
-////                                        name,
-////                                        tag,
-////                                        tag2,
-////                                        madeName
-////                                    )
-////                                    )
-////
-////                                    var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
-////
-////                                    binding.listChallenge.adapter = chAdapter
-////
-////                                    var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
-////                                    binding.listNew.adapter = newAdapter
-////                                }.toString()}
-//
-//                            challengeItemArray.add(ChallengeItemModel(imageLink,name,tag,tag2,madeName))
-//                            Log.i("item","아이템???: ${challengeItemArray}")
-//                        }
                     }
 
+            }catch (e: IllegalStateException){
+                    Log.e("StorageException", "찾을 수 없음")
             } catch (e: Exception) {
                     Log.e("SearchListJSON", response!!)
                 }
@@ -472,7 +413,7 @@ class FragmentChallengeList : Fragment() {
         queue!!.add(sr)
     }
 
-//    TODO: 찜 버튼 클릭 시 버튼 이미지 변경
+
 
     override fun onDestroyView() {
         super.onDestroyView()
