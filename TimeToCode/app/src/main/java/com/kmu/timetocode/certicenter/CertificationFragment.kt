@@ -93,7 +93,10 @@ class CertificationFragment : Fragment() {
                             Glide.with(context).load(uri.toString().toUri()).into(holder.ch_image!!)
                         }
 
-                holder.btn_certificaion?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(Certifbox()) }
+                holder.btn_certificaion?.setOnClickListener {
+                    model.sendMessage(fullName.toString())
+                    Log.d("test sendMessage", list[position].title.toString())
+                    (activity as NavActivity?)!!.replaceFragment(Certifbox()) }
                 holder.btn_gallery?.setOnClickListener {
                     model.sendMessage(fullName.toString())
                     Log.d("test sendMessage", list[position].title.toString())
