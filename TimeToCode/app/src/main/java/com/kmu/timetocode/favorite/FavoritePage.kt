@@ -41,14 +41,14 @@ class FavoritePage : Fragment() {
         showFavorList()
         return rootView
     }
-    private fun CancelFav() {
+    private fun CancelFav(clickTitle: String) {
         val myId = UserProfile.getId()
         val url = "https://android-pkfbl.run.goorm.io/UserFavoriteChallenge/delete"
         val sr: StringRequest = object : StringRequest(Method.POST, url,
             Response.Listener { response: String? ->
                 Toast.makeText(
                     requireContext(),
-                    Challname + " 찜 취소 완료",
+                    clickTitle.split("%").toTypedArray()[0] + " 찜 취소 완료",
                     Toast.LENGTH_SHORT
                 ).show()
                 showFavorList()
@@ -59,7 +59,7 @@ class FavoritePage : Fragment() {
             override fun getParams(): MutableMap<String, String>? {
                 val params: MutableMap<String, String> = HashMap()
                 params["idUser"] = myId.toString()
-                params["nameChallenge"] = Challname
+                params["nameChallenge"] = clickTitle
                 Log.e("params",params.toString())
                 return params
             }
@@ -115,17 +115,23 @@ class FavoritePage : Fragment() {
     }
     inner class FavorListAdapter(val context: Context, val list: ArrayList<FavorListModel>): BaseAdapter() {
         var queue: RequestQueue? = null
+//      override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+//                val currentItem = list[position]
+//                holder.view_title?.text = currentItem.title
+//                holder.view_owner?.text = currentItem.owner
+//            }
         override fun getView(position: Int, convertview: View?, parent: ViewGroup?): View {
             val view: View
             val holder : ViewHolder
-
             if (convertview == null) {
+
                 view = LayoutInflater.from(parent?.context).inflate(R.layout.favor_list_item,parent,false)
                 holder = ViewHolder()
 
                 holder.view_image = view.findViewById(R.id.imageArea)
                 holder.view_title = view.findViewById(R.id.title)
                 holder.view_owner = view.findViewById(R.id.owner)
+                holder.view_cancel = view.findViewById(R.id.cancelFav)
                 view.tag = holder
 
                 val challengeItem = list[position] // 챌린지 list 안의 챌린지 한개
@@ -142,18 +148,20 @@ class FavoritePage : Fragment() {
                         .addOnSuccessListener { uri ->
                             Glide.with(context).load(uri.toString().toUri()).into(holder.view_image!!)
                         }
+//                holder.view_cancel?.setOnClickListener {
+//                    CancelFav()
+//                    Log.e("click","ok")
+//                }
+//
+
             } else {
                 holder = convertview.tag as ViewHolder
                 view = convertview
             }
-//            val item = list[position]
-//            holder.view_title?.text = item.title
-//            holder.view_owner?.text = item.owner
-
-            val favorCancelBtn = view.findViewById<TextView>(R.id.cancelFav)
-            favorCancelBtn.setOnClickListener {
-                CancelFav()
-                Log.e("click","ok")
+            val currentItem = list[position]
+            holder.view_cancel?.setOnClickListener {
+                val clicktitle: String = currentItem.title
+                CancelFav(clicktitle)
             }
             return view
         }
@@ -162,10 +170,11 @@ class FavoritePage : Fragment() {
         }
         override fun getItem(position: Int): Any = list.get(position)
         override fun getItemId(position: Int): Long = position.toLong()
-        private inner class ViewHolder {
+        inner class ViewHolder {
             var view_image : ImageView? = null
             var view_title: TextView? = null
             var view_owner: TextView? = null
+            var view_cancel: TextView? = null
         }
     }
 }
