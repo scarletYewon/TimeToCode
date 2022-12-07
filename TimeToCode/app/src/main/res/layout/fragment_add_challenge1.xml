@@ -37,7 +37,6 @@
             android:hint="챌린지명을 입력해주세요."
             android:padding="10dp" />
 
-<!--TODO: 입력 글자 수 표시 추가 여부 고민-->
 <!--        <TextView-->
 <!--            android:id="@+id/textNameCount"-->
 <!--            android:layout_width="match_parent"-->
@@ -61,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:text="태그는 2개 이상으로 꼭 생성해주세요! 아래 배치되는 순서에 따라 챌린지를 대표하는 태그입니다. "
+            android:text="태그는 2개 이상으로 꼭 생성해주세요!\n아래 배치되는 순서에 따라 챌린지를 대표하는 태그입니다. "
             android:textColor="@color/main"/>
 
         <LinearLayout
@@ -78,7 +77,9 @@
                 android:layout_marginBottom="20dp"
                 android:padding="8dp"
                 android:background="@drawable/edit_challenge_border"
-                android:hint="추가할 태그를 입력해주세요"
+                android:hint="태그 입력 (#은 자동생성)"
+                android:singleLine="true"
+                android:maxLength="17"
                 android:textSize="17dp"                 />
 
             <Button
