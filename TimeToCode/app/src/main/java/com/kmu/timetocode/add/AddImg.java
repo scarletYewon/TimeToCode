@@ -12,4 +12,10 @@ public class AddImg {
             Log.d("Firebase", "사진 올림");
         });
     }
+
+    public static void AddUri(Uri uri, String fileName, String key) {
+        FirebaseStorage.getInstance().getReference().child(fileName).child("UserImages_" + key).putFile(uri).addOnCompleteListener(task1 -> {
+            Log.d("Firebase", fileName + " 아래에 사진 올림");
+        });
+    }
 }
