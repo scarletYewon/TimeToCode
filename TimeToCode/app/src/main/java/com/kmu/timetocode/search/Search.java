@@ -54,6 +54,8 @@ public class Search extends Fragment {
 
     RequestQueue queue;
 
+    int countChallenge = 0;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -154,6 +156,7 @@ public class Search extends Fragment {
             Log.d("searchList", response);
             ArrayList<ChallengeListModel> challengeList = new ArrayList<>();
             try {
+                countChallenge = 0;
                 JSONArray jsonArray = new JSONArray(response);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -173,16 +176,16 @@ public class Search extends Fragment {
                     String finalTag = tag1;
                     String finalTag1 = tag2;
 
-                    int finalI = i;
                     FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge + ".jpeg").getDownloadUrl().addOnSuccessListener(
                             uri -> {
                                 challengeList.add(new ChallengeListModel(uri.toString(), nameChallengeTemp, madeName, Integer.toString(count), finalTag, finalTag1));
-                                if (finalI == jsonArray.length() - 1) {
+                                if (countChallenge == jsonArray.length() - 1) {
                                     challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
                                     afterView.setAdapter(challengeItemAdapter);
                                     blur.setVisibility(View.INVISIBLE);
                                     dialog.dismiss();
                                 }
+                                countChallenge += 1;
                                 Log.d("FirebaseImageSuccess", "UserImages_" + nameChallenge + ".jpeg");
                             }
                     ).addOnFailureListener(
@@ -191,12 +194,13 @@ public class Search extends Fragment {
                                 FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge).getDownloadUrl().addOnSuccessListener(
                                         uri1 -> {
                                             challengeList.add(new ChallengeListModel(uri1.toString(), nameChallengeTemp, madeName, Integer.toString(count), finalTag, finalTag1));
-                                            if (finalI == jsonArray.length() - 1) {
+                                            if (countChallenge == jsonArray.length() - 1) {
                                                 challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
                                                 afterView.setAdapter(challengeItemAdapter);
                                                 blur.setVisibility(View.INVISIBLE);
                                                 dialog.dismiss();
                                             }
+                                            countChallenge += 1;
                                             Log.d("FirebaseImageSuccess", "UserImages_" + nameChallenge);
                                         }
                                 ).addOnFailureListener(
@@ -205,23 +209,24 @@ public class Search extends Fragment {
                                             FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge + ".jpg").getDownloadUrl().addOnSuccessListener(
                                                     uri2 -> {
                                                         challengeList.add(new ChallengeListModel(uri2.toString(), nameChallengeTemp, madeName, Integer.toString(count), finalTag, finalTag1));
-                                                        if (finalI == jsonArray.length() - 1) {
+                                                        if (countChallenge == jsonArray.length() - 1) {
                                                             challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
                                                             afterView.setAdapter(challengeItemAdapter);
                                                             blur.setVisibility(View.INVISIBLE);
                                                             dialog.dismiss();
                                                         }
+                                                        countChallenge += 1;
                                                         Log.d("FirebaseImageSuccess", "UserImages_" + nameChallenge + ".jpg");
                                                     }
                                             ).addOnFailureListener(
-
                                                     uri2 -> {
-                                                        if (finalI == jsonArray.length() - 1) {
+                                                        if (countChallenge == jsonArray.length() - 1) {
                                                             challengeItemAdapter = new ChallengeListAdapter(requireContext(), challengeList);
                                                             afterView.setAdapter(challengeItemAdapter);
                                                             blur.setVisibility(View.INVISIBLE);
                                                             dialog.dismiss();
                                                         }
+                                                        countChallenge += 1;
                                                         Log.e("FirebaseImageError3", "UserImages_" + nameChallenge + ".jpg / " + uri2);
                                                     }
                                             );
