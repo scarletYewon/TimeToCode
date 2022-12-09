@@ -9,19 +9,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 import com.kmu.timetocode.*
+import com.kmu.timetocode.add.AddImg
+import com.kmu.timetocode.login.UserProfile
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class Certifbox : Fragment() {
@@ -29,6 +30,9 @@ class Certifbox : Fragment() {
     lateinit var image : Bitmap
 
     private var imgFromCam : Boolean = false
+    var myId : Int = UserProfile.getId()
+    var challengename : String = ""
+    var now = LocalDate.now().format(DateTimeFormatter.ofPattern("MMdd"))
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,10 +44,18 @@ class Certifbox : Fragment() {
         val backCertification = rootView?.findViewById<ImageButton>(R.id.backCertification)
         val uploadCertifImg = rootView?.findViewById<LinearLayout>(R.id.uploadCertifImg)
         val challengeTitle = rootView?.findViewById<TextView>(R.id.challengeTitle)
+        val submitBtn = rootView?.findViewById<Button>(R.id.submit)
 
         backCertification?.setOnClickListener { (activity as NavActivity?)!!.replaceFragment(
             CertificationFragment()
         ) }
+        submitBtn?.setOnClickListener {
+            submit()
+            (activity as NavActivity?)!!.replaceFragment(
+                MainFragment()
+            )
+
+        }
 
         val model = ViewModelProvider(requireActivity()).get(MyViewModel::class.java)
 
@@ -51,6 +63,9 @@ class Certifbox : Fragment() {
         val title = fullName?.split("%")?.get(0)
         Log.d("test", title.toString())
         challengeTitle?.text = title
+        if (title != null) {
+            challengename = title
+        }
 
         uploadCertifImg?.setOnClickListener {  requestPermission() }
 
@@ -112,5 +127,9 @@ class Certifbox : Fragment() {
         val out = FileOutputStream(folderPath + fileName)
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
         Toast.makeText(activity,"사진이 앨범에 저장되었습니다.", Toast.LENGTH_SHORT).show()
+    }
+    private fun submit(){
+        Log.e("dd",now)
+//        AddImg.AddUri("",myId.toString()+ "%" + challengename + "%" + now) //5%1%1207
     }
 }
