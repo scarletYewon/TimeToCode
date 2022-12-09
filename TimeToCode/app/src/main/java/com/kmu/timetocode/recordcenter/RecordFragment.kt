@@ -31,6 +31,7 @@ class RecordFragment : Fragment() {
     var myList: GridView?=null
     var title: String?=null
     var now = LocalDate.now().format(DateTimeFormatter.ofPattern("MMdd"))
+    var challengeId : String?=null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -121,7 +122,7 @@ class RecordFragment : Fragment() {
             val storage: FirebaseStorage = FirebaseStorage.getInstance("gs://timetocode-13747.appspot.com/")
             val fileExt = arrayOf(".jpeg", ".jpg", "")
             for(i in fileExt)
-                storage.getReference().child("UserImages_" + UserProfile.getId().toString()+ "%" + title + "%" + now).downloadUrl
+                storage.getReference().child("UserImages_" + UserProfile.getId().toString()+ "%" + challengeId + "%" + now).downloadUrl
                     .addOnSuccessListener { uri ->
                         Glide.with(requireActivity().getApplicationContext()).load(uri).into(holder.rc_image!!)
                         Log.d("기록 사진 불러오기", uri.toString())
@@ -193,6 +194,7 @@ class RecordFragment : Fragment() {
                     val idUser = jsonObject.get("idUser")
                     val idChallenge = jsonObject.getInt("idChallenge")
                     recordList.add(Record(idChallenge, R.drawable.ttcwhite))
+                    challengeId = idChallenge.toString()
                 }
             } catch (e: Exception) {
                 Log.e("MyRecordJSON", response!!)
