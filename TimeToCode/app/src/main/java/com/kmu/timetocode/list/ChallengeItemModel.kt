@@ -7,5 +7,6 @@ data class ChallengeItemModel(
     val title: String,
     val tag: String,
     val tag2: String,
-    val whoMade:String
+    val whoMade:String,
+    val imgName : String
 )

@@ -14,7 +14,7 @@ import com.kmu.timetocode.R
 import com.kmu.timetocode.databinding.ChallengeNewItemBinding
 import com.kmu.timetocode.detail.ChallengeDetail
 
-class ChallengeItemAdapter(val context: Context, val challengeItemArray: ArrayList<ChallengeItemModel>): RecyclerView.Adapter<ChallengeItemAdapter.ItemViewHolder>()  {
+class ChallengeItemAdapter(val context: Context, private val challengeItemArray: ArrayList<ChallengeItemModel>): RecyclerView.Adapter<ChallengeItemAdapter.ItemViewHolder>()  {
 
     class ItemViewHolder(val binding: ChallengeNewItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun setList(item: ChallengeItemModel){
