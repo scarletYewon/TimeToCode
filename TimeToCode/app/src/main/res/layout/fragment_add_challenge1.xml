@@ -56,25 +56,27 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textChallengeTagTip"
+            android:id="@+id/textChallengeTagTip1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="태그는 2개 이상으로 꼭 생성해주세요!\n아래 배치되는 순서에 따라 챌린지를 대표하는 태그입니다. "
-            android:textColor="@color/main"/>
+            android:layout_marginBottom="10dp"
+            android:text="태그는 2개 이상으로 생성해주세요!"
+            android:textColor="@color/dark_gray"
+            android:textSize="13dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/editChallengeTagAdd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="7"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_weight="8"
+                android:layout_marginRight="6dp"
+
                 android:padding="8dp"
                 android:background="@drawable/edit_challenge_border"
                 android:hint="태그 입력 (#은 자동생성)"
@@ -86,7 +88,7 @@
                 android:id="@+id/btnChallengeAddTag"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="2.5"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 android:padding="8dp"
@@ -96,11 +98,21 @@
                 android:textColor="@color/white"/>
         </LinearLayout>
 
+
         <!-- TODO: chip height wrap_content 로 변경 필요       -->
+
+        <TextView
+            android:id="@+id/textChallengeTagTip2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="아래 나열되는 순으로 챌린지를 가장 대표하는 태그입니다."
+            android:textColor="@color/main"
+            android:textSize="12dp"/>
 
         <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_marginBottom="20dp"
             android:paddingVertical="9dp"
             android:layout_alignParentBottom="true"
@@ -110,7 +122,7 @@
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/tagChipGroup"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:paddingLeft="15dp"
                     app:singleLine="true" />
 
