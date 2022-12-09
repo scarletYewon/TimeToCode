@@ -27,6 +27,7 @@ import java.util.*
 class Certifbox : Fragment() {
 
     lateinit var image : Bitmap
+    lateinit var certiImage : String
 
     private var imgFromCam : Boolean = false
 
@@ -74,6 +75,7 @@ class Certifbox : Fragment() {
         requireActivity().supportFragmentManager.setFragmentResultListener("pickRequestKey",this) { requestKey, bundle ->
             bundle.getString("pickBundleKey")?.let {
                 var pickImage = Uri.parse(it)
+                certiImage = it
                 uploadCertifImgView?.setImageURI(pickImage)
                 imgFromCam= false
                 Log.i("take","pickImg를 통해 fragment")
