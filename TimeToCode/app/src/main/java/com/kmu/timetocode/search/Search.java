@@ -24,6 +24,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.kmu.timetocode.list.ChallengeListAdapter;
 import com.kmu.timetocode.list.ChallengeListModel;
 import com.kmu.timetocode.R;
@@ -175,6 +176,8 @@ public class Search extends Fragment {
                     String nameChallengeTemp = list[0];
                     String finalTag = tag1;
                     String finalTag1 = tag2;
+
+                    //StorageReference listRef = FirebaseStorage.getInstance().getReference().
 
                     FirebaseStorage.getInstance().getReference().child("UserImages_" + nameChallenge + ".jpeg").getDownloadUrl().addOnSuccessListener(
                             uri -> {
