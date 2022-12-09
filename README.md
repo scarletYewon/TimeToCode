@@ -293,8 +293,7 @@ Spring Boot 새 프로젝트를 생성 후, application.properties와 pom.xml파
 ## MySQL Table 구조
 
 ---
-
-
+<img width="941" alt="db" src="https://user-images.githubusercontent.com/81704418/206715197-2b89f40d-2b9b-4659-95a0-351cb10bf210.png">
 
 ## Domain 주소
 
