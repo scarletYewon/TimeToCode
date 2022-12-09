@@ -42,6 +42,11 @@ class FragmentChallengeList : Fragment() {
 
     private val binding get() = _binding!!
 
+    var dialog: CustomProgressDialog? = null
+    var blur: View? = null
+
+    var listCount : Int = 0
+
 
 
     override fun onCreateView(
@@ -51,6 +56,9 @@ class FragmentChallengeList : Fragment() {
 
         _binding = FragmentChallengeListBinding.inflate(inflater, container, false)
 
+        blur = binding.blur
+        dialog = CustomProgressDialog(requireContext())
+        dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         return binding.root
     }
@@ -62,6 +70,9 @@ class FragmentChallengeList : Fragment() {
             val intent = Intent(context, AddChallenge::class.java)
             startActivity(intent)
         }
+
+        blur!!.visibility = View.VISIBLE
+        dialog!!.show()
 
         showAllList()
         showNewList()
@@ -101,17 +112,29 @@ class FragmentChallengeList : Fragment() {
                         val madeName = jsonObject.getString("name")
                         val count = jsonObject.getInt("countUser").toString()
                         val nameTagList = nameTag.split("%")
+                        listCount = 0
                         FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpeg").downloadUrl.addOnSuccessListener{
                             uri ->
                             challengeListArray.add(ChallengeListModel(uri.toString(), nameTagList[0], madeName, count, nameTagList[1], nameTagList[2]))
                             var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
                             binding.listChallenge.adapter = chAdapter
+                            listCount += 1
+                            if(jsonArray.length()-1 == listCount){
+                                blur!!.visibility = View.INVISIBLE
+                                dialog!!.dismiss()
+                            }
+
                         }.addOnFailureListener {
                             uri -> FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag).downloadUrl.addOnSuccessListener {
                                 uri1 ->
                             challengeListArray.add(ChallengeListModel(uri1.toString(), nameTagList[0], madeName, count, nameTagList[1], nameTagList[2]))
                             var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
                             binding.listChallenge.adapter = chAdapter
+                            listCount += 1
+                            if(jsonArray.length()-1 == listCount){
+                                blur!!.visibility = View.INVISIBLE
+                                dialog!!.dismiss()
+                            }
 
                         }.addOnFailureListener {
                             uri1 -> FirebaseStorage.getInstance().getReference().child("UserImages_" + nameTag + ".jpg").downloadUrl.addOnSuccessListener{
@@ -119,6 +142,11 @@ class FragmentChallengeList : Fragment() {
                             challengeListArray.add(ChallengeListModel(uri2.toString(), nameTagList[0], madeName, count, nameTagList[1], nameTagList[2]))
                             var chAdapter = ChallengeListAdapter(requireContext(),challengeListArray)
                             binding.listChallenge.adapter = chAdapter
+                            listCount += 1
+                            if(jsonArray.length()-1 == listCount){
+                                blur!!.visibility = View.INVISIBLE
+                                dialog!!.dismiss()
+                            }
                         }
 
                         }
@@ -210,7 +238,7 @@ class FragmentChallengeList : Fragment() {
                     }
                     }
                     Log.i("ddd","길이길이: ${challengeItemArray.size}")
-                    for (i in 0 until  challengeItemArray.size){
+                    for (i in 0 until  challengeItemArray.size-1){
                         Log.i("현재","몇번째:${i}")
                         FirebaseStorage.getInstance().getReference().child("UserImages_" + challengeItemArray.get(i).imgName + ".jpeg").downloadUrl.addOnSuccessListener{
                                 uri ->
@@ -313,6 +341,9 @@ class FragmentChallengeList : Fragment() {
                     }
                 }catch (e: Exception){
                     Log.e("StorageException", "찾을 수 없음")
+                }
+                catch(e: IndexOutOfBoundsException){
+                    Log.e("IndexOutException", "찾을 수 없음")
                 }
 
                 var newAdapter = ChallengeItemAdapter(requireContext(),challengeItemArray)
