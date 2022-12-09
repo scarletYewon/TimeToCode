@@ -71,12 +71,17 @@ class RecordFragment : Fragment() {
 
         val storage: FirebaseStorage = FirebaseStorage.getInstance("gs://timetocode-13747.appspot.com/")
         val fileExt = arrayOf(".jpeg", ".jpg", "")
+
         for(i in fileExt)
             storage.getReference().child("UserImages_" + fullName + i).downloadUrl
                 .addOnSuccessListener { uri ->
                     Glide.with(requireActivity().getApplicationContext()).load(uri).into(tmpChallenge!!)
                     Log.d("기록센터 사진 불러오기", uri.toString())
                 }
+
+        var recordList:ArrayList<Record>
+
+
 
         return rootView
     }
