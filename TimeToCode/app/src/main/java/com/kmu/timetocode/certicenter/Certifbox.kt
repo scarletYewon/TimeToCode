@@ -132,6 +132,6 @@ class Certifbox : Fragment() {
     }
     private fun submit(){
         Log.e("dd",now)
-//        AddImg.AddUri("",myId.toString()+ "%" + challengename + "%" + now) //5%1%1207
+        AddImg.AddUri(certiImage.toUri(), myId.toString()+ "%" + challengename + "%" + now) //5%1%1207")
     }
 }

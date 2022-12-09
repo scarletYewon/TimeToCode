@@ -77,13 +77,6 @@ class RecordFragment : Fragment() {
                     Glide.with(requireActivity().getApplicationContext()).load(uri).into(tmpChallenge!!)
                     Log.d("기록센터 사진 불러오기", uri.toString())
                 }
-                .addOnFailureListener{
-                    storage.getReference().child("UserImages_" + UserProfile.getId().toString()+ "%" + title + "%" + now).downloadUrl
-                        .addOnSuccessListener { uri ->
-                            Glide.with(requireActivity().getApplicationContext()).load(uri).into(tmpChallenge!!)
-                            Log.d("기록센터 사진 불러오기2", uri.toString())
-                        }
-                }
 
         return rootView
     }
@@ -107,6 +100,7 @@ class RecordFragment : Fragment() {
                 holder.rc_title = view.findViewById(R.id.recordTitle)
                 holder.rc_image = view.findViewById(R.id.recordImage)
 
+
                 holder.rc_title?.text = list[position].chId.toString()
                 list[position].resId?.let {holder.rc_image?.setImageResource(it)}
 
@@ -122,7 +116,7 @@ class RecordFragment : Fragment() {
             val storage: FirebaseStorage = FirebaseStorage.getInstance("gs://timetocode-13747.appspot.com/")
             val fileExt = arrayOf(".jpeg", ".jpg", "")
             for(i in fileExt)
-                storage.getReference().child("UserImages_" + UserProfile.getId().toString()+ "%" + challengeId + "%" + now).downloadUrl
+                storage.getReference().child("UserImages_" + UserProfile.getId().toString()+ "%" + title + "%" + now).downloadUrl
                     .addOnSuccessListener { uri ->
                         Glide.with(requireActivity().getApplicationContext()).load(uri).into(holder.rc_image!!)
                         Log.d("기록 사진 불러오기", uri.toString())
