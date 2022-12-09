@@ -21,6 +21,8 @@ import com.kmu.timetocode.R
 import com.kmu.timetocode.certicenter.CertificationFragment
 import com.kmu.timetocode.login.UserProfile
 import org.json.JSONArray
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 class RecordFragment : Fragment() {
@@ -28,6 +30,8 @@ class RecordFragment : Fragment() {
     var queue: RequestQueue?=null
     var myList: GridView?=null
     var title: String?=null
+    var now = LocalDate.now().format(DateTimeFormatter.ofPattern("MMdd"))
+    var challengeId : String?=null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,6 +77,13 @@ class RecordFragment : Fragment() {
                     Glide.with(requireActivity().getApplicationContext()).load(uri).into(tmpChallenge!!)
                     Log.d("기록센터 사진 불러오기", uri.toString())
                 }
+                .addOnFailureListener{
+                    storage.getReference().child("UserImages_" + UserProfile.getId().toString()+ "%" + title + "%" + now).downloadUrl
+                        .addOnSuccessListener { uri ->
+                            Glide.with(requireActivity().getApplicationContext()).load(uri).into(tmpChallenge!!)
+                            Log.d("기록센터 사진 불러오기2", uri.toString())
+                        }
+                }
 
         return rootView
     }
@@ -108,6 +119,14 @@ class RecordFragment : Fragment() {
             val recordItem = list[position]
             val resourceId = context.resources.getIdentifier(recordItem.resId.toString(), "drawable", context.packageName)
             holder.rc_image?.setImageResource(resourceId)
+            val storage: FirebaseStorage = FirebaseStorage.getInstance("gs://timetocode-13747.appspot.com/")
+            val fileExt = arrayOf(".jpeg", ".jpg", "")
+            for(i in fileExt)
+                storage.getReference().child("UserImages_" + UserProfile.getId().toString()+ "%" + challengeId + "%" + now).downloadUrl
+                    .addOnSuccessListener { uri ->
+                        Glide.with(requireActivity().getApplicationContext()).load(uri).into(holder.rc_image!!)
+                        Log.d("기록 사진 불러오기", uri.toString())
+                        }
 
             return view //뷰 객체 반환
         }
@@ -175,6 +194,7 @@ class RecordFragment : Fragment() {
                     val idUser = jsonObject.get("idUser")
                     val idChallenge = jsonObject.getInt("idChallenge")
                     recordList.add(Record(idChallenge, R.drawable.ttcwhite))
+                    challengeId = idChallenge.toString()
                 }
             } catch (e: Exception) {
                 Log.e("MyRecordJSON", response!!)
